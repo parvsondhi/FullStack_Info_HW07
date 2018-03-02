@@ -1,0 +1,2 @@
+-- Insert code to create Database Schema
+-- This will create your .db database file for use
