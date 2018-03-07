@@ -7,22 +7,59 @@
     </div>
     <h2>Add Customer to Our Database</h2>
     <form action="" method="post" name="login">
-      {{ form.hidden_tag() }}
+      {{ customerForm.hidden_tag() }}
       <div class="divider"></div>
       <div class="section">
         <p>
-          Company name:<br>
-          {{ form.company(size=120) }}<br>
+          First name:<br>
+          {{ customerForm.first_name(size=120) }}<br>
         </p>
         <p>
-          Customer email:<br>
-          {{ form.email(size=120) }}<br>
+          Last name:<br>
+          {{ customerForm.last_name(size=120) }}<br>
           <!-- Additional form fields for the customer should go here -->
         </p>
+        <p>
+          Company name:<br>
+          {{ customerForm.company(size=120) }}<br>
+        </p>
+        <p>
+          Email:<br>
+          {{ customerForm.email(size=120) }}<br>
+        </p>
+        <p>
+          Phone number:<br>
+          {{ customerForm.phone_number(size=120) }}<br>
+        </p>
       </div>
+
+    <h2>Add an Address for the Customer</h2>
+    <form action="" method="post" name="login">
+      {{ addressForm.hidden_tag() }}
       <div class="divider"></div>
       <div class="section">
         <!-- Additional form fields for the Address should go here -->
+        <p>
+          Street Address:<br>
+          {{ addressForm.street_address(size=120) }}<br>
+        </p>
+        <p>
+          City:<br>
+          {{ addressForm.city(size=120) }}<br>
+          <!-- Additional form fields for the customer should go here -->
+        </p>
+        <p>
+          State:<br>
+          {{ addressForm.state(size=120) }}<br>
+        </p>
+        <p>
+          Country:<br>
+          {{ addressForm.country(size=120) }}<br>
+        </p>
+        <p>
+          Zip code:<br>
+          {{ addressForm.zipcode(size=120) }}<br>
+        </p>
       </div>
       <p><input type="submit" value="Create Customer"></p>
     </form>
