@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <!-- <a href="{{ url_for('display_trip') }}">Home</a> -->
+    </div>
+    <h1>Create a new trip</h2>
+    <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="form">
+        <table>
+          <tr>
+            <td>Destination: </td>
+            <td>
+              {{ form.destination() }}
+            </td> 
+          </tr>
+          <tr>
+            <td>With: </td>
+            <td>
+              {{ form.friend() }}
+<!--               <select>
+                <option>Friend 1</option>
+                <option>Friend 2</option>
+                <option>Friend 3</option>
+                <option>Friend 4</option>
+              </select>  -->
+            </td> 
+          </tr>
+        </table>
+      </div>
+      <div id = 'submitbuttoncontainer'>
+        <input type="submit" value="Create Trip" id = 'submitbutton'>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

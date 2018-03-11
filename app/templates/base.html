@@ -1,0 +1,14 @@
+<html>
+	<head>
+    <title>The Amazing Travel App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  	</head>
+  	
+  	<body>
+  		<div id = 'headline'>
+  			<button type="action">signup</button>
+  	  		<button type="action">login</button>
+  	  	</div>
+    {% block content %}{% endblock %}
+  	</body>
+</html>
