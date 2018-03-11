@@ -1,0 +1,39 @@
+.cloak {
+    opacity: 0;
+}
+
+*:not(.cloak) {
+    opacity: 1;
+    transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -webkit-transition: opacity .5s ease-in-out;
+}
+
+/* NAV BAR */
+.navbar.navbar-light a.word-mark {
+    font-weight: 500;
+    color: rgba(0,0,0, 0.8);
+}
+
+.navbar .nav .nav-item .nav-link {
+    color: #f96332;
+}
+
+/* FLASH MESSAGE */
+.alert.flash {
+    color: rgba(0,0,0, 0.8);
+}
+
+/* TABLE */
+.table>thead>tr>th {
+    font-size: 1.0em;
+}
+
+.table>tbody>tr>td {
+    font-size: 0.9em;
+}
+
+/* 404 */
+.not-found-container img {
+    padding: 10% 35% 10% 0;
+}
