@@ -1,0 +1,39 @@
+<!-- home aka signup -->
+
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1>Welcome to ACME Aircraft Parts</h1>
+      <div class= "section">
+        <a href="{{ url_for('create_customer') }}">Add a Trip</a>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <h3>These are all of our awesome users:</h3>
+        <!-- Display all the current existing customers information here -->
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="first_name">First name</th>
+              <th data-field="last_name">Last name</th>
+              <th data-field="company">Company</th>
+              <th data-field="email">Email</th>
+              <th data-field="phone">Phone</th>
+            </tr>
+          </thead>
+          {% for customer in customers %}
+            <tr>
+              <td>{{ customer['first_name'] }}</td>
+              <td>{{ customer['last_name'] }}</td>
+              <td>{{ customer['company'] }}</td>
+              <td>{{ customer['email'] }}</td>
+              <td>{{ customer['phone'] }}</td>
+              <td><a href="{{ url_for('create_order', value=customer['customer_id']) }}">Add an Order</a></td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

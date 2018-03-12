@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('display_customer') }}">Home</a>
+    </div>
+    <h2>Add an Order</h2>
+    <form action="" method="post" name="login">
+      {{ orderForm.hidden_tag() }}
+      <div class="divider"></div>
+      <!-- the Order Form-->
+      <div class="section">
+        <!--
+        name
+        destination
+        friend (dropdown)
+
+        <p>
+          Name of Part:<br>
+          {{ orderForm.name_of_part(size=120) }}<br>
+        </p>
+        <p>
+          Manufacturer of Part:<br>
+          {{ orderForm.manufacturer_of_part(size=120) }}<br>
+        </p>
+        -->
+      </div>
+      <div class="divider"></div>
+      <p><input type="submit" value="Add an Order"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}
