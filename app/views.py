@@ -13,6 +13,10 @@ def index():
     else:
        return redirect(url_for('register')) 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return 'TODO'
+    
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
