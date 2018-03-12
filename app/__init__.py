@@ -6,3 +6,10 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 
 from app import views, models
+
+
+def _create_database():
+    ''' Creates the database schema specified by the SQLAlchemy models '''
+    print('Rebuilding database schema ... ')
+    db.create_all()
+    print('Done!')
