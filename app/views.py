@@ -1,4 +1,5 @@
 from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, flash
 from app import app, db
 from flask_login import current_user
 
@@ -28,6 +29,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('trips'))
+        flash('Congratulations, we successfully registered your account!', 'info')
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/trips')
