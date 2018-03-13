@@ -5,6 +5,9 @@ from flask_login import current_user, login_user, login_required
 from app.forms import LoginForm, RegistrationForm
 from app.models import User
 
+# =========================
+# 1. Anonymously Accessible 
+# =========================
 
 @app.route('/')
 def index():
@@ -44,6 +47,12 @@ def register():
         flash('Congratulations, we successfully registered your account!', 'info')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+
+
+# =========================
+# 2. Login Required
+# =========================
 
 @app.route('/trips')
 @login_required
