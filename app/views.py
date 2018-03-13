@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, flash
 from app import app, db
-from flask_login import current_user, login_user, login_required
+from flask_login import current_user, login_user, login_required, logout_user
 
 from app.forms import LoginForm, RegistrationForm
 from app.models import User
@@ -32,7 +32,8 @@ def login():
 
 @app.route('/logout')
 def logout():
-    return "TODO"
+    logout_user()
+    return redirect(url_for('index'))
     
 @app.route('/register', methods=['GET', 'POST'])
 def register():
