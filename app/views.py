@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, flash
 from app import app, db
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, login_required
 
 from app.forms import LoginForm, RegistrationForm
 from app.models import User
@@ -46,5 +46,6 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/trips')
+@login_required
 def trips():
     return render_template('trips.html')

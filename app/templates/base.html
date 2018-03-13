@@ -27,7 +27,7 @@
         {% with messages = get_flashed_messages(with_categories=True) %}
         {% if messages %}
         {% for category, message in messages %}
-        {% if category == 'info' %}
+        {% if category == 'info' or category == 'message' %}
           <div class="alert alert-info" role="alert">
         {% endif %}
         {% if category == 'error' %}
