@@ -7,3 +7,13 @@ import sqlite3 as sql
 #         result = cur.execute("select * from customers").fetchall()
 #         print (result)
 #     return result
+
+# def get_trips():
+#
+# def insert_trip():
+#
+# def delete_trip():
+#
+# def add_friend():
+#
+# def login():

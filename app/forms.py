@@ -9,3 +9,7 @@ from wtforms.validators import DataRequired
     # fname = StringField('fname', validators=[DataRequired()])
     # lname = StringField('lname', validators=[DataRequired()])
     # phone = StringField('phone', validators=[DataRequired()])
+
+# class LoginForm(Form):
+
+# class CreateTrip(Form):
