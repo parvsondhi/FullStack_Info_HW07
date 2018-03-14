@@ -10,11 +10,12 @@ are a part of. (we’ll call this the “trips” page)
 * Upon creation, this information must be stored in a database
 
 # MM200
-* The friend on the trip must be a user in the system vWe recommend adding the friend via your form using a dropdown
+* The friend on the trip must be a user in the system
+  * We recommend adding the friend via your form using a dropdown
 * Each user can see the trips they are a part of on their trips page
- - ONLY need to show the trip name and destination
+  * ONLY need to show the trip name and destination
 * The user should be able to delete any trip
- - You can use any method you want, but we recommend using jQuery to remove elements from the DOM and make an ajax call to a method to delete information from the table
+  * You can use any method you want, but we recommend using jQuery to remove elements from the DOM and make an ajax call to a method to delete information from the table
 
 # Extra Credits
 * Signup
