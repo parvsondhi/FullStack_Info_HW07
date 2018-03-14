@@ -4,8 +4,17 @@
 drop table if exists trips;
 create table trips (
 	trip_id integer primary key,
+	tripname text not null,
 	destination text not null,
 	friend text not null
+);
+
+drop table if exists users;
+create table users (
+	user_id integer primary key,
+	username text not null,
+	email text not null,
+    password_hash text not null
 );
 
 -- drop table if exists customer_order;

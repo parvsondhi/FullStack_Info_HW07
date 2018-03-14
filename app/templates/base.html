@@ -2,13 +2,18 @@
 	<head>
     <title>The Amazing Travel App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<!--     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+
   	</head>
   	
   	<body>
   		<div id = 'headline'>
-  			<button type="action">signup</button>
-  	  		<button type="action">login</button>
+  			<button id='signup'  onclick="window.location.href='{{ url_for( 'signup') }}';" type="button">signup</button>
+
+
+  	  		<button id='login' onclick="window.location.href='{{ url_for( 'login') }}';" type="action">login</button>
   	  	</div>
     {% block content %}{% endblock %}
   	</body>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/buttons.js') }}"></script>
 </html>
