@@ -9,8 +9,9 @@
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="{{ url_for('static',filename='_css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='_css/now-ui-kit.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='_css/now-ui-kit-cool-jewel-tones.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='_css/style.css') }}">
+
   </head>
   <body class="cloak">
 
@@ -27,29 +28,29 @@
     <main class="container">
         {% block content %}{% endblock %}
     </main>
-      
+
 
     <!-- jquery and bootstrap -->
     <!-- Documentation: http://demos.creative-tim.com/now-ui-kit/documentation/tutorial-components.html -->
-    <script type="text/javascript" src="{{ url_for('static',filename='_js/jquery.3.2.1.min.js') }}"></script>    
-    <script type="text/javascript" src="{{ url_for('static',filename='_js/popper.min.js') }}"></script>    
-    <script type="text/javascript" src="{{ url_for('static',filename='_js/bootstrap.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ url_for('static',filename='_js/jquery.3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='_js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='_js/bootstrap.min.js') }}"></script>
 
-    
+
     <!-- jquery plugins -->
     <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-    <script type="text/javascript" src="{{ url_for('static',filename='_js/plugins/bootstrap-switch.js') }}"></script>  
+    <script type="text/javascript" src="{{ url_for('static',filename='_js/plugins/bootstrap-switch.js') }}"></script>
     <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-    <script type="text/javascript" src="{{ url_for('static',filename='_js/plugins/nouislider.min.js') }}"></script>  
+    <script type="text/javascript" src="{{ url_for('static',filename='_js/plugins/nouislider.min.js') }}"></script>
     <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-    <script type="text/javascript" src="{{ url_for('static',filename='_js/plugins/bootstrap-datepicker.js') }}"></script> 
-    <!-- Share Library etc --> 
-    <script type="text/javascript" src="{{ url_for('static',filename='_js/plugins/jquery.sharrre.js') }}"></script>  
-    
+    <script type="text/javascript" src="{{ url_for('static',filename='_js/plugins/bootstrap-datepicker.js') }}"></script>
+    <!-- Share Library etc -->
+    <script type="text/javascript" src="{{ url_for('static',filename='_js/plugins/jquery.sharrre.js') }}"></script>
+
     <!-- now-ui-kit setup -->
     <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-    <script type="text/javascript" src="{{ url_for('static',filename='_js/now-ui-kit.js') }}"></script>  
-    
+    <script type="text/javascript" src="{{ url_for('static',filename='_js/now-ui-kit.js') }}"></script>
+
     <!-- customs js -->
     <script type="text/javascript" src="{{ url_for('static',filename='_js/app.js') }}"></script>
   </body>
