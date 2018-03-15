@@ -1,5 +1,5 @@
 import sqlite3 as sql
-from app import login, db
+from app import login_manager, db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import sys
@@ -12,40 +12,33 @@ class User(UserMixin):
 		self.email = ""
 		self.password_hash = ""
 
-	def __repr__(self):
-		return '<User {}>'.format(self.username)
-
-	# @property
-	# def get_id(self):
-	# 	return self.username
-
 	def check_password(self, password):
 		return check_password_hash(self.password_hash, password)
 
-	@staticmethod
-	def get(userid):
-		with sql.connect('database.db') as connection:
-			connection.row_factory = sql.Row
-			cursor = connection.cursor()
-			cursor.execute("SELECT * FROM users WHERE username=?", (userid,))
-			result = cursor.fetchall()
-			if len(result) == 0:
-				return None
-			else:
-				user = User(userid)
-				row = result[0]
-				user.id = row[0]
-				user.email = row[2]
-				user.password_hash = row[3]
-				return user
+def get(userid):
+	with sql.connect('database.db') as connection:
+		connection.row_factory = sql.Row
+		cursor = connection.cursor()
+		cursor.execute("SELECT * FROM users WHERE username=?", (userid,))
+		result = cursor.fetchall()
+		if len(result) == 0:
+			return None
+		else:
+			user = User(username)
+			row = result[0]
+			user.id = row[0]
+			user.email = row[2]
+			user.password_hash = row[3]
+			for item in row:
+				print(item)
+			return user
 
 def set_password(password):
 		return generate_password_hash(password)
 
-
-@login.user_loader
+@login_manager.user_loader
 def load_user(id):
-	return User.get(id)
+     return get(id)
 
 def insert_trip(destination, friend):
 	with sql.connect('database.db') as connection:
