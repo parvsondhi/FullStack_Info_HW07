@@ -33,11 +33,11 @@ def getUserByUsername(query):
 """ Takes a userID as parameter and checks in the database. If the user exists, 
 returns user object. If not, returns None.
 """
-def getUserById(query):
+def getUserByID(query):
 	with sql.connect('database.db') as connection:
 		connection.row_factory = sql.Row
 		cursor = connection.cursor()
-		cursor.execute("SELECT * FROM users WHERE id=?", (query,))
+		cursor.execute("SELECT * FROM users WHERE user_id=?", (query,))
 		result = cursor.fetchall()
 		if len(result) == 0:
 			return None
