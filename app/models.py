@@ -20,7 +20,7 @@ def getUserByUsername(query):
 	with sql.connect('database.db') as connection:
 		connection.row_factory = sql.Row
 		cursor = connection.cursor()
-		cursor.execute("SELECT * FROM users WHERE username=?", (userid,))
+		cursor.execute("SELECT * FROM users WHERE username=?", (query,))
 		result = cursor.fetchall()
 		if len(result) == 0:
 			return None
