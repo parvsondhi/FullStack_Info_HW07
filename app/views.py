@@ -28,10 +28,7 @@ def signup():
             return render_template('signup.html', title = "Sign Up", form = form)
         password_hash = generate_password_hash(password)
         create_user(username, email, password_hash)
-        user = User(username)
-        user.email = email
-        user.password_hash = password_hash
-        user.id = response
+        user = User(response, username, email, password_hash)
         login_user(user, remember = True)
         return redirect(url_for('index'))
     return render_template('signup.html', title = "Sign Up", form = form)
@@ -45,13 +42,11 @@ def login():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-
-        user = User(username)
-
-        if user is None or not user.check_password(password):
+        comparedUser = getUser(username)
+        if comparedUser is None or not check_password_hash(comparedUser.password_hash, password):
             flash('Invalid username or password')
             return redirect(url_for('login'))
-        login_user(user, remember = form.remember_me.data)
+        login_user(comparedUser, remember = form.remember_me.data)
         return redirect(url_for('index'))
     return render_template('login.html', title='Log In', form=form)
 
