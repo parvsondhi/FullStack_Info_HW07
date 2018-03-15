@@ -22,6 +22,7 @@ def signup():
         email = form.email.data
         password = form.password.data
         response = check_username_exists(username)
+        print(response)
         if response != -1:
             flash("Username already exists. Please pick a different one.")
             return render_template('signup.html', title = "Sign Up", form = form)

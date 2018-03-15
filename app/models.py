@@ -6,11 +6,11 @@ import sys
 
 class User(UserMixin):
 
-	def __init__(self, username):
-		self.id = 0;
+	def __init__(self, id, username, email, password_hash):
+		self.id = id;
 		self.username = username
-		self.email = ""
-		self.password_hash = ""
+		self.email = email
+		self.password_hash = password_hash
 
 	def check_password(self, password):
 		return check_password_hash(self.password_hash, password)
@@ -24,17 +24,15 @@ def get(userid):
 		if len(result) == 0:
 			return None
 		else:
-			user = User(username)
 			row = result[0]
-			user.id = row[0]
-			user.email = row[2]
-			user.password_hash = row[3]
+			user = User(row[0], username, row[2], row[3])
 			for item in row:
 				print(item)
 			return user
 
-def set_password(password):
-		return generate_password_hash(password)
+
+# def set_password(password):
+# 		return generate_password_hash(password)
 
 @login_manager.user_loader
 def load_user(id):
@@ -70,10 +68,11 @@ def check_username_exists(query):
 		# print(result, file=sys.stderr)
 		if len(result) == 0:
 			# print("nothing found", file=sys.stderr)
-			return False
+			return -1
 		else:
 			# print("something found", file=sys.stderr)
-			return True
+			row = result[0]
+			return row[0]
 	
 # def retrieve_customer_id():
 # 	with sql.connect('database.db') as connection:
