@@ -21,15 +21,17 @@ def signup():
         username = form.username.data
         email = form.email.data
         password = form.password.data
-        response = check_username_exists(username)
-        print(response)
-        if response != -1:
+        user = getUserByUsername(username) #checks if user already exists
+        if user is not None:
+            # in this case user with this username exists already
             flash("Username already exists. Please pick a different one.")
             return render_template('signup.html', title = "Sign Up", form = form)
+        # in case it does not exist
         password_hash = generate_password_hash(password)
-        create_user(username, email, password_hash)
-        user = User(response, username, email, password_hash)
-        login_user(user, remember = True)
+        create_user(username, email, password_hash) # creates user in database
+        userID = getUserID(username)
+        user = User(userID, username, email, password_hash)
+        login_user(user)
         return redirect(url_for('index'))
     return render_template('signup.html', title = "Sign Up", form = form)
 
@@ -42,7 +44,7 @@ def login():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        comparedUser = getUser(username)
+        comparedUser = getUserByUsername(username)
         if comparedUser is None or not check_password_hash(comparedUser.password_hash, password):
             flash('Invalid username or password')
             return redirect(url_for('login'))
@@ -78,18 +80,13 @@ def display_trip():
 @login_required
 @app.route('/logout')
 def logout():
-    flask_login.logout_user()
+    logout_user()
     return 'Logged out'
 
 # @login.unauthorized_handler
 # def unauthorized_handler():
 #     return 'Unauthorized'
 
-# @app.route('/logout')
-# @login_required
-# def logout():
-#     logout_user()
-#     return redirect('/index')
 
 # @app.route('/create_order/<value>', methods=['GET', 'POST'])
 # def create_order(value):
