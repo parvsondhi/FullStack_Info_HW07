@@ -1,7 +1,8 @@
-from flask.ext.wtf import Form
+from flask_wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from flask_wtf.html5 import EmailField
+# from flask_wtf.html5 import EmailField
 from wtforms.validators import DataRequired
+from wtforms.fields.html5 import EmailField
 
 
 class TripForm(Form):

@@ -5,6 +5,8 @@ from .models import *
 from flask_login import current_user, login_user, logout_user
 from app.models import User
 from flask_login import login_required
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 @app.route('/')
 def index():
@@ -21,7 +23,11 @@ def signup():
         if check_username_exists(username):
             flash("Username already exists. Please pick a different one.")
             return render_template('signup.html', title = "Sign Up", form = form)
-        create_user(username, email, password)
+        password_hash = generate_password_hash(password)
+        create_user(username, email, password_hash)
+        user = User(username)
+        user.email = email
+        user.password_hash = password_hash
         login_user(user)
         return redirect(url_for('index'))
     return render_template('signup.html', title = "Sign Up", form = form)
