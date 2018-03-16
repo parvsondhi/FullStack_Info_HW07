@@ -7,7 +7,27 @@ from .forms import OrderForm
 
 @app.route('/')
 def index():
-    return redirect('/create_customer')
+    return redirect('/trips')
+
+
+@app.route('/login', methods=['GET', 'POST']) # You need to specify something here for the function to get requests
+def login():
+    # Here, you need to have logic like if there's a post request method, store the username and email from the form into
+    # session dictionary
+    if request.method == "POST":
+        session['username']=request.form['username']
+        session['email']=request.form['email']
+    return redirect(url_for('index'))
+
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('email', None)
+    return redirect(url_for('index'))
+
+# template code
 
 @app.route('/create_customer', methods=['GET', 'POST'])
 def create_customer():
@@ -31,7 +51,7 @@ def display_customer():
     orders = models.retrieve_orders()
     customers = models.retrieve_customers()
     # Retreive data from database to display
-    return render_template('home.html',
+    return render_template('trips.html',
                             customers=customers,
                             orders=orders,
                             )
@@ -58,5 +78,5 @@ def display_order():
     customers = models.retrieve_customers()
     orders = models.retrieve_orders()
     # Retreive data from database to display
-    return render_template('home.html',
+    return render_template('trips.html',
                             orders=orders, customers=customers)
