@@ -10,8 +10,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route('/')
 def index():
-    # return redirect('/create_trip')
-    return render_template('home.html')
+    if current_user.is_authenticated:
+        return render_template('home.html')
+    else:
+        return render_template(url_for('login'))
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -56,7 +58,7 @@ def login():
 @app.route('/protected')
 @login_required
 def protected():
-    return 'Logged in as: ' + current_user.id
+    return 'Logged in as: ' + current_user.username
 
 @login_required
 @app.route('/create_trip', methods=['GET', 'POST'])

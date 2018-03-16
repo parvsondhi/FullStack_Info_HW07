@@ -8,16 +8,20 @@
   	
   	<body>
   		<div id = 'headline'>
+
+        {% if current_user.is_authenticated %}
+
+        {% else %}
+
+        {% endif %}
   			<button id='signup'  onclick="window.location.href='{{ url_for( 'signup') }}';" type="button">signup</button>
   	  	<button id='login' onclick="window.location.href='{{ url_for( 'login') }}';" type="action">login</button>
 	  	</div>
       {% with messages = get_flashed_messages() %}
       {% if messages %}
-      <ul class=flashes>
         {% for message in messages %}
-        <li>{{ message }}</li>
+        {{ message }}
         {% endfor %}
-      </ul>
       {% endif %}
       {% endwith %}
       {% block content %}{% endblock %}
