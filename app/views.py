@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request, session
-from app import app, models, db
+from app import app, models
 from .forms import *
 from .models import *
 
@@ -8,9 +8,12 @@ from .models import *
 
 @app.route('/')
 def index():
-    return redirect('/new_user')
+    if 'username' in session:
+        return redirect('/trips')
+    else:
+        return redirect('/new_user')
 
-@app.route('/new_user', methods=['POST'])
+@app.route('/new_user', methods=['GET', 'POST'])
 def new_user():
     form = UserForm()
     if form.validate_on_submit():
@@ -19,20 +22,27 @@ def new_user():
         username = form.username.data
         password = form.password.data
 
-        insert_user(username, password)
-        return redirect('/users')
+        success = insert_user(username, password)
+        if success:
+            session['username'] = username
+            return redirect('/trips')
+        else:
+            return redirect('/new_user')
     return render_template('signup.html', form=form)
 
-@app.route('/users')
+@app.route('/trips')
 def display_user():
     # Retreive data from database to display
-    customers = retrieve_customers()
-    orders = retrieve_orders()
-    return render_template('home.html',
-                            customers=customers, orders=orders)
+    if 'username' not in session:
+        redirect('/new_user')
+    else:
+        username = session['username']
+        trips = get_trips(username)
+        return render_template('trips.html',
+                            username=username, trips=trips)
 
-@app.route('/create_order/<value>', methods=['GET', 'POST'])
-def create_order(value):
+@app.route('/create_trip/<value>', methods=['GET', 'POST'])
+def create_trip(value):
     form = OrderForm()
     if form.validate_on_submit():
         # Get data from the form
@@ -43,4 +53,4 @@ def create_order(value):
         order_id = insert_order(order_data)
         insert_customer_order(order_id, value)
         return redirect('/customers')
-    return render_template('order.html', form=form)
+    return render_template('create_trip.html', form=form)
