@@ -1,20 +1,10 @@
 import sqlite3 as sql
 
-# no need ? handle in the views.py
-#def login():
-
-# no need ? handle in the views.py
-#def logout():
-
-# no need ? handle in the views.py
-#def signup():
-
-# should we go with retrieve_trips() or retrieve_trip()? which one is better?
+# I think retrieve trips will be better
 def retrieve_trips():
     return none
 
 # change name to insert_trip
-#def create_trip():
 def insert_trip():
     return none
 
