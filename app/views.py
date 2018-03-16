@@ -8,6 +8,8 @@ from flask_login import login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
+
+# David to fix the logic and routing path to adhere to specs
 @app.route('/')
 def index():
     if current_user.is_authenticated:
@@ -68,7 +70,8 @@ def create_trip():
     if form.validate_on_submit():
         destination = form.destination.data
         friend = form.friend.data
-        insert_trip(destination, friend)
+        tripname = form.tripname.data
+        insert_trip(tripname, destination, friend)
         return redirect('/trip_detail') 
 
     return render_template('trips.html', form = form) # this is what gets called without form

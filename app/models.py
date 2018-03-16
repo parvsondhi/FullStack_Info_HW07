@@ -65,10 +65,10 @@ def getUserID(query):
 def load_user(id):
      return getUserByID(id)
 
-def insert_trip(destination, friend):
+def insert_trip(tripname, destination, friend):
 	with sql.connect('database.db') as connection:
 		cursor = connection.cursor()
-		cursor.execute("INSERT INTO trips (destination, friend) VALUES (?,?)",(destination, friend))
+		cursor.execute("INSERT INTO trips (tripname, destination, friend) VALUES (?,?,?)",(tripname, destination, friend))
 		connection.commit()
 
 
