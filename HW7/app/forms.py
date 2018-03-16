@@ -4,13 +4,11 @@ from flask_wtf.html5 import EmailField
 from wtforms.validators import DataRequired
 
 class userForm(Form):
-    """
     first_name = StringField('first_name', validators=[DataRequired()])
     last_name = StringField('last_name', validators=[DataRequired()])
-    company = StringField('company', validators=[DataRequired()])
-    email = EmailField('email', validators=[DataRequired()])
-    phone = IntegerField('phone', validators=[DataRequired()])
-    """
+    username = StringField('username', validators=[DataRequired()])
+    password = EmailField('email', validators=[DataRequired()])
+
 
 class tripForm(Form):
     """
