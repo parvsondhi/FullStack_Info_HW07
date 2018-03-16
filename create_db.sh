@@ -1,1 +1,1 @@
-sqlite3 app.db < schema.sql
+sqlite3 static/app.db < schema.sql
