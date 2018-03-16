@@ -1,27 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>TravelApp0.0</title>
-    <link rel="stylesheet" href="login.css">
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.7.min.js'></script>
 </head>
 <body>
-    <div id=leftBlock>
-        <div id=textBlock>
-           <div id=intro>
-                <h1>Plan your next<br>trip with us</h1>
-                <p>Let's get you logged in to start<br>organizing your trips.</p>
-            </div>
-            <div class=inputFields>
-                <input id="username" class="inputForm" name="username" type="text"  value="Username" onfocus="if (this.value == 'Username') {this.value = '';}" onblur="if (this.value == '') " /><br>
-                <input id="password" class="inputForm" name="password" type="text"  value="Password" onfocus="if (this.value == 'Password') {this.value = '';}" onblur="if (this.value == '') " /><br>
-                <button>Log In</button>
-            </div>
-        </div>
-    </div>
-    <div id=rightBlock>
-        <!-- &nbsp; -->
-        <img src="plane.svg">
-    </div>
+    <input id="username" class="inputForm" name="username" type="text"  value="Username" onfocus="if (this.value == 'Username') {this.value = '';}" onblur="if (this.value == '') " /><br>
+    <input id="password" class="inputForm" name="password" type="text"  value="Password" onfocus="if (this.value == 'Password') {this.value = '';}" onblur="if (this.value == '') " /><br>
+    <button class="action-button" id="login" type="submit" value="Log In"></button>
 </body>
 </html>
+
+{% endblock %}
