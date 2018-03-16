@@ -18,7 +18,7 @@ def create_user():
 @app.route('/trips')
 def display_trips():
 
-@app.route('/create_trip/<value>', methods=['GET', 'POST'])
+@app.route('/create-trip/<value>', methods=['GET', 'POST'])
 def create_trip(value):
 
 # 404 errohandler

@@ -1,14 +1,20 @@
 <html>
   <head>
     {% if title %}
-    <title>{{ title }} - ACME</title>
+    <title>{{ title }}</title>
     {% else %}
-    <title>Welcome to ACME Aircraft Parts</title>
+    <title>Welcome to Traveling App</title>
     {% endif %}
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   </head>
   <body>
-    {% block content %}{% endblock %}
+    <header>
+      {% block header %}{% endblock %}
+    </header>
+      {% block content %}{% endblock %}
+    <footer>
+        <p>&copy; A Survey Monkey Inmitation App</p>
+    </footer>
   </body>
 </html>
