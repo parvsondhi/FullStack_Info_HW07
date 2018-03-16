@@ -1,0 +1,29 @@
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1>Adventures</h1>
+      <div class= "section">
+        <a href="{{ url_for('createTrip') }}">Add Trip</a>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="trip_name">Trip Name</th>
+              <th data-field="friends">Friends</th>
+              <th data-field="location">Location</th>
+            </tr>
+          </thead>
+          {% for trip in trips %}
+            <tr>
+              <td>{{ trip['trip_name'] }}</td>
+              <td>{{ customer['friends'] }}</td>
+              <td>{{ customer['location'] }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
