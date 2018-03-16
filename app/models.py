@@ -1,6 +1,6 @@
 import sqlite3 as sql
 from app import login_manager, db
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import sys
 
@@ -27,7 +27,7 @@ def getUserByUsername(query):
 			return None
 		else:
 			row = result[0]
-			user = User(row[0], username, row[2], row[3])
+			user = User(row[0], query, row[2], row[3])
 			return user
 
 
@@ -61,14 +61,47 @@ def getUserID(query):
 		return result[0][0]
 
 
+def getAvailableFriends():
+	with sql.connect('database.db') as connection:
+		connection.row_factory = sql.Row
+		cursor = connection.cursor()
+		cursor.execute("SELECT username FROM users WHERE username !=?", (current_user.username,))
+		result = cursor.fetchall()
+		return result
+
+
 @login_manager.user_loader
 def load_user(id):
      return getUserByID(id)
 
-def insert_trip(tripname, destination, friend):
+def insert_trip(tripname, destination):
 	with sql.connect('database.db') as connection:
 		cursor = connection.cursor()
-		cursor.execute("INSERT INTO trips (tripname, destination, friend) VALUES (?,?,?)",(tripname, destination, friend))
+		cursor.execute("INSERT INTO trips (tripname, destination) VALUES (?,?)",(tripname, destination))
+		connection.commit()
+
+
+def lookupLatestTripID():
+	with sql.connect('database.db') as connection:
+		cursor = connection.cursor()
+		result = cursor.execute("SELECT trip_id FROM trips ORDER BY trip_id DESC LIMIT 1").fetchall()
+		return result[0][0]
+
+def lookUpTripsForCurrentUser():
+	with sql.connect('database.db') as connection:
+		cursor = connection.cursor()
+		result = cursor.execute("SELECT trips.tripname, trips.destination FROM trips JOIN users_on_trips ON trips.trip_id = users_on_trips.trip_id WHERE users_on_trips.user_id = ?", (current_user.id)).fetchall()
+		print(result[0])
+		return result
+
+def insert_user_trip(trip_id, creator, friend):
+	with sql.connect('database.db') as connection:
+		cursor = connection.cursor()
+		# enter creator 
+		cursor.execute("INSERT INTO users_on_trips (user_id, trip_id) VALUES (?,?)",(creator, trip_id))
+		connection.commit()
+		# enter friend
+		cursor.execute("INSERT INTO users_on_trips (user_id, trip_id) VALUES (?,?)",(friend, trip_id))
 		connection.commit()
 
 
@@ -77,6 +110,14 @@ def retrieve_trips():
 		connection.row_factory = sql.Row
 		cursor = connection.cursor()
 		result = cursor.execute("SELECT * FROM trips").fetchall()
+		return result
+
+
+def retrieve_trips_person(username):
+	with sql.connect('database.db') as connection:
+		connection.row_factory = sql.Row
+		cursor = connection.cursor()
+		# result = cursor.execute("SELECT * FROM trips WHERE f").fetchall() fix this
 		return result
 
 

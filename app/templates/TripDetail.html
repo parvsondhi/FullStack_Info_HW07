@@ -4,7 +4,25 @@
   <div class="row">
     <div class= "section">
     </div>
-    <h1>Here are the Details of your Trip</h1>
+    <h1>Here are the Details of your Trips</h1>
+    <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="Tripname">Tripname</th>
+              <th data-field="Destination">Destination</th>
+              <!-- could think about adding who else is going on trip -->
+            </tr>
+          </thead>
+          {% for trip in trips %}
+            <tr>
+              <td>{{ trip[0] }}</td>
+              <td>{{ trip[1] }}</td>
+            </tr>
+          {% endfor %}
+    </table>
+  </div>
+  <div class = "selection">
+  	<a href="{{ url_for('create_trip') }}">Add a Trip</a>
   </div>
 </div>
 {% endblock %}

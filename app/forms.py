@@ -8,7 +8,7 @@ class TripForm(Form):
 	tripname = StringField('tripname', validators=[DataRequired()])
 	destination = StringField('destination', validators=[DataRequired()])
 	friend = StringField('friend', validators=[DataRequired()])
-
+    # friend will become dropdown eventually
 
 class LoginForm(Form):
     username = StringField('Username', validators=[DataRequired()])

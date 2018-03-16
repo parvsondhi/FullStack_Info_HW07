@@ -2,20 +2,20 @@
 	<head>
     <title>The Amazing Travel App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 <!--     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 
   	</head>
   	
   	<body>
   		<div id = 'headline'>
-        <!--  put logic in here. David to do do... -->
         {% if current_user.is_authenticated %}
+       <button id='logout'  onclick="window.location.href='{{ url_for( 'logout') }}';" type="button">logout</button>
+       {% else %}
+       <button id='signup'  onclick="window.location.href='{{ url_for( 'signup') }}';" type="button">signup</button>
+       <button id='login' onclick="window.location.href='{{ url_for( 'login') }}';" type="action">login</button>
+       {% endif %}
 
-        {% else %}
-
-        {% endif %}
-  			<button id='signup'  onclick="window.location.href='{{ url_for( 'signup') }}';" type="button">signup</button>
-  	  	<button id='login' onclick="window.location.href='{{ url_for( 'login') }}';" type="action">login</button>
 	  	</div>
       {% with messages = get_flashed_messages() %}
       {% if messages %}

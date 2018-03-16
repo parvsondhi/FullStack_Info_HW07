@@ -13,9 +13,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 @app.route('/')
 def index():
     if current_user.is_authenticated:
-        return render_template('home.html')
+        return redirect(url_for('display_trip'))
     else:
-        # return render_template(url_for('login'))
+        # we should have a landing page for user who have not logged in or signed up
         return render_template('home.html')
 
 
@@ -67,11 +67,21 @@ def protected():
 @app.route('/create_trip', methods=['GET', 'POST'])
 def create_trip():
     form = TripForm()
+    friends = getAvailableFriends()
+    num_friends = len(friends)
+    # use num_friends to create 2 dropdown entries
+
     if form.validate_on_submit():
         destination = form.destination.data
         friend = form.friend.data
         tripname = form.tripname.data
-        insert_trip(tripname, destination, friend)
+        insert_trip(tripname, destination)
+        tripID = lookupLatestTripID()
+        print(type(tripID))
+        creatorID = int (current_user.id)
+        print(type(creatorID))
+        friendID = getUserByUsername(friend).id #might break if not exists! need dropdown
+        insert_user_trip(tripID, creatorID, friendID)
         return redirect('/trip_detail') 
 
     return render_template('trips.html', form = form) # this is what gets called without form
@@ -79,15 +89,14 @@ def create_trip():
 @login_required
 @app.route('/trip_detail')
 def display_trip():
-    # trips = retrieve_trips()
-    # return render_template('home.html', trips = trips)
-    return render_template('TripDetail.html')
+    trips = lookUpTripsForCurrentUser()
+    return render_template('TripDetail.html', trips = trips)
 
 @login_required
 @app.route('/logout')
 def logout():
     logout_user()
-    return 'Logged out'
+    return redirect(url_for('index'))
 
 # @login.unauthorized_handler
 # def unauthorized_handler():
