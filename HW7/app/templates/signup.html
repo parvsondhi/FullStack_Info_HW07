@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('display_customer') }}">Home</a>
+    </div>
+    <h2>Add Trip to Our Database</h2>
+    <form action="" method="post" name="login">
+      {{ customerForm.hidden_tag() }}
+      <div class="divider"></div>
+      <!-- the Customer Form-->
+      <div class="section">
+        <p>
+          First name:<br>
+          {{ customerForm.first_name(size=120) }}<br>
+        </p>
+        <p>
+          Last name:<br>
+          {{ customerForm.last_name(size=120) }}<br>
+        </p>
+        <p>
+          Company name:<br>
+          {{ customerForm.company(size=120) }}<br>
+        </p>
+        <p>
+          Email:<br>
+          {{ customerForm.email(size=120) }}<br>
+        </p>
+        <p>
+          Phone:<br>
+          {{ customerForm.phone(size=120) }}<br>
+        </p>
+      </div>
+      <p><input type="submit" value="Create Trip"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}

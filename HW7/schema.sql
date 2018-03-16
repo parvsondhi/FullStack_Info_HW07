@@ -1,27 +1,28 @@
 drop table if exists users;
 create table users(
-  customer_id integer primary key,
+  user_id integer primary key,
   first_name text not null,
   last_name text not null,
-  company text not null,
-  email text not null,
-  phone integer not null
+  username text not null,
+  password text not null
 );
 
 drop table if exists trips;
 create table trips(
-  order_id integer primary key,
-  name_of_part text not null,
-  manufacturer_of_part text not null,
-  customer_id integer not null,
-  FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+  trip_id integer primary key,
+  owner text not null,
+  destination text not null,
+  name text not null,
+  friend text not null,
+  user_id integer not null,
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 drop table if exists users_trips;
 create table users_trips(
   id integer primary key,
-  customer_id integer not null,
-  order_id integer not null,
-  FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
-  FOREIGN KEY (order_id) REFERENCES orders(order_id)
+  user_id integer not null,
+  trip_id integer not null,
+  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (trip_id) REFERENCES trips(trip_id)
 );
