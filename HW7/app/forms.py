@@ -3,7 +3,7 @@ from wtforms import StringField, IntegerField
 from flask_wtf.html5 import EmailField
 from wtforms.validators import DataRequired
 
-class UserForm(Form):
+class userForm(Form):
     """
     first_name = StringField('first_name', validators=[DataRequired()])
     last_name = StringField('last_name', validators=[DataRequired()])
@@ -12,7 +12,7 @@ class UserForm(Form):
     phone = IntegerField('phone', validators=[DataRequired()])
     """
 
-class TripForm(Form):
+class tripForm(Form):
     """
     name_of_part = StringField('name_of_part', validators=[DataRequired()])
     manufacturer_of_part = StringField('manufacturer_of_part', validators=[DataRequired()])

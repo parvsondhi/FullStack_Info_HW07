@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, session
-from app import app, models, db
-from forms import UserForm, TripForm, AddressForm
+from app import app, models
+from .forms import UserForm, TripForm, AddressForm
 # Access the models file to use SQL functions
 from models import *
 
@@ -14,7 +14,7 @@ def index():
     else:
         return render_template('login.html')
 
-@app.route('login', methods = ['GET', 'POST'])
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     if request.method=='POST':
         session['username'] = request.form['username']
@@ -51,6 +51,6 @@ def create_trip(value):
     return None
 
 # 404 errohandler
-@myapp.errorhandler(404)
+@app.errorhandler(404)
 def page_not_found(error):
 	return render_template('page_not_found.html'), 404
