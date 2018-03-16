@@ -1,8 +1,8 @@
-from flask import render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session
 from app import app, models, db
-from .forms import UserForm, TripForm, AddressForm
+from forms import UserForm, TripForm, AddressForm
 # Access the models file to use SQL functions
-from .models import *
+from models import *
 
 @app.route('/index')
 @app.route('/')
@@ -14,11 +14,11 @@ def index():
 
 @app.route('login', methods = ['GET', 'POST'])
 def login():
-    return None;
+    return None
 
 @app.route('/logout')
 def logout():
-    return None;
+    return None
 
 # need this?
 @app.route('/create_user', methods=['GET', 'POST'])
@@ -31,6 +31,6 @@ def display_trips():
 
 @app.route('/create-trip/<value>', methods=['GET', 'POST'])
 def create_trip(value):
-    return None;
+    return None
 
 # 404 errohandler
