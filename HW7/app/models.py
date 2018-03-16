@@ -11,15 +11,18 @@ import sqlite3 as sql
 
 # should we go with retrieve_trips() or retrieve_trip()? which one is better?
 def retrieve_trips():
+    return none
 
 # change name to insert_trip
 #def create_trip():
 def insert_trip():
+    return none
 
 # remove trip column from the table trips
 def delete_trip():
     # DELETE FROM table_name WHERE some_column=some_value;
     # ex: Delete from users where name = ‘eric’
+    return none
 
 # change name to retrieve_user
 # retrieve all user for the dropdown in the "creat"
@@ -41,3 +44,4 @@ def insert_user(username, password, first_name, last_name):
     return cur.lastrowid
 
 def google_maps():
+    return none
