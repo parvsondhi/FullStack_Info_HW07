@@ -1,0 +1,17 @@
+/* Navbar */
+.sidebar-collapse .navbar-collapse:before  {
+    background: white;
+}
+
+.sidebar-collapse .navbar-collapse .navbar-nav:not(.navbar-logo) .nav-link:not(.btn) {
+    color: #2c2c2c;
+}
+.pull-right {
+    float: right;
+}
+
+button.close {
+    cursor: pointer;
+}
+
+
