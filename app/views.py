@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, session
 from app import app, models, db
 from .forms import *
 from .models import *
@@ -8,35 +8,23 @@ from .models import *
 
 @app.route('/')
 def index():
-    return redirect('/create_customer')
+    return redirect('/new_user')
 
-@app.route('/create_customer', methods=['GET', 'POST'])
-def create_customer():
-    form = CustomerForm()
+@app.route('/new_user', methods=['POST'])
+def new_user():
+    form = UserForm()
     if form.validate_on_submit():
         # Get data from the form
         # Send data from form to Database
-        first_name = form.first_name.data
-        last_name = form.last_name.data
-        company = form.company.data
-        email = form.email.data
-        phone = form.phone.data
-        customer_data = [first_name,last_name,company,email,phone]
+        username = form.username.data
+        password = form.password.data
 
-        # add address info as well
-        street_address = form.street_address.data
-        city = form.city.data
-        state = form.state.data
-        country = form.country.data
-        zip_code = form.zip_code.data
-        #customer_id = get_customer_id()
-        address_data = [street_address, city, state, country, zip_code]
-        insert_data(customer_data, address_data)
-        return redirect('/customers')
-    return render_template('customer.html', form=form)
+        insert_user(username, password)
+        return redirect('/users')
+    return render_template('signup.html', form=form)
 
-@app.route('/customers')
-def display_customer():
+@app.route('/users')
+def display_user():
     # Retreive data from database to display
     customers = retrieve_customers()
     orders = retrieve_orders()

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('display_customer') }}">Home</a>
+    </div>
+    <h2> Add New User</h2>
+    <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          Username:<br>
+          {{ form.username(size=120)}}<br>
+        </p>
+        <p>
+          Password:<br>
+          {{ form.password(size=120)}}<br>
+        </p>
+
+      </div>
+
+      <p><input type="submit" value="Create User"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,5 +1,15 @@
 import sqlite3 as sql
 
+def insert_user(username, password):
+	pass
+
+
+def check_user(username):
+	pass
+
+
+
+# old functions
 def insert_data(customer_data, address_data):
 	# SQL statement to insert into database goes here
 	with sql.connect('database.db') as con:
