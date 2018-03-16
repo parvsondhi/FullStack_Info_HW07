@@ -3,7 +3,7 @@
 drop table if exists users;
 create table users (
 	username text primary key,
-	password text not null,
+	password text not null
 );
 
 drop table if exists trips;
@@ -13,5 +13,5 @@ create table trips (
     destination text not null,
     user1 text not null,
     user2 text,    
-    Foreign key(user1) refereces users(username)
+    FOREIGN KEY(user1) REFERENCES users(username)
 );
