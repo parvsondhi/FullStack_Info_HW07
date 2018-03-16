@@ -13,7 +13,8 @@ def index():
     if current_user.is_authenticated:
         return render_template('home.html')
     else:
-        return render_template(url_for('login'))
+        # return render_template(url_for('login'))
+        return render_template('home.html')
 
 
 @app.route('/signup', methods=['GET', 'POST'])
