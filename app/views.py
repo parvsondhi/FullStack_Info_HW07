@@ -6,7 +6,7 @@ from app.forms import LoginForm, RegistrationForm
 from app.models import User
 
 # =========================
-# 1. Anonymously Accessible 
+# 1. Anonymously Accessible
 # =========================
 
 @app.route('/')
@@ -14,7 +14,7 @@ def index():
     if current_user.is_authenticated:
         return redirect(url_for('trips'))
     else:
-       return redirect(url_for('register')) 
+       return redirect(url_for('register'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -34,7 +34,7 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
-    
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -59,3 +59,10 @@ def register():
 @login_required
 def trips():
     return render_template('trips.html')
+
+
+
+@app.route('/trips/create')
+@login_required
+def create_trip():
+    return render_template('createTrip.html')
