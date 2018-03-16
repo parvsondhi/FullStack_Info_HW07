@@ -6,6 +6,7 @@ from .models import *
 
 @app.route('/')
 def index():
+haha
 
 def login():
 
