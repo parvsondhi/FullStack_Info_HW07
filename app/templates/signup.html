@@ -17,9 +17,6 @@
                 <p>{{ form.submit(class = "log-btn") }}</p>
             </form>
         </div>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
-
     {% if error %}
     <p class=error><strong>Error:</strong> {{ error }}
     {% endif %}

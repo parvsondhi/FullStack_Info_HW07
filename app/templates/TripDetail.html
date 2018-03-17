@@ -1,26 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-  <div class="row">
-    <h1>Trip Details</h1>
-    <table id="trips">
-          <thead>
-            <tr>
-              <th data-field="Tripname">Tripname</th>
-              <th data-field="Destination">Destination</th>
-              <!-- could think about adding who else is going on trip -->
-            </tr>
-          </thead>
-          {% for trip in trips %}
-            <tr>
-              <td>{{ trip[0] }}</td>
-              <td>{{ trip[1] }}</td>
-            </tr>
-          {% endfor %}
-    </table>
-  </div>
-  <div id = "addTrip">
-    <a href="{{ url_for('create_trip') }}">Add a Trip</a>
-  </div>
+<h1>Trip Details</h1>
+<table id="trips">
+  <thead>
+    <tr>
+      <th data-field="Tripname">Tripname</th>
+      <th data-field="Destination">Destination</th>
+      <th>Action</th>
+      <!-- could think about adding who else is going on trip -->
+    </tr>
+  </thead>
+  {% for trip in trips %}
+  <tr>
+    <td>{{ trip[0] }}</td>
+    <td>{{ trip[1] }}</td>
+    <td>
+      <button type="submit" class = "delete">
+        <div class = "buttonContainer">
+          <img src = "{{ url_for('static', filename='img/DeleteButton.png') }}" alt="DeleteButton">
+          <span>Delete</span>
+        </div>
+      </button>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<div id = "addTrip">
+  <a href="{{ url_for('create_trip') }}">Add a Trip</a>
 </div>
 {% endblock %}
