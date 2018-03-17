@@ -8,7 +8,7 @@ app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 @app.route('/index')
 def index():
     username = ''
-    if 'username' in session: #check if the user is already in session, if so, direct the user to survey.html Hint: render_template with a variable
+    if 'username' in session: #check if the user is already in session, if so, direct the user to trips.html Hint: render_template with a variable
         username = session['username']
         "Logged in as " + username + "<br>" + \
         "<b><a href = '/logout'>Click here to log out</a></b>"
