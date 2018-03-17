@@ -1,5 +1,6 @@
 from app import app, db
 from app.models import User, Trip
+from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.shell_context_processor
 def make_shell_context():
