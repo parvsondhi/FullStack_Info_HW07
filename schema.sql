@@ -6,7 +6,7 @@ first_name TEXT, last_name TEXT, email TEXT
 );
 
 CREATE TABLE trips (
-id INTEGER PRIMARY KEY, 
-street_address TEXT, city TEXT, state TEXT, country TEXT, zip_code INTEGER
+trip_id INTEGER PRIMARY KEY, 
+trip_title TEXT, destination TEXT
 );
 

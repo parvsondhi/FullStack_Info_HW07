@@ -1,5 +1,5 @@
 # Importing flask library
-from app import app
+from app import app, models, db
 from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 import os
 app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
@@ -49,6 +49,14 @@ def submitSurvey():
         return render_template('results.html', name=username, surveyResponse=surveyResponse) # pass in variables to the template
     else:
         return render_template('login.html')
+
+#display users trips
+@app.route('trips')
+def display_trip():
+    # Retreive data from database to display
+    trips = models.retrieve_trips()
+    return render_template('home.html',
+                            customers=customers, orders=orders)
 
 
 @app.errorhandler(404)
