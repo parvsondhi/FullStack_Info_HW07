@@ -1,3 +1,3 @@
-$(document).ready(
-	$('#friends').append(new Option('ourOption', 'ourText'));
-);
+// $(document).ready(
+// 	$('#friends').append(new Option('ourOption', 'ourText'));
+// );

@@ -1,21 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Sign up</h1>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
-        </p>
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=32) }}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+     <div class="login-form">
+        <div class="form-group ">
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username(placeholder = "Username") }}
+                </p>
+                <p>
+                    {{ form.email(placeholder = "Email") }}
+                </p>
+                <p>
+                    {{ form.password(placeholder = "Password") }}
+                </p>
+                <p>{{ form.submit(class = "log-btn") }}</p>
+            </form>
+        </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+
 {% endblock %}

@@ -1,44 +1,22 @@
 <!--  David to make this according to spec -->
-
-
 {% extends "base.html" %}
+
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class= "section">
-      <!-- <a href="{{ url_for('display_trip') }}">Home</a> -->
-    </div>
-    <h1>Create a new trip</h2>
-    <form action="" method="post" name="login">
+<h1>Create a new trip</h1>
+<div class="login-form">
+  <div class="form-group ">
+    <form action="" method="post" name = "createTrip">
       {{ form.hidden_tag() }}
-      <div class="divider"></div>
-      <div class="form">
-        <table>
-          <tr>
-            <td>Trip name: </td>
-            <td>
-              {{ form.tripname() }}
-            </td>
-            </tr>
-            <tr> 
-            <td>Destination: </td>
-            <td>
-              {{ form.destination() }}
-            </td> 
-          </tr>
-          <tr>
-            <td>With: </td>
-            <td>
-              <!-- {{ form.friend() }} -->
-              <select id="friends">
-              </select>
-            </td> 
-          </tr>
-        </table>
-      </div>
-      <div id = 'submitbuttoncontainer'>
-        <input type="submit" value="Create Trip" id = 'submitbutton'>
-      </div>
+      <p>
+        {{ form.tripname(placeholder = "trip name") }}
+      </p>
+      <p>
+        {{ form.destination(placeholder = "destination") }}
+      </p>
+      <p>
+        {{ form.friend(placeholder = "friend") }}
+      </p>
+      <p>{{ form.submit(class = "log-btn") }}</p>
     </form>
   </div>
 </div>

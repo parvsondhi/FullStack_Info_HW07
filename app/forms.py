@@ -8,17 +8,18 @@ class TripForm(Form):
 	tripname = StringField('tripname', validators=[DataRequired()])
 	destination = StringField('destination', validators=[DataRequired()])
 	friend = StringField('friend', validators=[DataRequired()])
-    # friend will become dropdown eventually
+	submit = SubmitField('Create Trip')
+
 
 class LoginForm(Form):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Log In')
+	username = StringField('Username', validators=[DataRequired()])
+	password = PasswordField('Password', validators=[DataRequired()])
+	remember_me = BooleanField('Remember Me')
+	submit = SubmitField('Log In')
 
 
 class SignUpForm(Form):
-    username = StringField('Username', validators=[DataRequired()])
-    email = EmailField('Email', validators = [DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Sign Up')
+	username = StringField('Username', validators=[DataRequired()])
+	email = EmailField('Email', validators = [DataRequired()])
+	password = PasswordField('Password', validators=[DataRequired()])
+	submit = SubmitField('Sign Up')

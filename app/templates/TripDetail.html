@@ -2,10 +2,8 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class= "section">
-    </div>
-    <h1>Here are the Details of your Trips</h1>
-    <table class="striped">
+    <h1>Trip Details</h1>
+    <table id="trips">
           <thead>
             <tr>
               <th data-field="Tripname">Tripname</th>
@@ -21,8 +19,8 @@
           {% endfor %}
     </table>
   </div>
-  <div class = "selection">
-  	<a href="{{ url_for('create_trip') }}">Add a Trip</a>
+  <div id = "addTrip">
+    <a href="{{ url_for('create_trip') }}">Add a Trip</a>
   </div>
 </div>
 {% endblock %}
