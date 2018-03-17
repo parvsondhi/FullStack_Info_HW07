@@ -91,7 +91,6 @@ def lookUpTripsForCurrentUser():
 	with sql.connect('database.db') as connection:
 		cursor = connection.cursor()
 		result = cursor.execute("SELECT trips.tripname, trips.destination FROM trips JOIN users_on_trips ON trips.trip_id = users_on_trips.trip_id WHERE users_on_trips.user_id = ?", (current_user.id)).fetchall()
-		print(result[0])
 		return result
 
 def insert_user_trip(trip_id, creator, friend):

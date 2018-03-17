@@ -16,7 +16,7 @@ def index():
         return redirect(url_for('display_trip'))
     else:
         # we should have a landing page for user who have not logged in or signed up
-        return render_template('home.html')
+        return redirect(url_for('login'))
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -81,6 +81,8 @@ def create_trip():
         creatorID = int (current_user.id)
         print(type(creatorID))
         friendID = getUserByUsername(friend).id #might break if not exists! need dropdown
+        print("creatorID: " + str(creatorID))
+        print("friendID: " + str(friendID))
         insert_user_trip(tripID, creatorID, friendID)
         return redirect('/trip_detail') 
 
@@ -91,6 +93,19 @@ def create_trip():
 def display_trip():
     trips = lookUpTripsForCurrentUser()
     return render_template('TripDetail.html', trips = trips)
+
+@login_required
+@app.route('/delete_trip', methods=['GET', 'POST'])
+def delete_trip():
+    # tripname = request.field1
+    print("hello")
+    # destination = request.field2
+
+    # with sql.connect('database.db') as connection:
+    #     cursor = connection.cursor()
+    #     cursor.execute("DELETE FROM trips WHERE tripname = ? AND destination = ?", (tripname, destination))
+    #     connection.commit()
+
 
 @login_required
 @app.route('/logout')

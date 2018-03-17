@@ -19,8 +19,8 @@ create table users_on_trips (
 	user_trip_id integer primary key,
 	user_id integer not null, 
 	trip_id integer not null, 
-	FOREIGN KEY(user_id) REFERENCES users(user_id), 
-	FOREIGN Key(trip_id) REFERENCES trips(trip_id)
+	FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE, 
+	FOREIGN Key(trip_id) REFERENCES trips(trip_id) ON DELETE CASCADE
 
 );
 -- drop table if exists customer_order;
