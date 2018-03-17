@@ -1,14 +1,17 @@
 <html>
   <head>
     {% if title %}
-    <title>{{ title }} - TravelApp0.0</title>
+    <title>{{ title }} - TravelApp 0.0</title>
     {% else %}
-    <title>Welcome to TravelApp0.0</title>
+    <title>Welcome to TravelApp 0.0</title>
     {% endif %}
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  {% block header %}  
+  {% endblock %}
   </head>
   <body>
     {% block content %}{% endblock %}
   </body>
 </html>
+

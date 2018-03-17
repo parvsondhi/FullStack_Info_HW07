@@ -1,9 +1,24 @@
+{% extends "index.html" %}
+
+<!-- {% block title %}
+    Trips
+{% endblock %}
+ -->
+
+{% block header %}
+  {{ super() }}
+  <form action="logout" id="logout">
+    <span id="user_name">Logged in as {{ name }}</span>
+    <input class="action-button" id="logout-button" type="submit" value="Logout">
+  </form>
+{% endblock %}
+
 {% block content %}
   <div class="container">
     <div class="row">
-      <h1>Adventures</h1>
+      <h2>Adventures</h2>
       <div class= "section">
-        <a href="{{ url_for('createTrip') }}">Add Trip</a>
+        <a href="{{ url_for('create_trip') }}">Add Trip</a>
       </div>
       <div class="divider"></div>
       <div class="section">
@@ -11,15 +26,13 @@
           <thead>
             <tr>
               <th data-field="trip_name">Trip Name</th>
-              <th data-field="friends">Friends</th>
-              <th data-field="location">Location</th>
+              <th data-field="destination">Destination</th>
             </tr>
           </thead>
           {% for trip in trips %}
             <tr>
               <td>{{ trip['trip_name'] }}</td>
-              <td>{{ customer['friends'] }}</td>
-              <td>{{ customer['location'] }}</td>
+              <td>{{ trip['destination'] }}</td>
             </tr>
           {% endfor %}
         </table>
