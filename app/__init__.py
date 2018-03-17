@@ -9,7 +9,7 @@ app.config.from_object(Config) # pulls values from config.py
 db = SQLAlchemy(app) # db instance
 migrate = Migrate(app, db) # migrate db version object
 login = LoginManager(app) # login control for app
-login.login_view = 'login'
+login.login_view = 'login' # for login_required pages
 
 from app import routes, models # app directory module
 

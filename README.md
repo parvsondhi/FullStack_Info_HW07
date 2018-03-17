@@ -23,3 +23,7 @@ are a part of. (we’ll call this the “trips” page)
 * Embedded Google Map
 
 Michelle and Peter
+
+# To Do:
+* implement logout and login_required
+* display trips on index page

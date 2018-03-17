@@ -24,7 +24,7 @@ class Trip(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<User {}>'.format(self.tripname)
+        return '<Trip {}>'.format(self.tripname)
 
 ## Flask login ##
 @login.user_loader
