@@ -16,6 +16,7 @@
       <button id='login' onclick="window.location.href='{{ url_for( 'login') }}';" type="action">login</button>
       {% endif %}
     </div>
+    {% block content %}{% endblock %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
@@ -23,7 +24,6 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
-    {% block content %}{% endblock %}
   </body>
   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>

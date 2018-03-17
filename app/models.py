@@ -95,12 +95,27 @@ def lookUpTripsForCurrentUser():
 
 def insert_user_trip(trip_id, creator, friend):
 	with sql.connect('database.db') as connection:
-		cursor = connection.cursor()
+		cursor1 = connection.cursor()
+		cursor2 = connection.cursor()
 		# enter creator 
-		cursor.execute("INSERT INTO users_on_trips (user_id, trip_id) VALUES (?,?)",(creator, trip_id))
-		connection.commit()
+		cursor1.execute("INSERT INTO users_on_trips (user_id, trip_id) VALUES (?,?)",(creator, trip_id))
 		# enter friend
-		cursor.execute("INSERT INTO users_on_trips (user_id, trip_id) VALUES (?,?)",(friend, trip_id))
+		cursor2.execute("INSERT INTO users_on_trips (user_id, trip_id) VALUES (?,?)",(friend, trip_id))
+		connection.commit()
+
+def lookUpTripID(tripName, destiNation):
+	with sql.connect('database.db') as connection:
+		cursor = connection.cursor()
+		result = cursor.execute("SELECT trip_id FROM trips WHERE tripname = ? AND destination = ?", (tripName, destiNation)).fetchall()
+		return result[0][0]
+
+def delete_trip(tripID):
+	with sql.connect('database.db') as connection:
+		cursor1 = connection.cursor()
+		cursor1.execute("DELETE FROM trips WHERE trip_id = ?", (tripID,))
+		# hardcoded second delete in!
+		cursor2 = connection.cursor()
+		cursor2.execute("DELETE FROM users_on_trips WHERE trip_id = ?", (tripID,))
 		connection.commit()
 
 
@@ -123,7 +138,7 @@ def retrieve_trips_person(username):
 def create_user(username, email, password_hash):
 	with sql.connect('database.db') as connection:
 		cursor = connection.cursor()
-		cursor.execute("INSERT INTO users (username, email, password_hash) VALUES (?,?, ?)",(username, email, password_hash))
+		cursor.execute("INSERT INTO users (username, email, password_hash) VALUES (?,?,?)",(username, email, password_hash))
 		connection.commit()
 
 

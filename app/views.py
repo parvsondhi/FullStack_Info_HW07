@@ -63,8 +63,9 @@ def login():
 def protected():
     return 'Logged in as: ' + current_user.username
 
-@login_required
+
 @app.route('/create_trip', methods=['GET', 'POST'])
+@login_required
 def create_trip():
     form = TripForm()
     friends = getAvailableFriends()
@@ -88,34 +89,33 @@ def create_trip():
 
     return render_template('trips.html', form = form) # this is what gets called without form
 
-@login_required
+
 @app.route('/trip_detail')
+@login_required
 def display_trip():
     trips = lookUpTripsForCurrentUser()
     return render_template('TripDetail.html', trips = trips)
 
+
+@app.route('/delete-trip', methods=['GET', 'POST'])
 @login_required
-@app.route('/delete_trip', methods=['GET', 'POST'])
-def delete_trip():
-    # tripname = request.field1
-    print("hello")
-    # destination = request.field2
-
-    # with sql.connect('database.db') as connection:
-    #     cursor = connection.cursor()
-    #     cursor.execute("DELETE FROM trips WHERE tripname = ? AND destination = ?", (tripname, destination))
-    #     connection.commit()
+def deleteTrip():
+    tripname = request.form.get('tripname')
+    destination = request.form.get('destination')
+    tripID = lookUpTripID(tripname, destination)
+    delete_trip(tripID)
+    return redirect('/trip_detail') 
 
 
-@login_required
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
-# @login.unauthorized_handler
-# def unauthorized_handler():
-#     return 'Unauthorized'
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    return redirect(url_for('login'))
 
 
 # @app.route('/create_order/<value>', methods=['GET', 'POST'])
