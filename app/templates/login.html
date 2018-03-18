@@ -4,6 +4,20 @@
     Login
 {% endblock %}
 
+{% block header %}
+  {{ super() }}
+  <h5>First time here? Sign up</h4>
+    <form action="signup" method="POST" name="signup_form">
+    	{{ user_form.hidden_tag() }}
+        Username<br>
+        {{ user_form.user_name(size=120) }} </br>
+        
+        Password<br>
+        {{ user_form.password(size=120) }} </br>
+        <input class="action-button" id="signup" type="submit" value="Submit">
+    </form>
+{% endblock %}
+
 {% block content %}
 <h1>Welcome to Let-s-Go!</h1>
 <h4>The first travel app for friends <p></p></h4>
@@ -12,9 +26,10 @@
 <div class="main-container">
     <h5>Let's get you logged in</h4>
     <form action="/login" method="POST">
-        Username<input id="login" type="text" name="user_name">
-        Password<input id="login" type="text" name="password">
+        Username<input class="login" type="text" name="user_name">
+        Password<input class="login" type="text" name="password">
         <input class="action-button" id="login" type="submit" value="Submit">
     </form>
+        
 </div>
 {% endblock %}

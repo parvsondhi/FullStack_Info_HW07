@@ -6,13 +6,14 @@ from .models import *
 import sys
 
 
-@app.route('/index')
+@app.route('/index', methods = ['GET', 'POST'])
 def index():
     if 'user_name' in session: #check if the user is already in session, if so, direct the user to trips.html
         user_name = session.get('user_name')
         return render_template('trips.html', name=user_name)
     else:
-        return render_template('login.html')
+        user_form = UserForm()
+        return render_template('login.html', user_form=user_form)
 
 # @app.route('/create_user', methods=['GET', 'POST'])
 # def create_user():
@@ -22,7 +23,7 @@ def index():
 #         user_name = form.user_name.data
 #         password = form.password.data
 #         # Send data from form to Database
-#         insert_users(user_name,password)
+#         insert_user(user_name,password)
 #         return redirect('/index')
 #     return render_template('index.html', form=form)
 
@@ -39,13 +40,31 @@ def logout():
     session.pop('password', None)
     return redirect(url_for('index'))
 
-@app.route('/user')
-def display_user():
+@app.route('/signup', methods = ['GET', 'POST'])
+def signup():
+    print("Trying to signup a user...", file = sys.stderr)
+    user_form = UserForm()
+    print("UserForm created...", file = sys.stderr)
+    if user_form.validate_on_submit():
+        # Get data from the form
+        print("Validate on submit....", file = sys.stderr)
+        user_name = user_form.user_name.data
+        password = user_form.password.data
+        # Send data from form to Database
+        status = insert_user(user_name,password)
+        print(status, file = sys.stderr)
+        return redirect('/login')
+    return render_template('login.html', user_form=user_form) 
+
+@app.route('/users', methods=['GET', 'POST'])
+def display_users():
     # Retreive data from database to display
-    user = retrieve_users()
-    print(user)
+    print("trying to display users...", file = sys.stderr)
+    users = retrieve_users()
+    print("users are..." + users, file = sys.stderr)
+    print(users)
     return render_template('index.html',
-                            user=user)
+                            users=users)
 
 @app.route('/create_trip', methods=['GET', 'POST'])
 def create_trip():

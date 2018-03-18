@@ -22,8 +22,16 @@
           Enter a destination:<br>
           {{ trip_form.destination(size=120) }}<br>
         </p>
+        <p>
+          Invite a friend:<br>
+        <select>
+          {% for user in users %}
+            <option><a href={{ user['user_name'] }} title="hover text"> {{ user['user_name'] }} </a></option>
+          {% endfor %}
+        </select></br>
+        </p>
       </div>
-      <p><input type="submit" id="create_trip" value="Create Trip"></p>
+      <p><input type="submit" value="Create Trip"></p>
     </form>
   </div>
 </div>
