@@ -12,5 +12,5 @@ class TripForm(Form):
     # trip_id = IntegerField('trip_id', validators=[DataRequired()])
     trip_name = StringField('trip_name', validators=[DataRequired()])
     destination = StringField('destination', validators=[DataRequired()])
-    friend_name = SelectField('friend_name', choices = ('1','hello'),('2','bye'))
+    friend_name = SelectField('friend_name', choices = [('1', 'friend1'), ('2', 'friend2')])
 
