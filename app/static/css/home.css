@@ -93,7 +93,7 @@ select {
 }
 
 table {
-    margin: 0px auto;   
+    margin: 50px;   
     table-layout: fixed;
     width: 200px;
 }​
@@ -168,11 +168,29 @@ th, td {
   border-radius: 4px;
 }
 
+#tripscontainer {
+  display: inline-block;
+}
+
+.column {
+  float: left;
+  height: 85vh;
+  width: 45%;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-left: 10px;
+  text-align: center;
+}
 
 #trips {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 40%;
+    width: 90%;
+}
+
+#trips h1 {
+  margin-left: 0px;
 }
 
 #trips td, #trips th {
@@ -221,7 +239,7 @@ img {
   width: 20px;
   height: 20px;
   margin-right: 10px;
-  margin-left: 20px;
+  margin-left: 10px;
   vertical-align: middle;
 }
 
@@ -229,3 +247,9 @@ span {
   font-size: 14px;
 }
 
+.inspect {
+  vertical-align: middle;
+  margin-right: 0px;
+  background-color: rgba(255, 255, 255, 0);
+  border-style: none;
+}

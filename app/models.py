@@ -119,33 +119,9 @@ def delete_trip(tripID):
 		connection.commit()
 
 
-def retrieve_trips():
-	with sql.connect('database.db') as connection:
-		connection.row_factory = sql.Row
-		cursor = connection.cursor()
-		result = cursor.execute("SELECT * FROM trips").fetchall()
-		return result
-
-
-def retrieve_trips_person(username):
-	with sql.connect('database.db') as connection:
-		connection.row_factory = sql.Row
-		cursor = connection.cursor()
-		# result = cursor.execute("SELECT * FROM trips WHERE f").fetchall() fix this
-		return result
-
-
 def create_user(username, email, password_hash):
 	with sql.connect('database.db') as connection:
 		cursor = connection.cursor()
 		cursor.execute("INSERT INTO users (username, email, password_hash) VALUES (?,?,?)",(username, email, password_hash))
 		connection.commit()
 
-
-# def retrieve_customer_id():
-# 	with sql.connect('database.db') as connection:
-# 		connection.row_factory = sql.Row
-# 		cursor = connection.cursor()
-# 		result = cursor.execute("SELECT * FROM customers ORDER BY customer_id DESC LIMIT 1").fetchall()
-# 		for row in result:
-# 			return row[0]
