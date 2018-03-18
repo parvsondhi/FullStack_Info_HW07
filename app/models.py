@@ -1,6 +1,12 @@
 import sqlite3 as sql
 
 
+# def specify_user(user_name, password):
+#     with sql.connect("app.db") as con:
+#         cur = con.cursor()
+#         cur.execute("SELECT * FROM users WHERE username=(?) AND password = (?)", (user_name, password))
+#         con.commit()
+
 def insert_users(user_name,password):
     with sql.connect("app.db") as con:
         cur = con.cursor()
@@ -14,7 +20,7 @@ def insert_trips(trip_name,destination):
         cur.execute("INSERT INTO trips (trip_name, destination) VALUES (?,?)", (trip_name, destination))
         con.commit()
         message = "SQL insert trips succeeded"
-    return message 
+    return message
 
 def retrieve_users():
     with sql.connect("app.db") as con:

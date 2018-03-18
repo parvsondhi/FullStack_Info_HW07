@@ -49,17 +49,17 @@ def display_user():
 
 @app.route('/create_trip', methods=['GET', 'POST'])
 def create_trip():
-    print("TRying to create a trip...", file = sys.stderr)
+    # print("TRying to create a trip...", file = sys.stderr)
     trip_form = TripForm()
-    print("Form created...", file = sys.stderr)
+    # print("Form created...", file = sys.stderr)
     if trip_form.validate_on_submit():
         # Get data from the form
-        print("Validate on submit....", file = sys.stderr)
+        # print("Validate on submit....", file = sys.stderr)
         trip_name = trip_form.trip_name.data
         destination = trip_form.destination.data
         # Send data from form to Database
         status = insert_trips(trip_name,destination)
-        print(status, file = sys.stderr)
+        # print(status, file = sys.stderr)
         return redirect('/trips')
     return render_template('create_trip.html', trip_form=trip_form)
 
@@ -67,15 +67,15 @@ def create_trip():
 def display_trips():
     # Retreive data from database to display
     trips = retrieve_trips()
-    print(trips, file = sys.stderr)
+    # print(trips, file = sys.stderr)
     return render_template('trips.html',
                             trips=trips)
 
 
 @app.route('/delete_trip', methods=['GET', 'POST'])
 def delete_trip():
-    print("Hi!", file = sys.stderr)
+    # print("Hi!", file = sys.stderr)
     trip = request.form["trip_id"]
-    print("Trip id to delete:" + trip, file = sys.stderr)
+    # print("Trip id to delete:" + trip, file = sys.stderr)
     remove_trip(trip)
     return redirect(url_for('display_trips'))
