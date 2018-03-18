@@ -14,6 +14,10 @@ def retrieve_user(username):
     	cur = con.cursor()
     	return str(cur.execute('select user_id from users where username = "' + username + '"').fetchone()[0]) # why is it in tuple form??
 
+def retrieve_password(username):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        return str(cur.execute('SELECT password from users where username = "' + username +'"').fetchone()[0])
 # trip functions
 
 def insert_trip(trip_name, destination, owner_id, friend_id):

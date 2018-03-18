@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block header%}
-<form action="logout" id="logout">
-  <span id="username">Logged in as {{ name }}</span>
-  <input class="action-button" id="logout-button" type="submit" value="Logout">
-</form>
 {% endblock %}
 
 {% block content %}
   <div class="container">
+    <form action="logout" id="logout">
+      <span id="username">Logged in as {{ name }}</span>
+      <input class="action-button" id="logout-button" type="submit" value="Logout">
+    </form>
     <div class="row">
       <h1>Your Trips</h1>
       <div class="divider"></div>
@@ -24,7 +24,7 @@
               <td>{{ trip['trip_name'] }}</td>
               <td>{{ trip['destination'] }}</td>
               <!-- Below is a method of adding the 'add an order' button which will route you to create_order in views.py -->
-              <td><a href="{{ url_for('remove_trip', value=trip['trip_id']) }}">Remove Trip</a></td>            
+              <td><a id ="remove" href="{{ url_for('remove_trip', value=trip['trip_id']) }}">Remove Trip</a></td>            
             </tr>
           {% endfor %}
         </table>

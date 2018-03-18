@@ -17,9 +17,11 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
     if(request.method == 'POST'):
-        session['username'] = request.form['username']
-        # TODO: do some checking
-        session['password'] = request.form['password']
+        username = request.form['username']
+        password = request.form['password']
+        if password == retrieve_password(username):
+            session['username'] = username
+            # want to launch a popup but stay @ /login w/o 
     return redirect(url_for('index'))
 
 @app.route('/logout')
@@ -69,9 +71,9 @@ def create_trip():
 
 @app.route('/remove_trip/<value>')
 def remove_trip(value):
-    trips = delete_trip(value)
+    delete_trip(value)
     
-    # TODO: what if we didn't redirect and instead just update the DOM
+    # TODO: just want to remove element from DOM w/o redirecting
     return redirect('trips')
 
 
