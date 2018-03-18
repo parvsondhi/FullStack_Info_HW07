@@ -6,7 +6,9 @@ from .models import *
 import sys
 
 
-@app.route('/index')
+# @app.route('/index')
+@app.route('/')
+#load index on run
 def index():
     if 'user_name' in session: #check if the user is already in session, if so, direct the user to trips.html
         user_name = session.get('user_name')
