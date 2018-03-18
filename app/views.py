@@ -1,8 +1,9 @@
 # Importing flask library
-from app import app, models, db
+from . import app, models, db
 from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 import os
-app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
+from .forms import TripForm
+# app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 
 @app.route('/')
 @app.route('/index')
@@ -51,12 +52,11 @@ def submitSurvey():
         return render_template('login.html')
 
 #display users trips
-@app.route('trips')
+@app.route('/trips')
 def display_trip():
     # Retreive data from database to display
     trips = models.retrieve_trips()
-    return render_template('home.html',
-                            customers=customers, orders=orders)
+    return render_template('trips.html')
 
 
 @app.errorhandler(404)

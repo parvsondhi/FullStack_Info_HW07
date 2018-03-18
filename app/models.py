@@ -1,6 +1,6 @@
 import sqlite3 as sql
 
-DATABASE_FILE = 'ACME.db'
+
 
 def insert_user_data(first_name, last_name, email):
     # SQL statement to insert into database goes here
