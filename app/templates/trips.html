@@ -1,9 +1,9 @@
 {% extends "index.html" %}
 
-<!-- {% block title %}
+{% block title %}
     Trips
 {% endblock %}
- -->
+
 
 {% block header %}
   {{ super() }}
@@ -27,12 +27,14 @@
             <tr>
               <th data-field="trip_name">Trip Name</th>
               <th data-field="destination">Destination</th>
+              <th data-field=""></th>
             </tr>
           </thead>
           {% for trip in trips %}
             <tr>
               <td>{{ trip['trip_name'] }}</td>
               <td>{{ trip['destination'] }}</td>
+              <td><form action="{{ url_for('delete_trip') }}" method=POST><input type=hidden value="{{ trip['trip_id'] }}" name="trip_id"></input><input type="submit" value="Delete"></input></form></td>
             </tr>
           {% endfor %}
         </table>
