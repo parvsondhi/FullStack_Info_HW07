@@ -24,7 +24,7 @@ class Trip(db.Model):
     tripname = db.Column(db.String(64), index=True, unique=True)
     destination = db.Column(db.String(64), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    friend_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    friend_id = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Trip {}>'.format(self.tripname)
