@@ -29,6 +29,18 @@
 					     <span style="color: red;">[{{ error }}]</span>
 					{% endfor %}
 				</p>
+
+        <p>
+					{{ form.friend_id.label }}<br>
+					{{ form.friend_id(size=32) }}
+
+          <!-- Errors -->
+          {% for error in form.friend_id.errors %}
+					     <span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+				</p>
+
+
 				<p>{{ form.submit(class='btn') }}</p>
       </form>
     </div>
