@@ -12,7 +12,6 @@ def index():
     user_id = current_user.id
     user_trips = current_user.trips.all()
     all_trips = Trip.query.all()
-    flash(user_trips)
     return render_template('index.html', trips=user_trips)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -30,14 +29,28 @@ def login():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
         return redirect(next_page)
-        # return redirect(url_for('index'))
 
     # flash('login fail')
     return render_template('login.html', form=form)
 
-# @app.route('/create_trip')
-# @flask_login.login_required
-# def create_trip():
+@app.route('/create-trip', methods=['GET', 'POST'])
+@login_required
+def create_trip():
+    ## Get form Element
+    # form = TripForm()
+    ## Form Processing
+    # if form.validate_on_submit():
+        ## Create Trip object
+
+        ## Write Trip object to database
+
+        ## Redirect to index page
+
+    ## Render page and form
+    return render_template('create_trip.html', form=form)
+
+
+
 
 # @app.route('/delete_trip')
 # @flask_login.login_required
