@@ -24,7 +24,7 @@
         </p>
         <p>
           Invite a friend:<br>
-        <select class='dropdown-button btn'>
+        <select name=friend class='dropdown-button btn'>
           {% for user in users %}
             <option value={{user.user_name}}> {{user.user_name}} </option>
           {% endfor %}

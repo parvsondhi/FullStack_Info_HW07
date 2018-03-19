@@ -25,6 +25,11 @@
 
 <div class="main-container">
     <h5>Let's get you logged in</h4>
+    
+    {% if error %}
+    <p><strong class="red-text">Error: {{ error }} </strong> 
+    {% endif %}
+
     <form action="/login" method="POST">
         Username<input class="login" type="text" name="user_name">
         Password<input class="login" type="text" name="password">

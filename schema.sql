@@ -16,8 +16,8 @@ CREATE TABLE trips (
 );
 
 CREATE TABLE tracker (
-    user_id,
-    trip_id,
+    user_id integer,
+    trip_id integer,
     FOREIGN KEY(user_id) REFERENCES users(user_id),
     FOREIGN KEY(trip_id) REFERENCES trips(trip_id)
 );

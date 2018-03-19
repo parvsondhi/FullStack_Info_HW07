@@ -12,3 +12,4 @@ class TripForm(Form):
     #trip_id = IntegerField('trip_id', validators=[DataRequired()])
     trip_name = StringField('trip_name', validators=[DataRequired()])
     destination = StringField('destination', validators=[DataRequired()])
+    friend = StringField('friend')
