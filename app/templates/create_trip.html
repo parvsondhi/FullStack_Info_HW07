@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Create trip
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+
+    <h2>Create Trip</h2>
+    <h4>Tell us a little about your next trip to add it to your list of adventures</h4>
+    <form action="" method="post" name="create_trip_form">
+      {{ trip_form.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          Name your trip:<br>
+          {{ trip_form.trip_name(size=120) }}<br>
+        </p>
+        <p>
+          Enter a destination:<br>
+          {{ trip_form.destination(size=120) }}<br>
+        </p>
+        <p>
+          Invite a friend:<br>
+        <select name=friend class='dropdown-button btn'>
+          {% for user in users %}
+            <option value={{user.user_name}}> {{user.user_name}} </option>
+          {% endfor %}
+        </select></br>
+        </p>
+      </div>
+      <p><input type="submit" value="Create Trip"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}
