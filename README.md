@@ -19,8 +19,8 @@ are a part of. (we’ll call this the “trips” page)
 * On the create trip page, users should be allowed to create a trip with the minimum of the following information (trip name, destination, and ONE friend)
 * Upon creation, this information must be stored in a database
   * [X] Create Trip form object, [DEBUG] friend_id manual input
-  * [.] Form handler logic in route
-  * [.] ! Write trip to database
+  * [X] Form handler logic in route
+  * [X] Write trip to database
   * [X] html template update
 
 
@@ -39,14 +39,13 @@ are a part of. (we’ll call this the “trips” page)
   * [ ] add delete_trip/<value> route
     * [ ] implement delete + reload || Ajax remove and trigger delete
 
-
-
-
-
-
 # Extra Credits
 * Signup
+  * [ ] /registration route
+  * [ ] Register form
+  * [ ] insert new user into database
 * Logout
+  * [ ] delete current session
 * Embedded Google Map
 
 Michelle and Peter
