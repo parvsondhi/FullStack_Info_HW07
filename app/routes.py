@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for, request
-from app import app
+from app import app, db
 from app.forms import LoginForm, TripForm
 from flask_login import current_user, login_user, login_required
 from app.models import User, Trip
@@ -43,10 +43,11 @@ def create_trip():
     if form.validate_on_submit():
         ## Create Trip object
         trip = Trip(tripname=form.tripname.data, destination=form.destination.data, user_id=current_user.id)
+
         ## Write Trip object to database
-        # db.session.add(trip)
-        # db.session.commit()
-        # flash(trip) ## DEBUG
+        db.session.add(trip)
+        db.session.commit()
+
         ## Redirect to index page
         # return redirect(url_for('index'))
         return redirect(url_for('index'))
