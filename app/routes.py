@@ -33,19 +33,24 @@ def login():
     # flash('login fail')
     return render_template('login.html', form=form)
 
-@app.route('/create-trip', methods=['GET', 'POST'])
+@app.route('/create_trip', methods=['GET', 'POST'])
 @login_required
 def create_trip():
-    ## Get form Element
+    ## Create form object
     form = TripForm()
 
     ## Form Processing
     if form.validate_on_submit():
         ## Create Trip object
-        Pass
+        trip = Trip(tripname=form.tripname.data, destination=form.destination.data, user_id=current_user.id)
         ## Write Trip object to database
-
+        # db.session.add(trip)
+        # db.session.commit()
+        # flash(trip) ## DEBUG
         ## Redirect to index page
+        # return redirect(url_for('index'))
+        return redirect(url_for('index'))
+
 
     ## Render page and form
     return render_template('create_trip.html', form=form)
