@@ -6,7 +6,17 @@
 
 {% block content %}
   <p><strong> Logged in as {{ current_user.username }} </strong></p>
-	{% for trip in trips %}
-	<p> {{ trip.destination }} </p>
-	{% endfor %}
+
+	<table>
+		<tr>
+		<th></th>
+		</tr>
+		{% for trip in trips %}
+		<tr>
+			<td>{{ trip.tripname }}</td>
+			<td>{{ trip.destination }}</td>
+			<td>{{ trip.user_id }}</td>
+		</tr>
+		{% endfor %}
+	</table>
 {% endblock %}
