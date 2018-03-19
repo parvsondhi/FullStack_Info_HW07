@@ -68,10 +68,7 @@ def protected():
 @login_required
 def create_trip():
     form = TripForm()
-    friends = getAvailableFriends()
-    num_friends = len(friends)
-    # use num_friends to create 2 dropdown entries
-
+    form.set_choices();
     if form.validate_on_submit():
         destination = form.destination.data
         friend = form.friend.data

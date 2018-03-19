@@ -1,4 +1,3 @@
-<!--  David to make this according to spec -->
 {% extends "base.html" %}
 
 {% block content %}
@@ -13,8 +12,8 @@
       <p>
         {{ form.destination(placeholder = "destination") }}
       </p>
-      <p>
-        {{ form.friend(placeholder = "friend") }}
+      <p id = "friend">
+        {{ form.friend() }}
       </p>
       <p>{{ form.submit(class = "log-btn") }}</p>
     </form>

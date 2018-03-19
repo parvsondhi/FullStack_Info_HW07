@@ -1,14 +1,20 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 from wtforms.fields.html5 import EmailField
+from .models import *
 
 
 class TripForm(Form):
 	tripname = StringField('tripname', validators=[DataRequired()])
 	destination = StringField('destination', validators=[DataRequired()])
-	friend = StringField('friend', validators=[DataRequired()])
+	friend = SelectField('friend', validators=[DataRequired()])
 	submit = SubmitField('Create Trip')
+
+
+	def set_choices(self):
+		friends = getAvailableFriends()
+		self.friend.choices = [(friend[0],friend[0]) for friend in friends]
 
 
 class LoginForm(Form):

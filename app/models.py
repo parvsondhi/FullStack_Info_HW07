@@ -61,6 +61,7 @@ def getUserID(query):
 		return result[0][0]
 
 
+"""Gets the users from the database that are not the currently logged in user."""
 def getAvailableFriends():
 	with sql.connect('database.db') as connection:
 		connection.row_factory = sql.Row
@@ -68,7 +69,6 @@ def getAvailableFriends():
 		cursor.execute("SELECT username FROM users WHERE username !=?", (current_user.username,))
 		result = cursor.fetchall()
 		return result
-
 
 @login_manager.user_loader
 def load_user(id):
@@ -117,6 +117,7 @@ def delete_trip(tripID):
 		cursor2 = connection.cursor()
 		cursor2.execute("DELETE FROM users_on_trips WHERE trip_id = ?", (tripID,))
 		connection.commit()
+
 
 
 def create_user(username, email, password_hash):
