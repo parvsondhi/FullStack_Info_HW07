@@ -1,3 +1,35 @@
 {% extends "base.html" %}
 
-{% block content %} {% endblock %}
+{% block title %}
+	Create a Trip
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <h1>Create a Trip</h1>
+      <br>
+      <form action="" method="post">
+				{{ form.hidden_tag() }}
+				<p>
+					{{ form.tripname.label }}<br>
+					{{ form.tripname(size=32) }}
+
+          <!-- Errors -->
+          {% for error in form.tripname.errors %}
+					     <span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+				</p>
+
+				<p>
+					{{ form.destination.label }}<br>
+					{{ form.destination(size=32) }}
+
+          <!-- Errors -->
+          {% for error in form.destination.errors %}
+					     <span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+				</p>
+				<p>{{ form.submit(class='btn') }}</p>
+      </form>
+    </div>
+{% endblock %}

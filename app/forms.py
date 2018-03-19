@@ -9,7 +9,7 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
-class CreateTrip(FlaskForm):
+class TripForm(FlaskForm):
     tripname = StringField('tripname', validators=[DataRequired()])
     destination = StringField('destination', validators=[DataRequired()])
     friend_id = IntegerField('friend_id', validators=[DataRequired()]) # TESTING -- Replace with Drop down

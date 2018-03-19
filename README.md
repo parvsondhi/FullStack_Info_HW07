@@ -12,10 +12,10 @@ are a part of. (we’ll call this the “trips” page)
   * [X] Login Form
   * [X] Get trips for logged in user
   * [X] Display on /index
-  * [.] Template styling
+  * [X] Template styling
 * On the trips page, there should be a button that allows the user to create a trip (“create trip” page)
-  * [.] update template html
-  * [] /trips/create route
+  * [X] update template html
+  * [ ] /create-trip route
 * On the create trip page, users should be allowed to create a trip with the minimum of the following information (trip name, destination, and ONE friend)
 * Upon creation, this information must be stored in a database
   * [ ] Create Trip form object, [DEBUG] friend_id manual input
