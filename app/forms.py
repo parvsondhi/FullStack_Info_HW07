@@ -12,5 +12,5 @@ class LoginForm(FlaskForm):
 class TripForm(FlaskForm):
     tripname = StringField('tripname', validators=[DataRequired()])
     destination = StringField('destination', validators=[DataRequired()])
-    friend_id = IntegerField('friend_id', validators=[NumberRange(min=1, max=3, message='DEBUG: Can only be 1 - 3')])# TESTING -- Replace with Drop down
+    # friend_id = IntegerField('friend_id', validators=[NumberRange(min=1, max=3, message='DEBUG: Can only be 1 - 3')])# TESTING -- Replace with Drop down
     submit = SubmitField('Create Trip')
