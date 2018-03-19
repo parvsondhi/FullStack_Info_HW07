@@ -2,6 +2,8 @@ from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+## User Class Inherits required methods from UserMixin
+## db.Model creates tables
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -25,6 +27,13 @@ class Trip(db.Model):
 
     def __repr__(self):
         return '<Trip {}>'.format(self.tripname)
+
+## Invited friends M2M table
+invited = db.Table('invited',
+    db.Column('invited_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('trip_id', db.Integer, db.ForeignKey('trip.id'))
+)
+
 
 ## Flask login ##
 @login.user_loader

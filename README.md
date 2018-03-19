@@ -27,8 +27,8 @@ are a part of. (we’ll call this the “trips” page)
 # MM200
 * The friend on the trip must be a user in the system
   * We recommend adding the friend via your form using a dropdown
-  * [ ] pre-populate dropdown menu on Create Trip form
-  * [ ] M2M table for friends + trips. Update Database Migrations
+  * [.] pre-populate dropdown menu on Create Trip form
+  * [.] M2M table for friends + trips. Update Database Migrations
   * [ ] Query for invited trips.
 * Each user can see the trips they are a part of on their trips page
   * [ ] Add second table to template for invited trips
@@ -45,11 +45,7 @@ are a part of. (we’ll call this the “trips” page)
   * [ ] Register form
   * [ ] insert new user into database
 * Logout
-  * [ ] delete current session
+  * [.] delete current session
 * Embedded Google Map
 
 Michelle and Peter
-
-# To Do:
-* implement logout and login_required
-* display trips on index page
