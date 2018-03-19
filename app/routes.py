@@ -40,9 +40,9 @@ def create_trip():
     form = TripForm()
 
     ## Form Processing
-    # if form.validate_on_submit():
+    if form.validate_on_submit():
         ## Create Trip object
-
+        Pass
         ## Write Trip object to database
 
         ## Redirect to index page
