@@ -7,12 +7,12 @@
 {% block content %}
   <p><strong> Logged in as {{ current_user.username }} </strong></p>
 
+	<h1>My Trips</h1>
 	<table>
 		<thead>
 			<tr>
 				<th>Trip Name</th>
 				<th>Trip Destination</th>
-				<th>Trip User ID</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,7 +20,24 @@
 			<tr>
 				<td>{{ trip.tripname }}</td>
 				<td>{{ trip.destination }}</td>
-				<td>{{ trip.user_id }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h1>Trips I'm invited to</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Trip Name</th>
+				<th>Trip Destination</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for trip in invited %}
+			<tr>
+				<td>{{ trip.tripname }}</td>
+				<td>{{ trip.destination }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

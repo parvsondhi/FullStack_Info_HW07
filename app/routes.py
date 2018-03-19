@@ -11,8 +11,9 @@ from werkzeug.urls import url_parse
 def index():
     user_id = current_user.id
     user_trips = current_user.trips.all()
-    all_trips = Trip.query.all()
-    return render_template('index.html', trips=user_trips)
+    invited_trips = Trip.query.filter_by(friend_id=user_id).all()
+    # all_trips = Trip.query.all()
+    return render_template('index.html', trips=user_trips, invited=invited_trips)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
