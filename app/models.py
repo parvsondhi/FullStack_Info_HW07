@@ -24,17 +24,10 @@ class Trip(db.Model):
     tripname = db.Column(db.String(64), index=True, unique=True)
     destination = db.Column(db.String(64), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    friend_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Trip {}>'.format(self.tripname)
-
-## Invited friends M2M table
-invited = db.Table('invited',
-    db.Column('invited_id', db.Integer, db.ForeignKey('user.id')),
-    db.Column('trip_id', db.Integer, db.ForeignKey('trip.id'))
-)
-
-
 
 ## Flask login ##
 @login.user_loader
