@@ -30,6 +30,19 @@
 					{% endfor %}
 				</p>
 
+				<p>
+					{{ form.friend_id.label }}<br>
+
+					<!-- <div class="input-field col s12"> -->
+				    <select>
+							{% for friend in form.friend_id.choices %}
+							<option value='{{ friend[0] }}'>{{ friend[1] }}</option>
+							{% endfor %}
+				    </select>
+
+				</p>
+
+
 				<p>{{ form.submit(class='btn') }}</p>
       </form>
     </div>
