@@ -75,12 +75,8 @@ def create_trip():
         tripname = form.tripname.data
         insert_trip(tripname, destination)
         tripID = lookupLatestTripID()
-        print(type(tripID))
         creatorID = int (current_user.id)
-        print(type(creatorID))
         friendID = getUserByUsername(friend).id #might break if not exists! need dropdown
-        print("creatorID: " + str(creatorID))
-        print("friendID: " + str(friendID))
         insert_user_trip(tripID, creatorID, friendID)
         return redirect('/trip_detail') 
 

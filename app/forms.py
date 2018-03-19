@@ -11,7 +11,6 @@ class TripForm(Form):
 	friend = SelectField('friend', validators=[DataRequired()])
 	submit = SubmitField('Create Trip')
 
-
 	def set_choices(self):
 		friends = getAvailableFriends()
 		self.friend.choices = [(friend[0],friend[0]) for friend in friends]
