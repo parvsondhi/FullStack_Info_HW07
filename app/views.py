@@ -56,20 +56,21 @@ def signup():
         return redirect('/login')
     return render_template('login.html', user_form=user_form) 
 
-@app.route('/users', methods=['GET', 'POST'])
-def display_users():
-    # Retreive data from database to display
-    print("trying to display users...", file = sys.stderr)
-    users = retrieve_users()
-    print("users are..." + users, file = sys.stderr)
-    print(users)
-    return render_template('index.html',
-                            users=users)
+# @app.route('/users', methods=['GET', 'POST'])
+# def display_users():
+#     # Retreive data from database to display
+#     print("trying to display users...", file = sys.stderr)
+#     users = retrieve_users()
+#     print("users are..." + users, file = sys.stderr)
+#     print(users)
+#     return render_template('index.html',
+#                             users=users)
 
 @app.route('/create_trip', methods=['GET', 'POST'])
 def create_trip():
     print("TRying to create a trip...", file = sys.stderr)
     trip_form = TripForm()
+    users = retrieve_users()
     print("Form created...", file = sys.stderr)
     if trip_form.validate_on_submit():
         # Get data from the form
@@ -80,7 +81,7 @@ def create_trip():
         status = insert_trips(trip_name,destination)
         print(status, file = sys.stderr)
         return redirect('/trips')
-    return render_template('create_trip.html', trip_form=trip_form)
+    return render_template('create_trip.html', trip_form=trip_form, users=users)
 
 @app.route('/trips')
 def display_trips():
