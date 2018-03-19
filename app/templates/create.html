@@ -19,11 +19,17 @@
         </p>
         <p>
           Friend name:<br>
-          {{ form.friend(size=120) }}<br>
-        
+          <!-- {{ form.friend(size=120) }}<br> -->
+          <select name="friend" style="display: block">
+            <option disabled selected value> -- select a friend -- </option>
+            {% for user in users %}
+            <option value="{{ user.username }}">{{ user.username }}</option>
+            {% endfor %}
+          </select>
         </p>
 
       </div>
+
 
       <p><input type="submit" value="Create Trip"></p>
     </form>

@@ -28,6 +28,7 @@
             <tr>
               <td>{{ trip['trip'] }}</td>
               <td>{{ trip['destination'] }}</td>
+              <td><button id="{{ trip['trip'] }}" class="remove-btn">Remove Trip</button></td>
             </tr>
           {% endfor %}
         </table>

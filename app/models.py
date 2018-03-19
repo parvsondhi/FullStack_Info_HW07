@@ -45,8 +45,8 @@ def retrieve_allusers():
     	result = cur.execute("select * from users").fetchall()
     	return result
 
-
-
-
-
-
+def delete_trip(trip):
+	with sql.connect("database.db") as con:
+		con.row_factory = sql.Row
+		cur = con.cursor()
+		result = cur.execute("delete from users where trip=(?)", [trip]).fetchall()

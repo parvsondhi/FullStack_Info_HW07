@@ -45,13 +45,13 @@ def create():
 	user_id = retrieve_user(username)
 	# print(user_id)
 	form = TripForm()
+	users = retrieve_allusers()
 	if form.validate_on_submit():
 		trip = form.trip.data
 		destination = form.destination.data
-		friend = form.friend.data
+		friend = request.form.get('friend')
 		friend_id = retrieve_user(friend)
 		insert_trip(user_id,trip,destination,friend,friend_id)
 		insert_trip(friend_id,trip,destination,username,user_id)
-		return redirect('/user')  
-	return render_template('create.html',username=session['username'],form = form)
-
+		return redirect('/user')
+	return render_template('create.html',username=session['username'],form = form,users=users)
