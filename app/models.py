@@ -35,6 +35,7 @@ invited = db.Table('invited',
 )
 
 
+
 ## Flask login ##
 @login.user_loader
 def load_user(id):
