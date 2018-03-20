@@ -36,5 +36,31 @@ def delete_trip(id):
         cur.commit()
         return val
 
+def fetch_trips(username):
+    response = []
+    with sql.connect('database.db') as con:
+        cur = con.cursor()
+        sqltext = ("SELECT name, destination, user1, user2 "
+            "FROM trips "
+            "WHERE (user1=? OR user2=?)")
+        for rowlist in cur.execute(sqltext, (username, username)):
+            row['name'] = rowlist[0]
+            row['destination'] = rowlist[1]
+            row['user1'] = rowlist[2]
+            row['user2'] = rowlist[3]
+            response.append(row)
+        return response
+        
 
-
+def fetch_other_users(username):
+    response = []
+    with sql.connct('database.db') as con:
+        cur = con.cursor()
+        sqltext = ("SELECT username "
+            "FROM users "
+            "WHERE (username!=?)"
+            )
+        for rowlist in cur.execute(sqltext, [username]):
+            row['username'] = rowlist[0]
+            response.append(row)
+        return response
