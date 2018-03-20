@@ -13,6 +13,7 @@
 			<tr>
 				<th>Trip Name</th>
 				<th>Trip Destination</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,6 +21,7 @@
 			<tr>
 				<td>{{ trip.tripname }}</td>
 				<td>{{ trip.destination }}</td>
+				<td><a href='/delete_trip/{{ trip.id }}'>Delete</a></td>
 			</tr>
 			{% endfor %}
 		</tbody>

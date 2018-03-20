@@ -59,13 +59,15 @@ def create_trip():
         # return redirect(url_for('index'))
         return redirect(url_for('index'))
 
-
     ## Render page and form
     return render_template('create_trip.html', form=form)
 
+@app.route('/delete_trip/<value>')
+@login_required
+def delete_trip(value):
+    trip_id = value
+    # User.query.filter(User.id == 123).delete()
+    Trip.query.filter(Trip.id == trip_id).delete()
+    db.session.commit()
 
-
-
-# @app.route('/delete_trip')
-# @flask_login.login_required
-# def delete_trip():
+    return redirect(url_for('index'))
