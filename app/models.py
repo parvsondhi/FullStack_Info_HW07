@@ -28,7 +28,7 @@ def create_trip(name, destination, user1, user2):
         con.commit()
         return True
 
-def delete_trip(id):
+def db_delete_trip(id):
     with sql.connect('database.db') as con:
         cur = con.cursor()
         cur.execute("DELETE FROM trips WHERE id=?", [id])

@@ -51,7 +51,7 @@ def login():
 def display_user():
     # Retreive data from database to display
     if 'username' not in session:
-        return redirect('/logingit ')
+        return redirect('/login')
     else:
         username = session['username']
         # trips = get_trips(username)
@@ -72,7 +72,13 @@ def create_trip():
         name = form.name.data
         destination = form.destination.data
         user1 = username
-        user2 = form.user1.data
+        user2 = form.user2.data
         create_trip(name, destination, user1, user2)
         return redirect('/trips')
     return render_template('create_trip.html', form=form, username=username)
+
+@app.route('/delete_trip/<value>')
+def delete_trip(value):
+    db_delete_trip(value)
+    return redirect('/trips')
+
