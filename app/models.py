@@ -40,14 +40,15 @@ def fetch_trips(username):
     response = []
     with sql.connect('database.db') as con:
         cur = con.cursor()
-        sqltext = ("SELECT name, destination, user1, user2 "
+        sqltext = ("SELECT id, name, destination, user1, user2 "
             "FROM trips "
             "WHERE (user1=? OR user2=?)")
         for rowlist in cur.execute(sqltext, (username, username)):
-            row['name'] = rowlist[0]
-            row['destination'] = rowlist[1]
-            row['user1'] = rowlist[2]
-            row['user2'] = rowlist[3]
+            row['id'] = rowlist[0]
+            row['name'] = rowlist[1]
+            row['destination'] = rowlist[2]
+            row['user1'] = rowlist[3]
+            row['user2'] = rowlist[4]
             response.append(row)
         return response
         
