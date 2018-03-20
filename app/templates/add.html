@@ -1,0 +1,33 @@
+<!-- 1. extend from base-->
+{% extends "base.html" %}
+
+{% block title %}
+	Add Trip
+{% endblock %}
+
+<!-- 2. extend content here from base -->
+{% block content %}
+<div class="main-container">
+  <form action="" method="post" name="add">
+    {{ form.hidden_tag() }}
+    <!-- <div class="divider"></div> -->
+    <div class="section">
+      <p class="login-form-child">
+        Trip name:<br>
+        {{ form.trip_name(size=120) }}<br>
+      </p>
+      <p class="login-form-child">
+        Destination:<br>
+        {{ form.destination(size=120) }}<br>
+      </p>
+      <p class="login-form-child">
+        Select Friend:<br>
+        {{ form.friend() }}<br>
+      </p>
+    </div>
+    <p>
+    	<input type="submit" value="Add Trip">
+    </p>
+  </form>
+</div>
+{% endblock %}

@@ -1,35 +1,53 @@
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, session
 from app import app, models, db
-from .forms import CustomerForm, OrderForm
+from .forms import *
 # Access the models file to use SQL functions
 from .models import *
 
 @app.route('/')
 def index():
-    return redirect('/create_customer')
+    return redirect('/login')
 
-@app.route('/create_customer', methods=['GET', 'POST'])
-def create_customer():
-    form = CustomerForm()
+def db_stuff():
+    return
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    form = LoginForm()
     if form.validate_on_submit():
-        # Get data from the form
-        # Send data from form to Database
-        first_name = form.first_name.data
-        last_name = form.last_name.data
-        company = form.company.data
-        email = form.email.data
-        phone = form.phone.data
+        username = form.username.data
+        password = form.password.data
 
-        address = form.address.data
-        city = form.city.data
-        state = form.state.data
-        country = form.country.data
-        zip_code = form.zip_code.data
+        user_id = signup(username, password)
+        session['user_id'] = user_id
 
-        customer_id = insert_customer(first_name, last_name, company, email, phone)
-        insert_address(address, city, state, country, zip_code, customer_id)
-        return redirect('/customers')
-    return render_template('customer.html', form=form)
+        return redirect('/trips')
+    return render_template('login.html', form=form)
+
+@app.route('/trips')
+def trips():
+    # Retreive trips for this user from DB
+    if "user_id" in session:
+        user_id = session["user_id"]
+
+        trips = retrieve_trips(user_id)
+        return render_template('trips.html', trips=trips)
+    return redirect("/login")
+
+@app.route('/add', methods=['POST', 'GET'])
+def add():
+    form = AddTripForm()
+    form.friend.choices = [(user["userid"], user["username"]) for user in retrieve_users()]
+    if form.validate_on_submit():
+        trip_name = form.trip_name.data
+        destination = form.destination.data
+        friend = form.friend.data
+
+        add_trip(trip_name, destination, session["user_id"], friend)
+        return redirect('/trips')
+
+    return render_template('add.html', form=form)
+
 
 @app.route('/customers')
 def display_customer():
@@ -38,15 +56,7 @@ def display_customer():
     orders = retrieve_orders()
     return render_template('home.html', customers=customers, orders=orders)
 
-@app.route('/create_order/<value>', methods=['GET', 'POST'])
-def create_order(value):
-    # Get data from the form
-    # Send data from form to Database
-    customer_id = value
-    form = OrderForm()
-    if form.validate_on_submit():
-        name = form.name_of_part.data
-        manufacturer = form.manufacturer_of_part.data
-        insert_order(name, manufacturer, customer_id)
-        return redirect('/customers')
-    return render_template('order.html', form=form)
+@app.route('/remove/<value>', methods=['GET', 'POST'])
+def remove(value):
+    remove_trip(value)
+    return redirect('/trips')

@@ -5,7 +5,7 @@ def retrieve_users():
     with sql.connect("app.db") as conn:
         conn.row_factory = sql.Row
         cur = conn.cursor()
-        result = cur.execute("select * from users").fetchall()
+        result = cur.execute("select users.userid, users.username from users").fetchall()
     return result
 
 def retrieve_trips(user):
@@ -41,6 +41,6 @@ def remove_trip(tripid):
     with sql.connect("app.db") as conn:
         cur = conn.cursor()
         cur.execute("PRAGMA foreign_keys = ON")
-        cur.execute("DELETE FROM trips WHERE id =" + str(tripid))
         cur.execute("DELETE FROM user_to_trip WHERE tripid =" + str(tripid))
+        cur.execute("DELETE FROM trips WHERE id =" + str(tripid))
         conn.commit()
