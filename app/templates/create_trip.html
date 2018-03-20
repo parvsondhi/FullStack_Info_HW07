@@ -31,21 +31,14 @@
 				</p>
 
 				<p>
-				    <select style='display: inline'>
-				      <option value="" disabled selected>Choose your option</option>
-				      <option value="1">Option 1</option>
-				      <option value="2">Option 2</option>
-				      <option value="3">Option 3</option>
-				    </select>
-				    <label>Materialize Select</label>
-
-					<!-- {{ form.friend_id.label }}<br> -->
-					<!-- {{ form.friend_id(size=32) }} -->
-
+					{{ form.friend_id.label }}<br>
+				    <!-- <select style='display: inline'> -->
+					{{ form.friend_id(size=32) }}
+					<!-- </select> -->
 					<!-- Errors -->
-					<!-- {% for error in form.friend_id.errors %}
+					{% for error in form.friend_id.errors %}
 							 <span style="color: red;">[{{ error }}]</span>
-					{% endfor %} -->
+					{% endfor %}
 				</p>
 				<p>{{ form.submit() }}</p>
 

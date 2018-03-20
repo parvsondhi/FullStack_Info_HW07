@@ -17,6 +17,6 @@ class TripForm(FlaskForm):
     tripname = StringField('tripname', validators=[DataRequired()])
     destination = StringField('destination', validators=[DataRequired()])
     ## TESTING
-    # friend_select = SelectField('friend', choices=[(r.id, r.username) for r in User.query.with_entities(User.id, User.username)])
-    friend_id = IntegerField('friend_id', validators=[NumberRange(min=1, max=2)])
+    friend_id = SelectField('friend_id', choices=[(r.id, r.username) for r in User.query.with_entities(User.id, User.username)], coerce=int)
+    # friend_id = IntegerField('friend_id', validators=[NumberRange(min=1, max=2)])
     submit = SubmitField('Create Trip')
