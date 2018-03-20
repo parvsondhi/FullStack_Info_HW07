@@ -14,7 +14,11 @@
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password-form" placeholder="Password" name="password">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      {% if message %}
+        <h2>{{message}}</h2>
+      {% endif %}
+      <button type="submit" name="action" value="login" class="btn btn-primary">Login</button>
+      <button type="submit" name="action" value="signup" class="btn btn-primary">Sign Up</button>
     </form>
   </div>
 </div>
