@@ -6,7 +6,8 @@ import app.models as models
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('trip.html', username=escape(session['username']))
+        trips = models.get_trips(session['username'])
+        return render_template('trip.html', username=escape(session['username']), trips=trips)
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -42,7 +43,14 @@ def create_trip():
         dest = request.form['dest']
         models.add_trip(title, dest, session['username'], request.form['otheruser'])
         return redirect(url_for('index'))
-    return render_template('create_trip.html', users=models.get_users())
+    return render_template('create_trip.html', username=escape(session['username']), users=models.get_users())
+
+@app.route('/remove_trip', methods=['GET', 'POST'])
+def remove_trip():
+    trip_id = request.args.get('trip_id')
+    print trip_id
+    models.remove_trip(trip_id)
+    return redirect(url_for('index'))
 
 # set the secret key.  keep this really secret:
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
