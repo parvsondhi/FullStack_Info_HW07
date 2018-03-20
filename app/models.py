@@ -4,27 +4,27 @@ def insert_user(username, password):
     with sql.connect('database.db') as con:
         cur = con.cursor()
         cur.execute("SELECT COUNT(*) FROM users WHERE username=?", [username])
-        if cur.fetchone()[0]>0 return False
+        if cur.fetchone()[0]>0: return False
         result = cur.execute(
             "INSERT INTO users (username, password)"
             " VALUES (?,?)"
-            , )
+            , (username, password))
         con.commit()
         return True
 
-def login(username, password):
+def db_login(username, password):
     with sql.connect('database.db') as con:
         cur = con.cursor()
-        sql = "SELECT COUNT(*) FROM users WHERE (username=? AND password=?)",
-        cur.execute(sql, (username, password))
+        sqltext = "SELECT COUNT(*) FROM users WHERE (username=? AND password=?)"
+        cur.execute(sqltext, (username, password))
         return (cur.fetchone()[0]>0)
 
 def create_trip(name, destination, user1, user2):
     with sql.connect('database.db') as con:
         cur = con.cursor()
-        sql = ("INSERT INTO trips (name, destination, user1, user2)"
+        sqltext = ("INSERT INTO trips (name, destination, user1, user2)"
             " VALUES (?, ?)")
-        cur.execute(sql, (name, destination, user1, user2))
+        cur.execute(sqltext, (name, destination, user1, user2))
         con.commit()
         return True
 
