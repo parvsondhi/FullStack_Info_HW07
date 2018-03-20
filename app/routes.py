@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, TripForm
-from flask_login import current_user, login_user, login_required
+from flask_login import current_user, login_user, login_required, logout_user
 from app.models import User, Trip
 from werkzeug.urls import url_parse
 
@@ -33,6 +33,12 @@ def login():
 
     # flash('login fail')
     return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash('You were logged out')
+    return redirect(url_for('index'))
 
 @app.route('/create_trip', methods=['GET', 'POST'])
 @login_required
