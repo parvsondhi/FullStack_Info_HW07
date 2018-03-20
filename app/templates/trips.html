@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Trips
+{% endblock %}
+
+
+{% block header %}
+  {{ super() }}
+  <form action="logout" id="logout">
+    <span id="user_name">Logged in as {{ user_name }}</span>
+    <input class="action-button" id="logout-button" type="submit" value="Logout">
+  </form>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h2>Adventures</h2>
+      <div class= "section">
+        <a href="{{ url_for('create_trip') }}">Add Trip</a>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="trip_name">Trip Name</th>
+              <th data-field="destination">Destination</th>
+              <th data-field=""></th>
+            </tr>
+          </thead>
+          {% for trip in trips %}
+            <tr>
+              <td>{{ trip['trip_name'] }}</td>
+              <td>{{ trip['destination'] }}</td>
+              <td><form action="{{ url_for('delete_trip') }}" method=POST><input type=hidden value="{{ trip['trip_id'] }}" name="trip_id"></input><input type="submit" value="Delete"></input></form></td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
