@@ -19,7 +19,6 @@ def retrieve_user(username):
 		con.row_factory = sql.Row
 		cur = con.cursor()
 		result = cur.execute("select * from users WHERE username=(?)",[username]).fetchall()
-		# print (result[0][1])
 		return result[0][0]
 
 def insert_user(): # keep this function for signup
@@ -30,8 +29,6 @@ def check_user(username,password):
 		con.row_factory = sql.Row
 		cur = con.cursor()
 		result = cur.execute("select * from users WHERE username=(?) AND password = (?)", [username,password]).fetchall()
-		# result = cur.execute("select * from users").fetchall()
-		# print(result)
 		if len(result) == 0:
 			return False
 		else:
@@ -49,4 +46,4 @@ def delete_trip(trip):
 	with sql.connect("database.db") as con:
 		con.row_factory = sql.Row
 		cur = con.cursor()
-		result = cur.execute("delete from users where trip=(?)", [trip]).fetchall()
+		result = cur.execute("delete from trips where trip=(?)", [trip]).fetchall()

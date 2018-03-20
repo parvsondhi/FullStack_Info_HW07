@@ -1,6 +1,6 @@
 from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 from app import app, models, db
-from .forms import UserForm, TripForm #
+from .forms import UserForm, TripForm
 from .models import *
 import os
 app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
@@ -9,7 +9,7 @@ app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 @app.route('/index')
 def index():
     if 'username' in session:  
-    	return redirect('/user')      
+    	return redirect('/user')
     # return render_template('trip.html', username=session['username'])
     else:
         return render_template('login.html')
@@ -36,14 +36,12 @@ def logout():
 def user():
 	username = session['username']
 	trips = retrieve_trips(username)
-	# print(trips)
 	return render_template('trip.html', username=session['username'],trips = trips)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
 	username = session['username']
 	user_id = retrieve_user(username)
-	# print(user_id)
 	form = TripForm()
 	users = retrieve_allusers()
 	if form.validate_on_submit():
@@ -55,3 +53,9 @@ def create():
 		insert_trip(friend_id,trip,destination,username,user_id)
 		return redirect('/user')
 	return render_template('create.html',username=session['username'],form = form,users=users)
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+	trip = request.form.get('trip')
+	delete_trip(trip)
+	return redirect('/user')

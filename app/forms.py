@@ -1,6 +1,5 @@
 from flask.ext.wtf import Form
 from wtforms import StringField, IntegerField
-# from flask_wtf.html5 import EmailField
 from wtforms.validators import DataRequired
 
 class UserForm(Form):
@@ -10,4 +9,4 @@ class UserForm(Form):
 class TripForm(Form):
 	trip = StringField('trip', validators=[DataRequired()])
 	destination = StringField('destination', validators=[DataRequired()])
-	friend = StringField('friend', validators=[DataRequired()]) # friend -> 
+	friend = StringField('friend', validators=[DataRequired()])
