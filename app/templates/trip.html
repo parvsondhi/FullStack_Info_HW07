@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block stylesheets %}
+<link href="{{ url_for('static', filename='trip.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1 class="col-sm-12">Welcome, {{ username }}!</h1>
+    </div>
+    <div class="row" id="add_trip_button">
+        <div class="col-sm-12 section">
+            <a href="{{ url_for('create_trip') }}" class="btn btn-primary" role="button">Add a Trip</a>
+        </div>
+    </div>
+    <div class="row">
+        <h3 class="col-md-12">Here's the trip information</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12 section">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th data-field="trip_title">Trip Title</th>
+                        <th data-field="destination">Destination</th>
+                        <th data-field="remove-btn"></th>
+                    </tr>
+                </thead>
+                {% for trip in trips %}
+                <tr>
+                    <td>{{ trip['trip_title'] }}</td>
+                    <td>{{ trip['destination'] }}</td>
+
+                    <!-- Add more fields to showcase on this page -->
+                    <!-- Below is a method of adding the 'add an order' button which will route you to create_order in views.py -->
+                    <td><a href="{{ url_for('remove_trip', value=customer['customer_id']) }}">Remove Trip</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
