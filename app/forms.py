@@ -8,4 +8,8 @@ class UserForm(Form):
 	username = StringField('username', validators=[DataRequired()])
 	password = StringField('password', validators=[DataRequired()])
 
-
+class TripForm(Form):
+	# trip form
+	name = StringField('name', validators=[DataRequired()])
+	destination = StringField('destination', validators=[DataRequired()])
+	user2 = StringField('user2', validators=[DataRequired()])

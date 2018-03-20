@@ -4,23 +4,31 @@
 <div class="container">
   <div class="row">
     <div class= "section">
-      <a href="{{ url_for('display_customer') }}">Home</a>
+      <a href="{{ url_for('display_user') }}">Trips</a>
     </div>
-    <h2>Add Order to Our Database</h2>
+    <h2>Add Trip to Our Database</h2>
     <form action="" method="post" name="login">
       {{ form.hidden_tag() }}
       <div class="divider"></div>
       <div class="section">
         <p>
-          Name of Part:<br>
-          {{ form.name_of_part(size=120)}}<br>
+          Name of Trip:<br>
+          {{ form.name(size=120)}}<br>
         </p>
         <p>
-          Manufacturer of Part:<br>
-          {{ form.manufacturer_of_part(size=120)}}<br>
+          Destination:<br>
+          {{ form.destination(size=120)}}<br>
+        </p>
+        <p>
+          User1:<br>
+          <h5>{{ username }}</h5>
+        </p>
+        <p>
+          User2:<br>
+          {{ form.user2(size=120)}}<br>
         </p>
       </div>
-      <p><input type="submit" value="Create Order"></p>
+      <p><input type="submit" value="Create Trip"></p>
     </form>
   </div>
 </div>

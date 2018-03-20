@@ -34,23 +34,43 @@ def new_user():
 def display_user():
     # Retreive data from database to display
     if 'username' not in session:
+<<<<<<< HEAD
         redirect('/new_user')
     else:
         username = session['username']
         trips = get_trips(username)
         return render_template('trips.html',
                             username=username, trips=trips)
+=======
+        return redirect('/login')
+    else:
+        username = session['username']
+        # trips = get_trips(username)
+        return render_template('trips.html', username=username) # trips=trips)
 
-@app.route('/create_trip/<value>', methods=['GET', 'POST'])
-def create_trip(value):
-    form = OrderForm()
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
+>>>>>>> baefb7482951dc4ff9d3ad712b7e2af4006c45cf
+
+@app.route('/create_trip', methods=['GET', 'POST'])
+def create_trip():
+    form = TripForm()
+    username = session['username']
     if form.validate_on_submit():
         # Get data from the form
         # Send data from form to Database
-        name_of_part = form.name_of_part.data
-        manufacturer_of_part = form.manufacturer_of_part.data
-        order_data = [name_of_part, manufacturer_of_part, value]
-        order_id = insert_order(order_data)
-        insert_customer_order(order_id, value)
-        return redirect('/customers')
-    return render_template('create_trip.html', form=form)
+        name = form.name.data
+        destination = form.destination.data
+        user1 = username
+        user2 = form.user2.data
+        db_create_trip(name, destination, user1, user2)
+        return redirect('/trips')
+    return render_template('create_trip.html', form=form, username=username)
+
+@app.route('/delete_trip/<value>')
+def delete_trip(value):
+    db_delete_trip(value)
+    return redirect('/trips')
+
