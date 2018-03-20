@@ -56,7 +56,6 @@ def create_trip():
         db.session.commit()
 
         ## Redirect to index page
-        # return redirect(url_for('index'))
         return redirect(url_for('index'))
 
     ## Render page and form
