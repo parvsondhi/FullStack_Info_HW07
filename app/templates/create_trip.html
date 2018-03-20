@@ -23,11 +23,15 @@
           {{ trip_form.destination(size=120) }}<br>
         </p>
         <p>
-          Friend:<br>
-            {{ trip_form.friend_name(size=120) }}<br>
+          Invite a friend:<br>
+        <select name=friend class='dropdown-button btn'>
+          {% for user in users %}
+            <option value={{user.user_name}}> {{user.user_name}} </option>
+          {% endfor %}
+        </select></br>
         </p>
       </div>
-      <p><input type="submit" id="create_trip" value="Create Trip"></p>
+      <p><input type="submit" value="Create Trip"></p>
     </form>
   </div>
 </div>
