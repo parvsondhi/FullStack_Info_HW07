@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('display_trips') }}">Home</a>
+    </div>
+    <h2>Add a Trip</h2>
+    <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          Trip Title:<br>
+          {{ form.triptitle(size=120) }}<br>
+        </p>
+        <p>
+          Trip Destination:<br>
+          {{ form.destination(size=120) }}<br>
+        </p>
+        <p>
+          Going with:<br>
+          <div class="input-field s6">      
+          {{ form.friends(class_='browser-default') }}</div><br>
+        </p>
+
+        <p>
+        <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDpgVw_l377utsEIpJ_-iC_jpQgJ2__feY&q={{ form.destination.data }}"></iframe>
+        </p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        
+      </div>
+      <p><input type="submit" value="Create Trip"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}
