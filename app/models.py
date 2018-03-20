@@ -1,42 +1,46 @@
 import sqlite3 as sql
 
-def retrieve_customers():
+def retrieve_users():
     # SQL statement to query database goes here
     with sql.connect("app.db") as conn:
         conn.row_factory = sql.Row
         cur = conn.cursor()
-        result = cur.execute("select * from customers").fetchall()
+        result = cur.execute("select * from users").fetchall()
     return result
 
-def retrieve_orders():
+def retrieve_trips(user):
     # SQL statement to query database goes here
     with sql.connect("app.db") as conn:
         conn.row_factory = sql.Row
         cur = conn.cursor()
-        result = cur.execute("select o.name_of_part, o.manufacturer_of_part, co.customer_id from orders as o, customers_orders as co where o.order_id = co.order_id").fetchall()
+        result = cur.execute("select t.id, t.tripname, t.destination from trips as t, user_to_trip as ut where t.id = ut.tripid and ut.userid =" + str(user)).fetchall()
     return result
 
 
 ##You might have additional functions to access the database
-def insert_customer(first_name, last_name, company, email, phone):
+def signup(username, password):
     with sql.connect("app.db") as conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO customers(first_name, last_name, company, email, phone) VALUES (?, ?, ?, ?, ?)", (first_name, last_name, company, email, phone))
-        customer_id = cur.execute('SELECT last_insert_rowid()').fetchone()[0]
+        cur.execute("INSERT INTO users(username, password) VALUES (?, ?)", (username, password))
+        userid = cur.execute('SELECT last_insert_rowid()').fetchone()[0]
         conn.commit()
-    return customer_id
+    return userid
 
-def insert_address(address, city, state, country, zip_code, customer_id):
+def add_trip(tripname, destination, user1, user2):
     with sql.connect("app.db") as conn:
         cur = conn.cursor()
         cur.execute("PRAGMA foreign_keys = ON")
-        cur.execute("INSERT INTO addresses(street_address, city, state, country, zip_code, customer_id) VALUES (?, ?, ?, ?, ?, ?)", (address, city, state, country, zip_code, customer_id))
+        cur.execute("INSERT INTO trips(tripname, destination, userid_1, userid_2) VALUES (?, ?, ?, ?)", (tripname, destination, user1, user2))
+        tripid = cur.execute('SELECT last_insert_rowid()').fetchone()[0]
+        cur.execute("INSERT INTO user_to_trip(userid, tripid) VALUES (?, ?)", (user1, tripid))
+        cur.execute("INSERT INTO user_to_trip(userid, tripid) VALUES (?, ?)", (user2, tripid))
         conn.commit()
 
-def insert_order(name, manufacturer, customer_id):
+
+def remove_trip(tripid):
     with sql.connect("app.db") as conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO orders(name_of_part, manufacturer_of_part) VALUES (?, ?)", (name, manufacturer))
-        order_id = cur.execute('SELECT last_insert_rowid()').fetchone()[0]
-        cur.execute("INSERT INTO customers_orders(customer_id, order_id) VALUES (?, ?)", (customer_id, order_id))
+        cur.execute("PRAGMA foreign_keys = ON")
+        cur.execute("DELETE FROM trips WHERE id =" + str(tripid))
+        cur.execute("DELETE FROM user_to_trip WHERE tripid =" + str(tripid))
         conn.commit()
