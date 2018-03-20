@@ -1,6 +1,8 @@
+from __future__ import print_function
 import sqlite3 as sql
 
 import sys
+
 
 def insert_user(user_name,password):
     with sql.connect("app.db") as con:
@@ -16,7 +18,7 @@ def insert_trips(trip_name,destination,users):
         message = "SQL insert trips failed"
         cur = con.cursor()
         cur.execute("INSERT INTO trips (trip_name, destination) VALUES (?,?)", (trip_name, destination))
-        trip_id = cur.lastrowid  # Get id of the new trip. 
+        trip_id = cur.lastrowid  # Get id of the new trip.
         for user in users:
             user_id = get_userid_from_name(user)
             print("Trip id is {}, user name is {} u_id is {}".format(trip_id, user, user_id), file=sys.stderr)

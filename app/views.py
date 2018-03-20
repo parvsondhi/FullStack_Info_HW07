@@ -1,3 +1,4 @@
+from __future__ import print_function
 from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 from app import app, models, db
 from .forms import UserForm, TripForm
@@ -6,7 +7,7 @@ from .models import *
 import sys
 
 
-@app.route('/index', methods = ['GET', 'POST'])
+@app.route('/', methods = ['GET', 'POST'])
 def index():
     if 'user_name' in session: #check if the user is already in session, if so, direct the user to trips.html
         #user_name = session.get('user_name')
@@ -53,7 +54,7 @@ def signup():
         status = insert_user(session['user_name'], session['password'])
         print(status, file = sys.stderr)
         return redirect('/login')
-    return render_template('login.html', user_form=user_form) 
+    return render_template('login.html', user_form=user_form)
 
 
 @app.route('/create_trip', methods=['GET', 'POST'])
@@ -67,7 +68,7 @@ def create_trip():
         # print("Validate on submit....", file = sys.stderr)
         trip_name = trip_form.trip_name.data
         destination = trip_form.destination.data
-        users = [session['user_name'], 
+        users = [session['user_name'],
                 trip_form.friend.data]  # myself and my friendss
         # Send data from form to Database
         status = insert_trips(trip_name,destination,users)
