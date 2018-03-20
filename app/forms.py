@@ -1,5 +1,6 @@
 from app import db
 from app.models import User
+from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
@@ -15,7 +16,7 @@ class LoginForm(FlaskForm):
 class TripForm(FlaskForm):
     tripname = StringField('tripname', validators=[DataRequired()])
     destination = StringField('destination', validators=[DataRequired()])
-    # friend_id = IntegerField('friend_id', validators=[NumberRange(min=1, max=3, message='DEBUG: Can only be 1 - 3')])# TESTING -- Replace with Drop down
-    # friend_id = QuerySelectField(query_factory=lambda: )
-    # friend_id = SelectField('friend', choices=[(r.id, r.username) for r in User.query.with_entities(User.id, User.username) ])
+    ## TESTING
+    # friend_select = SelectField('friend', choices=[(r.id, r.username) for r in User.query.with_entities(User.id, User.username)])
+    friend_id = IntegerField('friend_id', validators=[NumberRange(min=1, max=2)])
     submit = SubmitField('Create Trip')

@@ -21,7 +21,7 @@ class User(UserMixin, db.Model):
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    tripname = db.Column(db.String(64), index=True, unique=True)
+    tripname = db.Column(db.String(64), index=True)
     destination = db.Column(db.String(64), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     friend_id = db.Column(db.Integer)
