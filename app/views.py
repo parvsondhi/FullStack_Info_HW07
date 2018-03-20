@@ -2,7 +2,7 @@ from flask import request, Flask, session, redirect, url_for, escape, request, r
 from app import app, models, db
 from .forms import CustomerForm, OrderForm
 # Access the models file to use SQL functions
-from models import insert_customer_data, insert_order_data, retrieve_customers, retrieve_orders
+import app.models as models  
 
 @app.route('/')
 def index():
@@ -13,10 +13,22 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        session['username'] = request.form['username']
-        print request.form
-        return redirect(url_for('index'))
-    return render_template('login.html')
+        username = request.form['username']
+        password = request.form['password']
+        if request.form['action'] == 'login':
+            if models.check_login(username, password):
+                session['username'] = username
+                return redirect(url_for('index'))
+            else:
+                return render_template('login.html', message="Incorrect username or password")
+        else:
+            if models.create_user(username, password):
+                session['username'] = username
+                return redirect(url_for('index'))
+            else:
+                return render_template('login.html', message="User already exists")
+
+    return render_template('login.html', message=None)
 
 @app.route('/logout')
 def logout():
@@ -24,9 +36,14 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
-@app.route('/create_trip')
+@app.route('/create_trip', methods=['GET', 'POST'])
 def create_trip():
-    return 'Create trip'
+    if request.method == 'POST':
+        title = request.form['title']
+        dest = request.form['dest']
+        models.add_trip(title, dest, session['username'], request.form['otheruser'])
+        return redirect(url_for('index'))
+    return render_template('create_trip.html', users=models.get_users())
 
 # set the secret key.  keep this really secret:
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
