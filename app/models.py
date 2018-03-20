@@ -3,7 +3,7 @@ import sqlite3 as sql
 def insert_user(username, password):
 	with sql.connect('database.db') as con:
 		cur = con.cursor()
-        cur.execute("SELECT COUNT(*) FROM users WHERE username=?", username)
+        cur.execute("SELECT COUNT(*) FROM users WHERE username=?", [username])
         if cur.fetchone()>0 return false
 		result = cur.execute(
             "INSERT INTO users (username, password)"
@@ -31,7 +31,7 @@ def create_trip(name, destination, user1, user2):
 def delete_trip(id):
     with sql.connect('database.db') as con:
         cur = con.cursor()
-        cur.execute("DELETE FROM trips WHERE id=?", id)
+        cur.execute("DELETE FROM trips WHERE id=?", [id])
         val = cur.fetchone()
         cur.commit()
         return val
