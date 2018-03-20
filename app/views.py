@@ -62,16 +62,17 @@ def logout():
     session.clear()
     return redirect('/')
 
-@app.route('/create_trip/<value>', methods=['GET', 'POST'])
-def create_trip(value):
-    form = OrderForm()
+@app.route('/create_trip', methods=['GET', 'POST'])
+def create_trip():
+    form = TripForm()
+    username = session['username']
     if form.validate_on_submit():
         # Get data from the form
         # Send data from form to Database
-        name_of_part = form.name_of_part.data
-        manufacturer_of_part = form.manufacturer_of_part.data
-        order_data = [name_of_part, manufacturer_of_part, value]
-        order_id = insert_order(order_data)
-        insert_customer_order(order_id, value)
-        return redirect('/customers')
-    return render_template('create_trip.html', form=form)
+        name = form.name.data
+        destination = form.destination.data
+        user1 = username
+        user2 = form.user1.data
+        create_trip(name, destination, user1, user2)
+        return redirect('/trips')
+    return render_template('create_trip.html', form=form, username=username)
