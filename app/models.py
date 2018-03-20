@@ -19,7 +19,7 @@ def db_login(username, password):
         cur.execute(sqltext, (username, password))
         return (cur.fetchone()[0]>0)
 
-def create_trip(name, destination, user1, user2):
+def db_create_trip(name, destination, user1, user2):
     with sql.connect('database.db') as con:
         cur = con.cursor()
         sqltext = ("INSERT INTO trips (name, destination, user1, user2)"

@@ -55,7 +55,7 @@ def display_user():
     else:
         username = session['username']
         # trips = get_trips(username)
-        return render_template('trips.html', username=username)
+        return render_template('trips.html', username=username) # trips=trips)
 
 @app.route('/logout')
 def logout():
@@ -73,7 +73,7 @@ def create_trip():
         destination = form.destination.data
         user1 = username
         user2 = form.user2.data
-        create_trip(name, destination, user1, user2)
+        db_create_trip(name, destination, user1, user2)
         return redirect('/trips')
     return render_template('create_trip.html', form=form, username=username)
 
