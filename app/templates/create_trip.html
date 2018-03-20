@@ -14,11 +14,14 @@
         <label for="password">Trip Desination</label>
         <input type="text" class="form-control" id="dest-form" name="dest">
       </div>
-      <select name="otheruser">
-        {% for u in users %}
+      <div class="form-group">
+        <label for="password">Select a Friend</label>
+        <select class="form-control" name="otheruser">
+          {% for u in users %}
           <option value="{{u['email']}}">{{u['email']}}</option>
-        {% endfor %}
-      </select>
+          {% endfor %}
+        </select>
+      </div>
       <button type="submit" class="btn btn-primary">Create Trip</button>
     </form>
   </div>

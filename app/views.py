@@ -1,6 +1,5 @@
 from flask import request, Flask, session, redirect, url_for, escape, request, render_template
 from app import app, models, db
-from .forms import CustomerForm, OrderForm
 # Access the models file to use SQL functions
 import app.models as models  
 

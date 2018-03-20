@@ -4,6 +4,11 @@ body {
   padding-top: 5rem;
 }
 
+#welcome-text {
+  color: whitesmoke;
+  margin-right: 1%;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

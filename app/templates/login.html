@@ -15,10 +15,12 @@
         <input type="password" class="form-control" id="password-form" placeholder="Password" name="password">
       </div>
       {% if message %}
-        <h2>{{message}}</h2>
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
       {% endif %}
       <button type="submit" name="action" value="login" class="btn btn-primary">Login</button>
-      <button type="submit" name="action" value="signup" class="btn btn-primary">Sign Up</button>
+      <button type="submit" name="action" value="signup" class="btn btn-outline-success">Sign Up</button>
     </form>
   </div>
 </div>
