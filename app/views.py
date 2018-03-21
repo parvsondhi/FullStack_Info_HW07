@@ -33,6 +33,16 @@ def logout():
 	session.pop('email', None)
 	return redirect(url_for('index'))
 
+@app.route('/trips')
+def view_trips():
+    
+    return render_template('trips.html')
+
+@app.route('/create-trip')
+def create_trips():
+    
+    return render_template('create_trip.html')
+
 @app.route('/submit-survey', methods=['GET', 'POST'])
 def submitSurvey():
     username = ''

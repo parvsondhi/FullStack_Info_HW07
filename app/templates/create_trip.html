@@ -1,35 +1,31 @@
+<!-- 1. extend from base-->
 {% extends "base.html" %}
+
+{% block title %}
+ Create a Trip
+{% endblock %}
+
+{% block header %}
+  <!-- super function here -->
+  {{ super() }}
+  <form action="logout" id="logout">
+    <span id="username">Logged in as {{ name }}</span>
+    <input class="action-button" id="logout-button" type="submit" value="Logout">
+  </form>
+{% endblock %}
+
+
+<!-- 1. extend from content block from the base-->
 {% block content %}
-  <div class="container">
-    <div class="row">
-      <h1>Welcome to Travel Pals</h1>
-<!--       <div class= "section">
-        <a href="{{ url_for('create_trip') }}">Add a Customer</a>
-      </div> -->
-      <div class="divider"></div>
-      <div class="section">
-        <h3>These are all of your awesome trips:</h3>
-        <table class="striped">
-          <thead>
-            <tr>
-              <th data-field="company">Trip Title</th>
-              <th data-field="email">Destination</th>
-              <th data-field="email">Friends</th>
-            </tr>
-          </thead>
-<!--           {% for trip in trips %}
-            <tr>
-              <td>{{ trip['trip_title'] }}</td>
-              <td>{{ trip['destination'] }}</td>
-               <td>{{ trip[''] }}</td>
-
-
-              Below is a method of adding the 'add an order' button which will route you to create_order in views.py
-
-              <td><a href="{{ url_for('create_order', value=customer['customer_id']) }}">Add an Order</a></td>  
-            </tr>
-          {% endfor %} -->
-        </table>
+  <div class="main-container">
+    <h3>Where do you want to go?</h3>
+    <label class="survey-item sm-label">Trip Title
+      <input class="sm-input" type="text" name="color"></label>
+    <label class="survey-item sm-label">Destination
+      <input class="sm-input" type="text" name="food"></label>
+    <label class="survey-item sm-label">With who?
+      <input class="sm-input" type="text" name="vacation"></label>
+    <button class="action-button" id="submit-survey">Submit</button>
       </div>
     </div>
   </div>
