@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <div>
+  <div class="trips">
     <h1>Trips</h1>
 
     <div>
@@ -21,7 +21,8 @@
                       </a>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{trip.destination}}</h6>
-                  </div>
+                </div>
+                <img class="card-img" src="https://source.unsplash.com/600x600/daily/?{{trip.destination}}">
             </div>
           </div>
         {% endfor %}
@@ -41,7 +42,8 @@
                       </a>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{trip.destination}}</h6>
-                  </div>
+                </div>
+                <img class="card-img" src="https://source.unsplash.com/600x600/daily?{{trip.destination}}">
             </div>
           </div>
         {% endfor %}
