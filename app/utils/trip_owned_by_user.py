@@ -6,12 +6,7 @@ from app.models import Trip
 
 def trip_owned_by_user(func):
     @wraps(func)
-    def decorated_function(id, *args, **kwargs):
-        trip = Trip.query.filter_by(id=int(id)).first()
-        if trip is None:
-            flash("The trip does not exists")
-            return abort(404)
-
+    def decorated_function(trip, *args, **kwargs):
         if trip.user_id != current_user.id:
             flash("You do not have access to this trip!")
             return abort(403)
