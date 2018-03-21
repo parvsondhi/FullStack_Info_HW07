@@ -5,14 +5,14 @@ import os
 app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index' )
 def index():
     username = ''
     if 'username' in session: #check if the user is already in session, if so, direct the user to survey.html Hint: render_template with a variable
         username = session['username']
         "Logged in as " + username + "<br>" + \
         "<b><a href = '/logout'>Click here to log out</a></b>"
-        return render_template('survey.html', name=username)
+        return render_template('trips.html', username=username)
     else:
         return render_template('login.html')
 
@@ -21,8 +21,8 @@ def login():
     # Here, you need to have logic like if there's a post request method, store the username and email from the form into
     # session dictionary
     if request.method == 'POST':
-        session['username'] = request.form['name']
-        session['email'] = request.form['email']
+        session['username'] = request.form['username']
+        session['password'] = request.form['password']
         return redirect(url_for('index'))
     else:
         return render_template('login.html')
