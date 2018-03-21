@@ -13,7 +13,7 @@ def current_user_has_access_to_trip(func):
         if TripInvitation.query.filter_by(user_id=current_user.id, trip_id=trip.id).first():
             return func(trip, *args, **kwargs)
 
-        flash("You do not have access to this trip!")
+        flash('You do not have access to this trip!', 'error')
         return abort(403)
 
     return decorated_function

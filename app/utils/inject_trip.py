@@ -8,7 +8,7 @@ def inject_trip(func):
     def decorated_function(id, *args, **kwargs):
         trip = Trip.query.filter_by(id=int(id)).first()
         if trip is None:
-            flash("The trip does not exists!")
+            flash('The trip does not exists!', 'error')
             return abort(404)
 
         return func(trip, *args, **kwargs)

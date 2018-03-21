@@ -8,7 +8,7 @@ def trip_owned_by_user(func):
     @wraps(func)
     def decorated_function(trip, *args, **kwargs):
         if trip.user_id != current_user.id:
-            flash("You do not have access to this trip!")
+            flash('You do not have access to this trip!', 'error')
             return abort(403)
 
         return func(trip, *args, **kwargs)
