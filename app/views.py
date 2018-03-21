@@ -1,9 +1,13 @@
 # Importing flask library
+# from . import app, models, db
+# from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
+# import os
+# from .forms import TripForm
+from flask import request, Flask, session, redirect, url_for, escape, request, render_template
 from . import app, models, db
-from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
+# Access the models file to use SQL functions
 import os
 from .forms import TripForm
-# app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 
 @app.route('/')
 @app.route('/index')
