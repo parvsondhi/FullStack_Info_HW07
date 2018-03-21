@@ -1,6 +1,5 @@
 Flask
 gunicorn
-python-3.6.4
 Jinja2
 flask-login
 werkzeug.security
