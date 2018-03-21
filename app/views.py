@@ -33,23 +33,6 @@ def logout():
 	session.pop('email', None)
 	return redirect(url_for('index'))
 
-# @app.route('/submit-survey', methods=['GET', 'POST'])
-# def submitSurvey():
-#     username = ''
-#     email = ''
-#     if'username' in session: #check if user in session
-#         username = session.get('username')
-#         surveyResponse = {}
-#         surveyResponse['color'] = request.form.get('color')
-#         surveyResponse['food'] = request.form.get('food')
-#         surveyResponse['vacation'] = request.form.get('vacation')
-#         #get the rest o responses from users using request library Hint: ~3 lines of code
-#         surveyResponse['fe-before'] = request.form.get('feBefore')
-#         surveyResponse['fe-after'] = request.form.get('feAfter')
-#         return render_template('results.html', name=username, surveyResponse=surveyResponse) # pass in variables to the template
-#     else:
-#         return render_template('login.html')
-
 #users can create trips
 @app.route('/create-trip')
 def create_trip():
