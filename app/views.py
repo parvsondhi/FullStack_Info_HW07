@@ -11,7 +11,7 @@ def index():
     if 'username' in session:
         return redirect('/trips')
     else:
-        return redirect('/new_user')
+        return redirect('/login')
 
 @app.route('/new_user', methods=['GET', 'POST'])
 def new_user():
@@ -30,34 +30,44 @@ def new_user():
             return redirect('/new_user')
     return render_template('signup.html', form=form)
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = UserForm()
+    if form.validate_on_submit():
+        # Get data from the form
+        # Send data from form to Database
+        username = form.username.data
+        password = form.password.data
+
+        success = db_login(username, password)
+        if success:
+            session['username'] = username
+            return redirect('/trips')
+        else:
+            return redirect('/login')
+    return render_template('login.html', form=form)
+
 @app.route('/trips')
 def display_user():
     # Retreive data from database to display
     if 'username' not in session:
-<<<<<<< HEAD
-        redirect('/new_user')
-    else:
-        username = session['username']
-        trips = get_trips(username)
-        return render_template('trips.html',
-                            username=username, trips=trips)
-=======
         return redirect('/login')
     else:
         username = session['username']
-        # trips = get_trips(username)
-        return render_template('trips.html', username=username) # trips=trips)
+        trips = fetch_trips(username)
+        return render_template('trips.html', username=username, trips=trips)
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
->>>>>>> baefb7482951dc4ff9d3ad712b7e2af4006c45cf
 
 @app.route('/create_trip', methods=['GET', 'POST'])
 def create_trip():
     form = TripForm()
     username = session['username']
+    users = fetch_other_users(username)
+    print('len users: {}'.format(len(users)))
     if form.validate_on_submit():
         # Get data from the form
         # Send data from form to Database
@@ -67,7 +77,7 @@ def create_trip():
         user2 = form.user2.data
         db_create_trip(name, destination, user1, user2)
         return redirect('/trips')
-    return render_template('create_trip.html', form=form, username=username)
+    return render_template('create_trip.html', form=form, username=username, users=users)
 
 @app.route('/delete_trip/<value>')
 def delete_trip(value):

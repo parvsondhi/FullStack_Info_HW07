@@ -25,7 +25,17 @@
         </p>
         <p>
           User2:<br>
-          {{ form.user2(size=120)}}<br>
+          <select>
+            {% for user in users %}
+            <option value="{{ user }}">{{ user }}</option>
+            {% endfor %}
+          </select><br>
+        </p>
+        <p>
+          <select>
+            <option>1</option>
+            <option>2</option>
+          </select>
         </p>
       </div>
       <p><input type="submit" value="Create Trip"></p>
