@@ -6,4 +6,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 # SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 WTF_CSRF_ENABLED = True
+<<<<<<< HEAD
 SECRET_KEY = 'you-will-never-guess'
+=======
+SECRET_KEY = 'you-will-never-guess'
+>>>>>>> refs/remotes/origin/master
