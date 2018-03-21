@@ -1,4 +1,17 @@
 {% extends "base.html" %}
+
+{% block title %}
+	Trips
+{% endblock %}
+
+{% block header %}
+	{{ super() }}
+	<form action="logout" id="logout">
+		<span id="username">Logged in as: {{ username }}</span>
+		<input class="action-button" id="logout-button" type="submit" value="Logout">
+	</form>
+{% endblock %}
+
 {% block content %}
   <div class="container">
     <div class="row">
@@ -25,7 +38,7 @@
             <tr>
               <td>{{ trip['trip_name'] }}</td>
               <td>{{ trip['destination'] }}</td>
-              <!-- < <td>{{ trip[''] }}</td>  --> 
+              <!-- < <td>{{ trip[''] }}</td>  -->
             </tr>
           {% endfor %}
         </table>

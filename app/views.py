@@ -1,4 +1,3 @@
-# Importing flask library
 from app import app
 from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 import os
@@ -8,7 +7,7 @@ app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 @app.route('/index' )
 def index():
     username = ''
-    if 'username' in session: #check if the user is already in session, if so, direct the user to survey.html Hint: render_template with a variable
+    if 'username' in session: #check if the user is already in session, if so, direct the user to trips.html Hint: render_template with a variable
         username = session['username']
         "Logged in as " + username + "<br>" + \
         "<b><a href = '/logout'>Click here to log out</a></b>"
@@ -33,25 +32,6 @@ def logout():
 	session.pop('email', None)
 	return redirect(url_for('index'))
 
-@app.route('/trips')
-def view_trips():
-    
-    return render_template('trips.html')
-
-@app.route('/create-trip', methods=['GET', 'POST'])
-def create_trips():
-    username = ''
-    if'username' in session: #check if user in session
-        username = session.get('username')
-        surveyResponse = {}
-        surveyResponse['trip_name'] = request.form.get('trip_name')
-        surveyResponse['destination'] = request.form.get('destination')
-        return render_template('trips.html', trip_name=trip_name , destination=destination) # pass in variables to the template
-    else:
-        return render_template('create_trip.html')
-    
-    # return render_template('create_trip.html')
-
 @app.route('/submit-survey', methods=['GET', 'POST'])
 def submitSurvey():
     username = ''
@@ -68,6 +48,13 @@ def submitSurvey():
         return render_template('results.html', name=username, surveyResponse=surveyResponse) # pass in variables to the template
     else:
         return render_template('login.html')
+
+#display users trips
+@app.route('/trips')
+def display_trip():
+    # Retreive data from database to display
+    trips = models.retrieve_trips()
+    return render_template('trips.html')
 
 
 @app.errorhandler(404)
