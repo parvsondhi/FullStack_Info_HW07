@@ -21,14 +21,13 @@ html {
   height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  /* font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+/* h1, h2, h3, h4, h5, h6 {
   font-family: sans-serif;
   font-weight: 700;
   margin: 0 0 35px;
   letter-spacing: 1px;
   text-transform: uppercase;
-}
+} */
 
 #site-title {
   margin-left: 10px;
@@ -40,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
   width: 70%;
   /* height: 50px; */
-  margin-top: 200px;
+  margin-top: 100px;
   padding-top: 50px;
   padding-bottom: 50px;
   text-align: center;
@@ -65,7 +64,11 @@ h1, h2, h3, h4, h5, h6 {
 .login-input {
   width: 170px;
   height: 20px;
-  padding-left: 2px;
+  padding-left: 10px;
+}
+
+input {
+  text-align: center;
 }
 
 input#login {
@@ -73,4 +76,6 @@ input#login {
   height: 30px;
   width: 70px;
   border-radius: 15px;
+  color: black;
+  text-align: center;
 }
