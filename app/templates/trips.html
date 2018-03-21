@@ -6,16 +6,19 @@
 
 {% block header %}
 	{{ super() }}
-	<form action="logout" id="logout">
-		<span id="username">Logged in as: {{ username }}</span>
-		<input class="action-button" id="logout-button" type="submit" value="Logout">
-	</form>
+  <div id="logout">
+  	<form action="logout">
+  		<span id="username">Logged in as: {{ username }}</span>
+  		<input class="action-button" id="logout-button" type="submit" value="Logout">
+  	</form>
+  </div>
 {% endblock %}
 
 {% block content %}
-  <div class="container">
+  <div class="trips-container">
     <div class="row">
       <h1>Welcome to Travel Pals</h1>
+      <input class="action-button" id="create-trip" type="submit" value="Create trip">
       <div class="divider"></div>
 
       <div class="section">
