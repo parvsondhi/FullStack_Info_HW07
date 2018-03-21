@@ -16,8 +16,8 @@ def delete_trip():
 
 # change name to retrieve_user
 # retrieve all user for the dropdown in the "creat"
-#def retrieve_friends():
-def retrieve_user():
+def retrieve_friends():
+#def retrieve_user():
     with sql.connect("database.db") as con:
         con.row_factory = sql.Row
         cur = con.cursor()

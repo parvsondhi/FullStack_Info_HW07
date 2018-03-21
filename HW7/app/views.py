@@ -1,6 +1,6 @@
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session, escape, url_for
 from app import app, models
-from .forms import UserForm, TripForm
+from .forms import userForm, tripForm
 # Access the models file to use SQL functions
 from .models import *
 
@@ -40,11 +40,13 @@ def register():
 # need this?
 @app.route('/create_user', methods=['GET', 'POST'])
 def create_user():
-    return render_template('create-user.html')
+    userForm = userForm()
+    # tripForm = tripForm()
+    return render_template('trips.html')
 
 @app.route('/trips')
 def display_trips():
-    return render_template('trip.html')
+    return render_template('trips.html')
 
 @app.route('/create-trip/<value>', methods=['GET', 'POST'])
 def create_trip(value):
