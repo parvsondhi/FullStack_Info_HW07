@@ -12,3 +12,6 @@ class Trip(db.Model):
         nullable=False)
     owner = db.relationship('User',
         backref=db.backref('trips', lazy=True))
+    
+    guests = db.relationship('User', secondary='trip_invitation', lazy='subquery',
+        backref=db.backref('invited_trips', lazy=True))

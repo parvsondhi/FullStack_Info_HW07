@@ -77,8 +77,8 @@ def register():
 @login_required
 def trips():
     created_trips = current_user.trips
-    return render_template('trips.html', created_trips=created_trips)
-
+    invited_trips = current_user.invited_trips
+    return render_template('trips.html', created_trips=created_trips, invited_trips=invited_trips)
 
 @app.route('/trips/<id>')
 @login_required
