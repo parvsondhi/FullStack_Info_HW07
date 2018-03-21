@@ -17,13 +17,6 @@
     <div class="row">
       <h1>Welcome to Travel Pals</h1>
       <div class="divider"></div>
-{% block header %}
-{{super()}}
-  <form action="logout" id="logout">
-    <span id="username">Logged in as {{ username }}</span>
-    <input class="action-button" id="logout-button" type="submit" value="Logout">
-  </form>
-{% endblock %}
 
       <div class="section">
         <h3>These are all of your awesome trips:</h3>

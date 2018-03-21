@@ -1,6 +1,7 @@
 from app import app
 from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 import os
+from forms import TripForm
 app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 
 @app.route('/')
@@ -32,22 +33,37 @@ def logout():
 	session.pop('email', None)
 	return redirect(url_for('index'))
 
-@app.route('/submit-survey', methods=['GET', 'POST'])
-def submitSurvey():
-    username = ''
-    email = ''
-    if'username' in session: #check if user in session
-        username = session.get('username')
-        surveyResponse = {}
-        surveyResponse['color'] = request.form.get('color')
-        surveyResponse['food'] = request.form.get('food')
-        surveyResponse['vacation'] = request.form.get('vacation')
-        #get the rest o responses from users using request library Hint: ~3 lines of code
-        surveyResponse['fe-before'] = request.form.get('feBefore')
-        surveyResponse['fe-after'] = request.form.get('feAfter')
-        return render_template('results.html', name=username, surveyResponse=surveyResponse) # pass in variables to the template
-    else:
-        return render_template('login.html')
+# @app.route('/submit-survey', methods=['GET', 'POST'])
+# def submitSurvey():
+#     username = ''
+#     email = ''
+#     if'username' in session: #check if user in session
+#         username = session.get('username')
+#         surveyResponse = {}
+#         surveyResponse['color'] = request.form.get('color')
+#         surveyResponse['food'] = request.form.get('food')
+#         surveyResponse['vacation'] = request.form.get('vacation')
+#         #get the rest o responses from users using request library Hint: ~3 lines of code
+#         surveyResponse['fe-before'] = request.form.get('feBefore')
+#         surveyResponse['fe-after'] = request.form.get('feAfter')
+#         return render_template('results.html', name=username, surveyResponse=surveyResponse) # pass in variables to the template
+#     else:
+#         return render_template('login.html')
+
+#users can create trips
+@app.route('/create-trip')
+def create_trip():
+    form = TripForm()
+    if'username' in session:
+        trip_name = form.trip_name.data
+        destination = form.destination.data
+        models.insert_trip(trip_name, destination)
+
+        # surveyResponse = {}
+        # surveyResponse['trip_name'] = request.form.get('trip_name')
+        # surveyResponse['destination'] = request.form.get('destination')
+        return redirect('/trips')
+    return render_template('trips.html', form=form)
 
 #display users trips
 @app.route('/trips')

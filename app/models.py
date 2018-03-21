@@ -1,11 +1,11 @@
 import sqlite3 as sql
 
-def insert_customer(first_name, last_name, company, email, phone_number):
+def insert_trip(trip_name, destination):
     # SQL statement to insert into database goes here
     with sql.connect("app.db") as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO customers (first_name, last_name, company, email, phone_number) VALUES (?,?,?,?,?)",
-        (first_name,last_name,company,email,phone_number))
+        cur.execute("INSERT INTO trips (trip_name, destination) VALUES (?,?)",
+        (trip_name,destination))
         con.commit()
     return cur.lastrowid
 
