@@ -76,8 +76,7 @@ def register():
 @app.route('/trips')
 @login_required
 def trips():
-    current_user_id = current_user.id
-    created_trips = Trip.query.filter_by(user_id=current_user_id).all()
+    created_trips = current_user.trips
     return render_template('trips.html', created_trips=created_trips)
 
 
