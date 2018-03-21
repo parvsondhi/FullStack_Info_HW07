@@ -7,6 +7,10 @@ class LoginForm(Form):
 	username = StringField("username", validators=[DataRequired()])
 	password = PasswordField("password", validators=[DataRequired()])
 
+class SignupForm(Form):
+	username = StringField("username", validators=[DataRequired()])
+	password = PasswordField("password", validators=[DataRequired()])
+
 class AddTripForm(Form):
     # Add order input form fields here
     trip_name = StringField("trip_name", validators=[DataRequired()])

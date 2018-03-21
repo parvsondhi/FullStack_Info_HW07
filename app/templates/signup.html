@@ -9,9 +9,8 @@
 <!-- 2. extend content here from base -->
 {% block content %}
 <h1>Hi There! Welcome to TravelBoi.</h1>
-
 <div class="main-container">
-	<h3>Please log in or sign up.</h3>
+	<h3>Please sign up.</h3>
     <form action="" method="post" name="login">
       {{ form.hidden_tag() }}
       <!-- <div class="divider"></div> -->
@@ -24,11 +23,10 @@
           Password:<br>
           {{ form.password(size=120) }}<br>
         </p>
-        <a href="{{ url_for('signup')}}">Sign Up</a>
       </div>
       <p>
       	<!-- <input type="submit" value="Sign up"> -->
-      	<input type="submit" value="Log in">
+      	<input type="submit" value="Sign up">
       </p>
     </form>
 </div>

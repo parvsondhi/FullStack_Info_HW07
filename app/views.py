@@ -17,12 +17,31 @@ def login():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-
-        user_id = signup(username, password)
-        session['user_id'] = user_id
-
-        return redirect('/trips')
+        users = retrieve_username()
+        user_id = check_up(username, password)
+        if user_id:
+            session['user_id'] = user_id
+            return redirect('/trips')
+            
     return render_template('login.html', form=form)
+
+@app.route('/signup', methods=['POST', 'GET'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        users = check_user(username);
+        if not users:
+            return render_template('signup.html', form=form)
+        
+        else:
+            user_id = sign_up(username, password)
+            session['user_id'] = user_id
+            return redirect('/trips')
+        
+
+    return render_template('signup.html', form=form)
 
 @app.route('/trips')
 def trips():
