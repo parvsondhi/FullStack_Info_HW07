@@ -1,19 +1,14 @@
 # Importing flask library
-# from . import app, models, db
-# from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
-# import os
-# from .forms import TripForm
-from flask import request, Flask, session, redirect, url_for, escape, request, render_template
-from . import app, models, db
-# Access the models file to use SQL functions
+from app import app
+from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 import os
-from .forms import TripForm
+app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 
 @app.route('/')
 @app.route('/index')
 def index():
     username = ''
-    if 'username' in session: #check if the user is already in session, if so, direct the user to trips.html Hint: render_template with a variable
+    if 'username' in session: #check if the user is already in session, if so, direct the user to survey.html Hint: render_template with a variable
         username = session['username']
         "Logged in as " + username + "<br>" + \
         "<b><a href = '/logout'>Click here to log out</a></b>"
@@ -54,13 +49,6 @@ def submitSurvey():
         return render_template('results.html', name=username, surveyResponse=surveyResponse) # pass in variables to the template
     else:
         return render_template('login.html')
-
-#display users trips
-@app.route('/trips')
-def display_trip():
-    # Retreive data from database to display
-    trips = models.retrieve_trips()
-    return render_template('trips.html')
 
 
 @app.errorhandler(404)
