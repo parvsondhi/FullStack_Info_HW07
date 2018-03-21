@@ -14,4 +14,8 @@ button.close {
     cursor: pointer;
 }
 
+.card {
+    margin: 8px;
+}
+
 
