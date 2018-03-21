@@ -1,19 +1,21 @@
 -- Insert code to create Database Schema
 -- This will create your .db database file for use
+DROP TABLE if exists users;
+DROP TABLE if exists trips;
+
 CREATE TABLE users (
-first_name TEXT, last_name TEXT, email TEXT
+  user_id INTEGER primary key,
+  first_name TEXT not null,
+  last_name TEXT not null,
+  email TEXT not null,
+  password TEXT not null
 );
 
 CREATE TABLE trips (
-id INTEGER PRIMARY KEY, 
-destination TEXT, trip_name TEXT
+  trip_id INTEGER PRIMARY KEY,
+  trip_name TEXT not null,
+  destination TEXT not null,
+  planner_id INTEGER not null,
+  pal_id INTEGER,
+  FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
-
--- CREATE TABLE orders (
--- order_id INTEGER PRIMARY KEY, part_name TEXT, manufacturer TEXT, customer_id INTEGER
--- );
-
--- CREATE TABLE customer_orders (
--- order_id INTEGER ,customer_id INTEGER
--- );
-
