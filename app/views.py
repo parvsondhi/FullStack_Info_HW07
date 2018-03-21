@@ -38,10 +38,19 @@ def view_trips():
     
     return render_template('trips.html')
 
-@app.route('/create-trip')
+@app.route('/create-trip', methods=['GET', 'POST'])
 def create_trips():
+    username = ''
+    if'username' in session: #check if user in session
+        username = session.get('username')
+        surveyResponse = {}
+        surveyResponse['trip_name'] = request.form.get('trip_name')
+        surveyResponse['destination'] = request.form.get('destination')
+        return render_template('trips.html', trip_name=trip_name , destination=destination) # pass in variables to the template
+    else:
+        return render_template('create_trip.html')
     
-    return render_template('create_trip.html')
+    # return render_template('create_trip.html')
 
 @app.route('/submit-survey', methods=['GET', 'POST'])
 def submitSurvey():
