@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, session, escape, url_for
 from app import app, models
-from .forms import userForm, tripForm
+from .forms import UserForm, TripForm
 # Access the models file to use SQL functions
 from .models import *
 
