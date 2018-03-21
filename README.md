@@ -1,2 +1,4 @@
-# FullStack_Info_HW07
-FullStack_Info_HW07 - Mega Lab
+# MegaLab
+MegaLab Homework Assignment for Fullstack290T Spring 2018
+
+This web application was created by Carina Sauter and Wan (David) Huh.
