@@ -1,0 +1,38 @@
+<!-- 1. extend from base-->
+{% extends "base.html" %}
+
+{% block title %}
+	Trips
+{% endblock %}
+
+<!-- 2. extend content here from base -->
+{% block content %}
+<div class="addtrip">
+  <a href="{{ url_for('add') }}">Add Trip</a>
+</div>
+<div class="logout">
+  <a href="{{ url_for('logout') }}">Log Out</a>
+</div>
+  <div class="divider"></div>
+  <div class="section">
+    <h3>Your Trips:</h3>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th data-field="name">Name</th>
+          <th data-field="destination">Destination</th>
+          <th data-field="remove_button"></th>
+        </tr>
+      </thead>
+      {% for trip in trips %}
+        <tr class="trip_tr">
+          <td>{{ trip['tripname'] }}</td>
+          <td>{{ trip['destination'] }}</td>
+          <td>
+          	<a href="{{ url_for('remove', value=trip['id']) }}">Remove trip</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+</div>
+{% endblock %}
