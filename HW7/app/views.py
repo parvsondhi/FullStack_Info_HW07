@@ -48,8 +48,15 @@ def create_user():
 def display_trips():
     return render_template('trips.html')
 
-@app.route('/create-trip/<value>', methods=['GET', 'POST'])
+@app.route('/create-trip', methods=['GET', 'POST'])
 def create_trip(value):
+    form = TripForm()
+    if form.validate_on_submit():
+        dest = form.dest.data
+        friend = form.dest.friend
+        trip_name = form.trip_name.data
+        trip_owner = session['username']
+        insert_trip(dest, friend, trip_name, trip_owner)
     return None
 
 # 404 errohandler
