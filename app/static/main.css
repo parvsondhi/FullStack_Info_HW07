@@ -42,6 +42,8 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 /*----------------- CSS RESET ------------------*/
@@ -61,8 +63,10 @@ header {
 }
 
 footer {
-	background-color: #00bf6f;
+	position: fixed;
 	bottom: 0;
+ 	left:0;
+	background-color: #00bf6f;
 	color: #ecf0f1;
 	height: 8rem;
 	margin-top: 10em;
@@ -76,7 +80,7 @@ footer p {
 }
 
 h1, h3 {
-	padding: 4px;
+	padding: 20px;
 }
 
 h1 {
@@ -92,15 +96,8 @@ a {
 	text-decoration: none;
 }
 
-input[type="text"], input[type="range"] {
-	border: 1px solid #bdc3c7;
-	border-radius: 2px;
-	margin-left: 1rem;
-	vertical-align: middle;
-}
-
 input[type=range]{
-		background-color: #00bf6f;
+	background-color: #00bf6f;
     -webkit-appearance: none;
 }
 
@@ -167,7 +164,7 @@ input[type=range]::-webkit-slider-runnable-track {
 	margin-left: .1rem;
 }
 
-#username {
+input {
 	margin-right: .7rem;
 }
 
@@ -259,3 +256,19 @@ input[type=range]::-webkit-slider-runnable-track {
 select {
 	display: inline-block;
 }
+
+.addtrip {
+	display: inline-block;
+	margin: 10px;
+	padding: 5px;
+	border: 1px solid #dddddd;
+}
+
+.logout {
+	display: inline-block;
+	margin: 10px;
+	padding: 5px;
+	float: right;
+	border: 1px solid #dddddd;
+}
+

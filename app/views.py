@@ -8,9 +8,6 @@ from .models import *
 def index():
     return redirect('/login')
 
-def db_stuff():
-    return
-
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     form = LoginForm()
@@ -22,8 +19,12 @@ def login():
         if user_id:
             session['user_id'] = user_id
             return redirect('/trips')
-            
     return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect('/login')
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
@@ -34,13 +35,11 @@ def signup():
         users = check_user(username);
         if not users:
             return render_template('signup.html', form=form)
-        
         else:
             user_id = sign_up(username, password)
             session['user_id'] = user_id
             return redirect('/trips')
         
-
     return render_template('signup.html', form=form)
 
 @app.route('/trips')
