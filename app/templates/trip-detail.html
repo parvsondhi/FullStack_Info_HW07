@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block navlinks %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<div class="">
+    <div class="card">
+        <div class="card-body">
+                <div class="row">
+                        <div class="col col-md">
+                            <h5 class="card-title">
+                                <a href="{{ url_for('show_trip', id=trip.id) }}">
+                                    {{trip.title}}
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="col col-md">
+                            <a class="btn btn-primary btn-round pull-right" href="{{ url_for('edit_trip', id=trip.id) }}">Edit</a>
+                        </div>
+                    </div>
+   
+            <h6 class="card-subtitle">
+                <span class="text-muted">in  </span>
+                <span class="mb-2 text-muted">{{trip.destination}}</span>
+                
+            </h6>
+            </div>
+    </div>
+</div>
+
+
+<!-- <div class="card">
+    <div class="row">
+        <div class="col col-md">
+            <h3>{{trip.title}}</h3>
+        </div>
+
+        <div class="col col-md">
+            <a class="btn btn-neutral btn-round pull-right" href="{{ url_for('edit_trip', id=trip.id) }}">Edit</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">{{trip.destination}}</h6>
+    </div>
+</div> -->
+
+{% endblock %}

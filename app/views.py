@@ -4,7 +4,7 @@ from flask_login import current_user, login_user, login_required, logout_user
 
 from app.forms import LoginForm, RegistrationForm
 from app.models import User, Trip
-from app.utils import inject_trip, current_user_has_access_to_trip
+from app.utils import inject_trip, current_user_has_access_to_trip, trip_owned_by_user
 
 # =========================
 # 1. Anonymously Accessible 
@@ -69,4 +69,11 @@ def trips():
 @inject_trip
 @current_user_has_access_to_trip
 def show_trip(trip):
-    return str(trip.id)
+    return render_template('trip-detail.html', trip=trip)
+
+@app.route('/trips/<id>/edit')
+@login_required
+@inject_trip
+@trip_owned_by_user
+def edit_trip(trip):
+    return str('Edit' +  str(trip.id))
