@@ -21,8 +21,22 @@ def retrieve_user(username):
 		result = cur.execute("select * from users WHERE username=(?)",[username]).fetchall()
 		return result[0][0]
 
-def insert_user(): # keep this function for signup
-	pass
+def check_username(username):
+	with sql.connect("database.db") as con:
+		con.row_factory = sql.Row
+		cur = con.cursor()
+		result = cur.execute("select * from users WHERE username=(?)" , [username]).fetchall()
+		if len(result) == 0:
+			return True
+		else:
+			return False
+
+def insert_user(username,password): # keep this function for signup
+	with sql.connect("database.db") as con:
+		cur = con.cursor()
+		cur.execute("INSERT INTO users (username, password) VALUES (?,?)",(username,password))
+		con.commit()
+	return cur.lastrowid
 
 def check_user(username,password):
 	with sql.connect("database.db") as con:

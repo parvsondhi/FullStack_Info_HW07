@@ -14,7 +14,7 @@ def index():
     else:
         return render_template('login.html')
 
-@app.route('/login', methods=['GET', 'POST']) 
+@app.route('/login', methods=['POST']) 
 def login():
     if request.method == 'POST':
         session['username'] = request.form['username']
@@ -25,6 +25,10 @@ def login():
         	return redirect(url_for('index'))
         else:
         	return render_template('login.html')
+
+@app.route('/login', methods=['GET']) 
+def show_login():
+	return render_template('login.html')
 
 @app.route('/logout')
 def logout():
@@ -59,3 +63,17 @@ def delete():
 	trip = request.form.get('trip')
 	delete_trip(trip)
 	return redirect('/user')
+
+@app.route('/register', methods=['POST'])
+def register():
+	username = request.form['username']
+	password = request.form['password']
+	if check_username(username):
+		insert_user(username,password)
+		return render_template('login.html')
+	else:
+		return render_template('register.html',message="username already existed.")
+
+@app.route('/register',methods=['GET'])
+def show_register():
+    return render_template('register.html')

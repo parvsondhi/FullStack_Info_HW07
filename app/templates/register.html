@@ -7,23 +7,25 @@
 {% block content %}
 <h1>Welcome to Travel App</h1>
 <div class="main-container">
-	<h3>Let's get you logged in</h3>
+	<h3>Let's get you Sign Up!</h3>
 	
-	<form action="/login" method="post" name="login"> 
+	<form action="/register" method="post" name="register"> 
 	Name:<br>
   	<input type="text" name="username" required>
   	<br>
   	Password:<br>
   	<input type="password" name="password" required>
-		<input class="action-button" type="submit" value="Log in">
+		<input class="action-button" type="submit" value="Sign Up">
 	</form>
-</div>
-
-      <div> New User?</div>
+  <div style="color:red">{{message}}</div>
+  <br>
+  
+  <div> Already have an account?</div>
       <div> Click here to 
-        <a href="/register">
-          <span>Register</span>
+        <a href="/login">
+          <span>Log in</span>
         </a>
         <span>!</span>
       </div>
+</div>
 {% endblock %}
