@@ -1,35 +1,42 @@
 <!-- home aka signup -->
 
 {% extends "base.html" %}
+
+{% block header %}
+	<!-- super function here -->
+	{{super()}}
+	<form action="logout" id="logout">
+		<span id="username">Logged in as {{ name }}</span>
+		<input class="action-button" id="logout-button" type="submit" value="Logout">
+	</form>
+{% endblock %}
+
 {% block content %}
   <div class="container">
     <div class="row">
-      <h1>Welcome to ACME Aircraft Parts</h1>
+      <h1>Welcome to the Trips</h1>
       <div class= "section">
-        <a href="{{ url_for('create_customer') }}">Add a Trip</a>
+        <a href="{{ url_for('create_trip') }}">Add a Trip</a>
       </div>
       <div class="divider"></div>
       <div class="section">
-        <h3>These are all of our awesome users:</h3>
+        <h3>These are all of our awesome trips:</h3>
         <!-- Display all the current existing customers information here -->
         <table class="striped">
           <thead>
             <tr>
-              <th data-field="first_name">First name</th>
-              <th data-field="last_name">Last name</th>
-              <th data-field="company">Company</th>
-              <th data-field="email">Email</th>
-              <th data-field="phone">Phone</th>
+              <th data-field="trip_name">Trip name</th>
+              <th data-field="destination">Destination</th>
+              <th data-field="owner">Friend</th>
             </tr>
           </thead>
-          {% for customer in customers %}
+          {% for user in users %}
             <tr>
-              <td>{{ customer['first_name'] }}</td>
-              <td>{{ customer['last_name'] }}</td>
-              <td>{{ customer['company'] }}</td>
-              <td>{{ customer['email'] }}</td>
-              <td>{{ customer['phone'] }}</td>
-              <td><a href="{{ url_for('create_order', value=customer['customer_id']) }}">Add an Order</a></td>
+              <td>{{ user['first_name'] }}</td>
+              <td>{{ user['last_name'] }}</td>
+              <td>{{ user['username'] }}</td>
+              <td>{{ user['password'] }}</td>
+              <td><a href="{{ url_for('create_trip', value=user['user_id']) }}">Add a Trip</a></td>
             </tr>
           {% endfor %}
         </table>
