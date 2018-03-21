@@ -7,6 +7,23 @@ from app.models import User, Trip
 from app.utils import inject_trip, current_user_has_access_to_trip, trip_owned_by_user
 
 # =========================
+# 0. Error Handler
+# =========================
+
+@app.errorhandler(404)
+def page_not_found(e):
+    error_code = 404
+    error_message = 'Sorry, we can\'t find what you are looking for :-('
+    return render_template('error.html', error_code=error_code, error_message=error_message), error_code
+
+@app.errorhandler(403)
+def page_not_found(e):
+    error_code = 403
+    error_message = 'Naughty! You are not allowed to access this resource!'
+    return render_template('error.html', error_code=error_code, error_message=error_message), error_code
+
+
+# =========================
 # 1. Anonymously Accessible 
 # =========================
 
