@@ -3,7 +3,8 @@ from app import app, db
 from flask_login import current_user, login_user, login_required, logout_user
 
 from app.forms import LoginForm, RegistrationForm
-from app.models import User
+from app.models import User, Trip
+from app.utils import inject_trip, current_user_has_access_to_trip, trip_owned_by_user
 
 # =========================
 # 0. Error Handler
@@ -75,4 +76,21 @@ def register():
 @app.route('/trips')
 @login_required
 def trips():
-    return render_template('trips.html')
+    current_user_id = current_user.id
+    created_trips = Trip.query.filter_by(user_id=current_user_id).all()
+    return render_template('trips.html', created_trips=created_trips)
+
+
+@app.route('/trips/<id>')
+@login_required
+@inject_trip
+@current_user_has_access_to_trip
+def show_trip(trip):
+    return render_template('trip-detail.html', trip=trip)
+
+@app.route('/trips/<id>/edit')
+@login_required
+@inject_trip
+@trip_owned_by_user
+def edit_trip(trip):
+    return str('Edit' +  str(trip.id))
