@@ -21,13 +21,10 @@ html {
   height: 100%;
 }
 
-/* h1, h2, h3, h4, h5, h6 {
-  font-family: sans-serif;
-  font-weight: 700;
-  margin: 0 0 35px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-} */
+h5 {
+  font-style:italic;
+  font-size: 20px;
+}
 
 #site-title {
   margin-left: 10px;
