@@ -6,6 +6,15 @@ from app.forms import LoginForm, RegistrationForm
 from app.models import User
 
 # =========================
+# 0. Error Handler
+# =========================
+
+@app.errorhandler(404)
+def page_not_found(e):
+    error_code = 404
+    error_message = 'Sorry, we can\'t find what you are looking for :-('
+    return render_template('error.html', error_code=error_code, error_message=error_message), error_code
+# =========================
 # 1. Anonymously Accessible 
 # =========================
 
