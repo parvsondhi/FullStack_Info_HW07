@@ -1,4 +1,5 @@
 from app import app
+import models
 from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 import os
 from forms import TripForm
@@ -34,19 +35,19 @@ def logout():
 	return redirect(url_for('index'))
 
 #users can create trips
-@app.route('/create-trip')
+@app.route('/createTrip')
 def create_trip():
     form = TripForm()
-    if'username' in session:
-        trip_name = form.trip_name.data
-        destination = form.destination.data
-        models.insert_trip(trip_name, destination)
-
-        # surveyResponse = {}
-        # surveyResponse['trip_name'] = request.form.get('trip_name')
-        # surveyResponse['destination'] = request.form.get('destination')
-        return redirect('/trips')
-    return render_template('trips.html', form=form)
+    # if'username' in session:
+    #     trip_name = form.trip_name.data
+    #     destination = form.destination.data
+    #     models.insert_trip(trip_name, destination)
+    #
+    #     # surveyResponse = {}
+    #     # surveyResponse['trip_name'] = request.form.get('trip_name')
+    #     # surveyResponse['destination'] = request.form.get('destination')
+    #     return redirect(url_for('trips'))
+    return render_template('create_trip.html', form=form)
 
 #display users trips
 @app.route('/trips')
