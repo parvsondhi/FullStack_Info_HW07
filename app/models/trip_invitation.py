@@ -1,7 +1,7 @@
 from app import db
 from datetime import datetime
 
-class TripInvitation (db.Model):
+class TripInvitation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
