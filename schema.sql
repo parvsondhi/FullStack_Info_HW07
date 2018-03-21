@@ -16,6 +16,5 @@ CREATE TABLE trips (
   trip_name TEXT not null,
   destination TEXT not null,
   planner_id INTEGER not null,
-  pal_id INTEGER,
-  FOREIGN KEY(user_id) REFERENCES users(user_id)
-);
+  pal_id INTEGER );
+  -- FOREIGN KEY(user_id) REFERENCES users(user_id));
