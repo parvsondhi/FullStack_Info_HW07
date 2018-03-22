@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block header %}
+	{{super()}}
+	<form action="logout" id="logout">
+		<span id="username">Logged in as {{ name }}</span>
+		<input class="action-button" id="logout-button" type="submit" value="Logout">
+	</form>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('display_trips') }}">Home</a>
+    </div>
+    <h3>Add a Trip</h3>
+    <form action="" method="post" name="create">
+      {{ form.hidden_tag() }}
+      <div class="divider"></div>
+      <!-- the Trip Form-->
+      <div class="section">
+        <p>
+          Trip Title: <br>
+          {{ form.trip_name(size=120)}}<br>
+        </p>
+        <p>
+          Trip Destination: <br>
+          {{ form.dest(size=120) }} <br>
+        </p>
+        <p>
+          Friend: <br></p>
+          {{ form.friend }} <br>
+
+      </div>
+      <div class="divider"></div>
+      <p><input class="btn" type="submit" value="Create Trip"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+  console.log("hi");
+  $(document).ready(function() {
+    $('select').formSelect();
+  });
+
+</script>
+{% endblock %}
