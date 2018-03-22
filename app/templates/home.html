@@ -4,7 +4,10 @@
     <div class="row">
       <h1>Welcome to Trip Planner!</h1>
       <div class= "section">
-        <a href="{{ url_for('create_customer') }}">Add a Trip</a> 
+        <a href="{{ url_for('add_trip') }}">Add a Trip</a> 
+        <form action="logout" id="logout">
+          <input class="action-button" id="logout-button" type="submit" value="Logout">
+        </form>
       </div>
       <div class="divider"></div>
       <div class="section">
@@ -20,8 +23,7 @@
             <tr>
               <td>{{ trip['trip_title'] }}</td>
               <td>{{ trip['destination'] }}</td>
-              <!-- Below is a method of adding the 'add an order' button which will route you to create_order in views.py</td> 
-              <td><a href="{{ url_for('create_order', value=customer['customer_id']) }}">Add an Order</a> -->
+
             </tr>
           {% endfor %}
         </table>

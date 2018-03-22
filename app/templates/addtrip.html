@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class= "section">
-      <a href="{{ url_for('display_customer') }}">Home</a>
+      <a href="{{ url_for('display_trips') }}">Home</a>
     </div>
     <h2>Add Trip to Our Database</h2>
     <form action="" method="post" name="login">
@@ -18,10 +18,7 @@
           Trip Destination:<br>
           {{ form.destination(size=120) }}<br>
         </p>
-        <p>
-          Friend:<br>
-          {{ form.friend(size=120) }}<br>
-        </p>
+
       </div>
      
       <p><input type="submit" value="Create Trip"></p>
