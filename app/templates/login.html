@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h2>Hi There, Welcome to Travel app!</h2>
+    <div>
+      <p> Lets Get you Logged in!</p>
+      <form action="" method="post" name="loginForm">
+
+        <div>
+          <label >Username(Email):</label>
+          <input type="text" placeholder="Username" name="email_id"><br>
+        </div>
+        <div>
+          <label >Password:</label>
+          <input type="text" placeholder="Password" name="password"><br>
+        </div>
+
+      {% if message %}
+        <div role="alert">
+        {{message}}
+        </div>
+      {% endif %}
+
+        <button type="submit" name="action" value="login" class="btn1">Login</button>
+        <p> New User? Sign up now By Filling all these 4 Fields!</p>
+
+        <div>
+          <label>First Name:</label>
+          <input type="text" placeholder="firstName" name="first_name"><br>
+        </div>
+
+        <div>
+          <label>Last Name:</label>
+          <input type="text" placeholder="lastName" name="last_name"><br>
+        </div>
+
+        <button type="submit" name="action" value="signup" class="btn2">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
