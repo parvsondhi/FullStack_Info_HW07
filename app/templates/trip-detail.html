@@ -67,6 +67,18 @@
                         </tbody>
                     </table>
                 </div>
+                <div>
+                <div class="dropdown">
+                        <a href="#pablo" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            Invite Users
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for user in trip.invitable_users() %}
+                                <a class="dropdown-item invite-user" href="{{ url_for('invite_to_trip', id=trip.id, user_id=user.id) }}" title="{{ user.email }}">{{ user.fullName() }}</a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div class="card-text">

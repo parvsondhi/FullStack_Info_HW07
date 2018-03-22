@@ -26,3 +26,6 @@ class User(UserMixin, db.Model):
     def formattedName(self):
         return self.firstname[0] + '. ' + self.lastname
 
+    def fullName(self):
+        return self.firstname + ' ' + self.lastname
+
