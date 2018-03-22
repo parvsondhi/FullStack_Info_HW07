@@ -11,11 +11,15 @@ CREATE TABLE users (
 );
 
 CREATE TABLE trips (
-  trip_id INTEGER PRIMARY KEY AUTOINCREMENT, trip_name TEXT not null, destination TEXT not null
+  trip_id INTEGER PRIMARY KEY AUTOINCREMENT, trip_name TEXT not null, destination TEXT not null, travel_pal TEXT not null
   );
 
 
- -- trip_name TEXT not null, destination TEXT not null);
-  -- FOREIGN KEY(user_id) REFERENCES users(user_id));
+INSERT INTO users (username, password) 
+VALUES ("Bob", "password");
+
+INSERT INTO users (username, password) 
+VALUES ("Ann", "password");
+
 
 

@@ -25,8 +25,14 @@
       <input class="sm-input" type="text" name="trip_name"></label><br>
     <label class="survey-item sm-label">Destination
       <input class="sm-input" type="text" name="destination"></label><br>
-    <!-- <label class="survey-item sm-label">Travel Pal
-      <input class="sm-input" type="text" name="pal"></label><br> -->
+      <label name="travel_pal">Travel Pal </label>
+      <select name="travel_pal">
+          <!-- {% for u in users %}
+          <option value="{{ u['username'] }}">{{u['username']}}</option>
+          {% endfor %} -->
+          <option value="">Select</option>
+        </select>
+      <!-- <input class="sm-input" type="text" name="pal"></label><br> -->
     <button class="action-button" id="trip-cancel" onClick="history.go(-1); return false;">Cancel</button>
     <button class="action-button" type='submit' name="submit-trip" id="trip-go">Submit</button>
   </form>

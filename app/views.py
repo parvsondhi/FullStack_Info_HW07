@@ -50,6 +50,7 @@ def logout():
 @app.route('/create_trip', methods=['POST', 'GET'])
 def create_trip():
     # tripform = TripForm()
+
     if request.method == 'POST':
         trip_name  = request.form['trip_name']
         destination  = request.form['destination']

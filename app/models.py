@@ -1,10 +1,10 @@
 import sqlite3 as sql
 
-def insert_trip(trip_name, destination):
+def insert_trip(trip_name, destination, travel_pal):
     # SQL statement to insert into database goes here
     with sql.connect("app.db") as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO trips (trip_name, destination) VALUES (?,?)", (trip_name,destination))
+        cur.execute("INSERT INTO trips (trip_name, destination, travel_pal) VALUES (?,?, ?)", (trip_name,destination, travel_pal))
         con.commit()
     # return cur.lastrowid
 
@@ -21,6 +21,12 @@ def insert_users(username, password):
         cur = con.cursor()
         cur.execute("INSERT INTO users (username, password) VALUES( ?, ?)",(username, password))
         con.commit()
+
+def fetch_friends(currentuser):
+    with sql.connect("app.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT username FROM users WHERE username != '"+currentuser+"'")
+        return cur.fetchall()
 # def retrieve_customers():
 #     # SQL statement to query database goes here
 #     with sql.connect("app.db") as con:
