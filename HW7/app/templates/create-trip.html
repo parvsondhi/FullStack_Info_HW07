@@ -20,9 +20,9 @@
           {{ form.dest(size=120) }} <br>
         </p>
         <p>
-          Friend: <br>
-          {{ form.friend(size=120) }} <br>
-        </p>
+          Friend: <br></p>
+          {{ form.friend }} <br>
+        
       </div>
       <div class="divider"></div>
       <p><input type="submit" value="Create Trip"></p>
@@ -30,3 +30,12 @@
   </div>
 </div>
 {% endblock %}
+{% block script %} 
+<script>
+  console.log("hi");
+  $(document).ready(function() {
+    $('select').formSelect();
+  });
+  
+</script>
+{% endblock %} 

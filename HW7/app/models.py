@@ -28,25 +28,30 @@ def delete_trip(value):
 
 def retrieve_friends():
     #curr_user = escape(session['username'])
-    #curr_user = "'cy'"
-    #query = "SELECT username FROM users WHERE username != " + curr_user
-    query = "SELECT * FROM users"
+    curr_user = "'cy'"
+    query = "SELECT username FROM users WHERE username != " + curr_user
     print(query, file=sys.stderr)
-    with sql.connect("database.db") as con:
-        con.row_factory = sql.Row
+    with sql.connect("database.db") as con:        
+        #con.row_factory = sql.Row
+        con.row_factory = lambda cursor, row: row[0]
         cur = con.cursor()
         result = cur.execute(query).fetchall()
-        for row in con.execute(query):
-            print(row, file=sys.stderr) 
+        #for row in result:
+        #    print(row['username'])
+        #     print("here", file=sys.stderr)
+        #     print(row, file=sys.stderr) 
         con.commit()
+    # for row in result:
+    #     print(row['username'], file=sys.stderr)
+    
     return result
 
 def insert_user(username, password, first_name, last_name):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO user (username, password, first_name, last_name) VALUES (?,?,?,?)", (username, password, first_name, last_name))
+        cur.execute("INSERT INTO users (username, password, first_name, last_name) VALUES (?,?,?,?)", (username, password, first_name, last_name))
         con.commit()
     return cur.lastrowid
 
 def google_maps():
-    return none
+    return None
