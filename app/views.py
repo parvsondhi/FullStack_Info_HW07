@@ -44,6 +44,11 @@ def login():
 #users can create trips
 @app.route('/create_trip', methods=['POST', 'GET'])
 def create_trip():
+<<<<<<< HEAD
+=======
+    # tripform = TripForm()
+
+>>>>>>> 76493b61e1e3deab3f6e4539f6aa67ff41b8a5bc
     if request.method == 'POST':
         trip_name  = request.form['trip_name']
         destination  = request.form['destination']
