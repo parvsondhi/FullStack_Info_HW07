@@ -33,7 +33,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         models.insert_users( username, password)
-        return render_template('trips.html')
+        return render_template('trips.html', username=username)
     else:
         return render_template('login.html')
 
@@ -47,34 +47,32 @@ def logout():
 @app.route('/createTrip', methods=['POST', 'GET'])
 def create_trip():
     tripform = TripForm()
-    if request.method == 'POST' and tripform.validate_on_submit():
- 
-        trip_name  = tripform.trip_name.data
-        destination  = tripform.destination.data
-    # if'username' in session:
-    #     trip_name = form.trip_name.data
-    #     destination = form.destination.data
-        models.insert_trip(trip_name, destination)
-        
-    #     # surveyResponse = {}
-    #     # surveyResponse['trip_name'] = request.form.get('trip_name')
-    #     # surveyResponse['destination'] = request.form.get('destination')
-    #     return redirect(url_for('trips'))
-        return render_template('trips.html')
+    # if request.method == 'POST' and tripform.validate_on_submit():
+    #     trip_name  = tripform.trip_name.data
+    #     destination  = tripform.destination.data
+    #     models.insert_trip(trip_name, destination)
+    #     return render_template('trips.html')
     return render_template('create_trip.html', form=tripform)
 
-#cancel from create trips
-@app.route('/trips')
-def cancel_create_trip():
-    return render_template('trips.html')
+@app.route('/trips', methods=['POST', 'GET'])
+def submit_trip():
+    form = TripForm()
+    if form.validate_on_submit:
+        trip_name = form.trip_name.data
+        destination = form.destination.data
+        travel_pal = form.pal.data
+
+        trip_id = insert_trip(trip_name, destination)
+        return redirect('trips')
+    return render_template('create_trip.html', form=form)
 
 #display users trips
 @app.route('/trips')
 def display_trip():
     # if request.method == 'POST':
     # Retreive data from database to display
-    trips = models.retrieve_trips()
-    return render_template('trips.html')
+    trips = retrieve_trips()
+    return render_template('trips.html', trips=trips)
 
 
 @app.errorhandler(404)

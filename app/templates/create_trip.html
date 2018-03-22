@@ -27,7 +27,7 @@
       <input class="sm-input" type="text" name="destination"></label><br>
     <label class="survey-item sm-label">Travel Pal
       <input class="sm-input" type="text" name="pal"></label><br>
-    <button class="action-button" id="trip-cancel" onclick="window.history.back()">Cancel</button>
+    <button class="action-button" id="trip-cancel" onClick="history.go(-1); return false;">Cancel</button>
     <button class="action-button" type='submit' name="submit-trip" id="trip-go">Submit</button>
   </form>
       </div>
