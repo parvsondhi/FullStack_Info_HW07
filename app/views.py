@@ -67,7 +67,7 @@ def create_trip():
     form = TripForm()
     username = session['username']
     users = fetch_other_users(username)
-    print('len users: {}'.format(len(users)))
+
     if form.validate_on_submit():
         # Get data from the form
         # Send data from form to Database

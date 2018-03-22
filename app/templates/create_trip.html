@@ -25,17 +25,11 @@
         </p>
         <p>
           User2:<br>
-          <select>
+          <select style="display: inline-block;" name='user2' form='form'>
             {% for user in users %}
             <option value="{{ user }}">{{ user }}</option>
             {% endfor %}
           </select><br>
-        </p>
-        <p>
-          <select>
-            <option>1</option>
-            <option>2</option>
-          </select>
         </p>
       </div>
       <p><input type="submit" value="Create Trip"></p>
