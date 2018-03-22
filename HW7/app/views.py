@@ -20,6 +20,9 @@ def login():
         session['username'] = request.form['username']
         session['password'] = request.form['password']
         return redirect(url_for('index'))
+    #if request.method=='GET':
+    #    do something
+    #    return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
