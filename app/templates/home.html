@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1>Welcome to ACME Aircraft Parts</h1>
+      <div class= "section">
+        <a href="{{ url_for('create_customer') }}">Add a Customer</a>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <h3>These are all of our awesome customers:</h3>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="firstName">First Name</th>
+              <th data-field="lastName">Last Name</th>
+              <th data-field="company">Company</th>
+              <th data-field="email">Email</th>
+              <th data-field="telephone">Telephone</th>
+            </tr>
+          </thead>
+          {% for customer in customers %}
+            <tr>
+              <td>{{ customer['first_name'] }}</td>
+              <td>{{ customer['last_name'] }}</td>
+              <td>{{ customer['company'] }}</td>
+              <td>{{ customer['email'] }}</td>
+              <td>{{ customer['phone'] }}</td>
+              <td><a href="{{ url_for('create_order', value = customer['email']) }}">Add Order</a></td>              
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="section">
+        <h3>Orders from Customers:</h3>
+        <!-- Display all the current existing order information here -->
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="Name of Part">Name of Part</th>
+              <th data-field="Manufacturer of Part">Manufacturer of Part</th>
+              <th data-field="customer_id">Customer ID</th>
+            </tr>
+          </thead>
+          {% for order in orders %}
+          <tr>
+            <td>{{ order['name_of_part'] }}</td>
+            <td>{{ order['manufacturer_of_part'] }}</td>
+            <td>{{ order['customer_id'] }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
