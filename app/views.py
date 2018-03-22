@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, session, url_for
+from flask import Flask, render_template, redirect, request, session, url_for
 from app import app, models, db
 from .forms import TripForm
 from .models import *
@@ -74,14 +74,19 @@ def display_trips():
 def add_trip():
     # Get data from the form
     # Send data from form to Database
+    current_user = session['username']
+    friend_list = retrieve_friends(current_user)
+    friend_tuple = list(zip(friend_list, friend_list))
     tripForm = TripForm()
+    tripForm.friend.choices = friend_tuple
     if tripForm.validate_on_submit():
-        current_user = session['username']
         uid = getID(current_user)
         print(uid, file=sys.stderr)
         trip_title = tripForm.trip_title.data
         destination = tripForm.destination.data
-        trip_id = insert_trip(trip_title, destination)
-        insert_trip_user(trip_id, uid)
+        friend = tripForm.friend.data
+        trip_id = insert_trip(trip_title, destination, friend)
+        friend_id = getID(friend)
+        insert_trip_user(trip_id, uid, friend_id)
         return redirect('/home')
     return render_template('addtrip.html', form=tripForm)

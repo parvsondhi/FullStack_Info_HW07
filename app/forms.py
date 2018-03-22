@@ -6,6 +6,7 @@ from wtforms.validators import DataRequired
 class TripForm(Form):
     trip_title = StringField('trip_title', validators=[DataRequired()])
     destination = StringField('destination', validators=[DataRequired()])
+    friend = SelectField('friend', validators=[DataRequired()])
   
     # company = StringField('company', validators=[DataRequired()])
     # email = EmailField('email', validators=[DataRequired()])

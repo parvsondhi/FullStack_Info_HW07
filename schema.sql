@@ -15,13 +15,16 @@ CREATE TABLE 'user' (
 CREATE TABLE `trip` (
 	`trip_id`	INTEGER NOT NULL PRIMARY KEY,
 	`trip_title`	TEXT NOT NULL,
-	`destination`	TEXT NOT NULL
+	`destination`	TEXT NOT NULL,
+	'friend' TEXT NOT NULL
 );
 
 CREATE TABLE `trip_user` (
 	--'trip_user_id' integer not null primary key autoincrement,
 	`trip_id`	integer,
 	`uid`	integer,
+	'friend_id' integer,
 	FOREIGN KEY(`uid`) REFERENCES `user`(`uid`),
 	FOREIGN KEY(`trip_id`) REFERENCES `trip`(`trip_id`)
+	
 );

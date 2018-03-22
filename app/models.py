@@ -4,11 +4,11 @@ import sys
 # def insert_data():
 #     # SQL statement to insert into database goes here
     
-def insert_trip(trip_title, destination):
+def insert_trip(trip_title, destination, friend):
     # SQL statement to insert into database
     with sql.connect('app.db') as con:
         cur = con.cursor() # creating cursor
-        cur.execute("INSERT INTO trip (trip_title, destination) VALUES (?,?)", (trip_title, destination))
+        cur.execute("INSERT INTO trip (trip_title, destination, friend) VALUES (?,?,?)", (trip_title, destination, friend))
         con.commit() # commit = save to database
         trip_id = cur.lastrowid
     return int(trip_id)
@@ -19,7 +19,7 @@ def retrieve_trips(username):
         con.row_factory = sql.Row
         cur = con.cursor() # creating cursor
         # not sure if below sql statement is correctly passing parameters in
-        result = cur.execute("SELECT trip.trip_title, trip.destination FROM trip INNER JOIN trip_user ON trip.trip_id = trip_user.trip_id WHERE trip_user.uid = (?)", [username]).fetchall() 
+        result = cur.execute("SELECT trip.trip_title, trip.destination FROM trip INNER JOIN trip_user ON trip.trip_id = trip_user.trip_id WHERE trip_user.uid = (?) OR trip_user.friend_id = (?)", (username, username)).fetchall() 
         print(result, file=sys.stderr)
     return result
 
@@ -39,10 +39,10 @@ def retrieve_trips(username):
 #         print(result)
 #     return result
 
-def insert_trip_user(trip_id, uid):
+def insert_trip_user(trip_id, uid, friend_id):
     with sql.connect('app.db') as con:
         cur = con.cursor() 
-        cur.execute("INSERT INTO 'trip_user' (trip_id, uid) VALUES (?,?)", (trip_id, uid))
+        cur.execute("INSERT INTO 'trip_user' (trip_id, uid, friend_id) VALUES (?,?,?)", (trip_id, uid, friend_id))
         con.commit()
 
 def getID(current_user):
@@ -52,4 +52,12 @@ def getID(current_user):
         result = cur.execute("SELECT uid FROM user WHERE username = (?)", [current_user]).fetchone()
     return result
 
+def retrieve_friends(current_user):
+    with sql.connect('app.db') as con:
+        con.row_factory = lambda cursor, row: row[0]
+        cur = con.cursor() # creating cursor
+        result = cur.execute("SELECT username FROM user WHERE username != (?)", [current_user]).fetchall()
+        # result = cur.execute("SELECT trip.trip_title, trip.destination FROM trip INNER JOIN trip_user ON trip.trip_id = trip_user.trip_id WHERE trip_user.uid = (?)", [username]).fetchall() 
+        print(result, file=sys.stderr)
+    return result
 ##You might have additional functions to access the database

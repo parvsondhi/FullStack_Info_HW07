@@ -9,6 +9,7 @@
     <form action="" method="post" name="login">
       {{ form.hidden_tag() }}
       <div class="divider"></div>
+   
       <div class="section">
         <p>
           Trip Title:<br>
@@ -18,11 +19,23 @@
           Trip Destination:<br>
           {{ form.destination(size=120) }}<br>
         </p>
-
+        <p>
+          Friend:<br>
+          {{ form.friend }}<br>
+        </p>
       </div>
-     
+
       <p><input type="submit" value="Create Trip"></p>
     </form>
   </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+  console.log("Hi");
+  $(document).ready(function() {
+    $('select').formSelect();
+  });
+</script>
 {% endblock %}
