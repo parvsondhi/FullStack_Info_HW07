@@ -110,7 +110,7 @@ th {
 #create-trip {
   background-color: #6E7B8B;
   color: white;
-  border-radius: 10px;
+  border-radius: 15px;
   width: 150px;
   height: 30px;
   border: none;
@@ -119,4 +119,23 @@ th {
 
 .divider {
   margin-top: 25px;
+}
+
+#trip-go {
+  background-color: #6E7B8B;
+  color: white;
+  border-radius: 12px;
+  width: 100px;
+  border: none;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#trip-cancel {
+  background-color: #6E7B8B;
+  color: white;
+  border-radius: 12px;
+  width: 100px;
+  border: none;
+  margin-right: 20px;
 }

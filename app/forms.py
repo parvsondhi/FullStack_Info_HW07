@@ -16,7 +16,7 @@ class TripForm(Form):
     # country = StringField('country', validators=[DataRequired()])
     # zipcode = StringField('zipcode', validators=[DataRequired()])
 
-class OrderForm(Form):
-    # Add order input form fields here
-    name_of_part = StringField('name_of_part', validators=[DataRequired()])
-    manufacturer_of_part = StringField('manufacturer_of_part', validators=[DataRequired()])
+# class OrderForm(Form):
+#     # Add order input form fields here
+#     name_of_part = StringField('name_of_part', validators=[DataRequired()])
+#     manufacturer_of_part = StringField('manufacturer_of_part', validators=[DataRequired()])

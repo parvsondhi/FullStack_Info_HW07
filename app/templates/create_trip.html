@@ -6,12 +6,13 @@
 {% endblock %}
 
 {% block header %}
-  <!-- super function here -->
-  {{ super() }}
-  <form action="logout" id="logout">
-    <span id="username">Logged in as {{ name }}</span>
-    <input class="action-button" id="logout-button" type="submit" value="Logout">
-  </form>
+	{{ super() }}
+  <div id="logout">
+  	<form action="logout">
+  		<span id="username">Logged in as: {{ username }}</span>
+  		<input class="action-button" id="logout-button" type="submit" value="Logout">
+  	</form>
+  </div>
 {% endblock %}
 
 
@@ -25,7 +26,8 @@
       <input class="sm-input" type="text" name="food"></label><br>
     <label class="survey-item sm-label">With who?
       <input class="sm-input" type="text" name="vacation"></label><br>
-    <button class="action-button" id="submit-survey">Submit</button>
+<button class="action-button" id="trip-cancel">Cancel</button>
+    <button class="action-button" id="trip-go">Submit</button>
       </div>
     </div>
   </div>
