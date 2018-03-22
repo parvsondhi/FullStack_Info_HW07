@@ -18,7 +18,7 @@
   <div class="trips-container">
     <div class="row">
       <h1>Welcome to Travel Pals</h1>
-      <form action="createTrip">
+      <form action="create_trip">
     		<input class="action-button" id="create-trip" type="submit" value="Create trip">
     	</form>
 
@@ -31,12 +31,14 @@
             <tr>
               <th data-field="trip_name">Trip Title</th>
               <th data-field="destination">Destination</th>
+              <th data-field="trip_id">Trip ID</th>
             </tr>
           </thead>
           {% for trip in trips %}
             <tr>
               <td>{{ trip['trip_name'] }}</td>
               <td>{{ trip['destination'] }}</td>
+              <td>{{ trip['trip_id'] }}</td>
             </tr>
           {% endfor %}
         </table>

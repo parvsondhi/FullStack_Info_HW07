@@ -14,14 +14,13 @@ app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 @app.route('/')
 @app.route('/index' )
 def index():
-    username = ''
-    if 'username' in session: #check if the user is already in session, if so, direct the user to trips.html Hint: render_template with a variable
-        username = session['username']
-        "Logged in as " + username + "<br>" + \
-        "<b><a href = '/logout'>Click here to log out</a></b>"
-        return render_template('trips.html', username=username)
-    else:
-        return render_template('login.html')
+    username = session['username']
+    if username in session: #check if the user is already in session, if so, direct the user to trips.html Hint: render_template with a variable
+        trips = retrieve_trips()
+        return render_template('trips.html', trips=trips)
+        # return render_template('trips.html', username=username)
+    # else:
+    #     return render_template('login.html')
 
 @app.route('/login', methods=['POST', 'GET']) # You need to specify something here for the function to get requests
 def login():
@@ -44,34 +43,35 @@ def logout():
 	return redirect(url_for('index'))
 
 #users can create trips
-@app.route('/createTrip', methods=['POST', 'GET'])
+@app.route('/create_trip', methods=['POST', 'GET'])
 def create_trip():
     tripform = TripForm()
-    # if request.method == 'POST' and tripform.validate_on_submit():
-    #     trip_name  = tripform.trip_name.data
-    #     destination  = tripform.destination.data
-    #     models.insert_trip(trip_name, destination)
-    #     return render_template('trips.html')
-    return render_template('create_trip.html', form=tripform)
+    if request.method == 'POST':
+        trip_name  = request.form['trip_name']
+        destination  = request.form['destination']
+        models.insert_trip(trip_name, destination)
+        # return render_template('trips.html')
+        return render_template('trips.html')
+    return render_template('create_trip.html')
 
-@app.route('/trips', methods=['POST', 'GET'])
-def submit_trip():
-    form = TripForm()
-    if form.validate_on_submit:
-        trip_name = form.trip_name.data
-        destination = form.destination.data
-        travel_pal = form.pal.data
+# @app.route('/trips', methods=['POST', 'GET'])
+# def submit_trip():
+#     # form = TripForm()
+#     # if form.validate_on_submit:
+#     #     trip_name = form.trip_name.data
+#     #     destination = form.destination.data
+#     #     travel_pal = form.pal.data
 
-        trip_id = insert_trip(trip_name, destination)
-        return redirect('trips')
-    return render_template('create_trip.html', form=form)
+#     #     trip_id = insert_trip(trip_name, destination)
+#     #     return redirect('trips')
+#     return render_template('create_trip.html', form=form)
 
 #display users trips
-@app.route('/trips')
+@app.route('/trips', methods=['POST', 'GET'])
 def display_trip():
-    # if request.method == 'POST':
+    if request.method == 'POST':
     # Retreive data from database to display
-    trips = retrieve_trips()
+        trips = models.retrieve_trips()
     return render_template('trips.html', trips=trips)
 
 

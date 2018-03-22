@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired
 class TripForm(Form):
     trip_name = StringField('trip_name', validators=[DataRequired()])
     destination = StringField('destination', validators=[DataRequired()])
-    travel_pal = SelectField('travel_pal', choices=[])
+    # travel_pal = SelectField('travel_pal', choices=[])
     # Add additional Address fields here
     # first_name = StringField('first_name', validators=[DataRequired()])
     # last_name = StringField('last_name', validators=[DataRequired()])

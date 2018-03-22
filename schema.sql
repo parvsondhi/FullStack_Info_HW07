@@ -10,11 +10,11 @@ CREATE TABLE users (
   username TEXT not null, password TEXT not null
 );
 
--- CREATE TABLE trips (
---   trip_id INTEGER PRIMARY KEY, trip_name TEXT not null, destination TEXT not null);
+CREATE TABLE trips (
+  trip_id INTEGER PRIMARY KEY AUTOINCREMENT, trip_name TEXT not null, destination TEXT not null);
 
 CREATE TABLE trips (
- trip_name TEXT not null, destination TEXT not null);
+ -- trip_name TEXT not null, destination TEXT not null);
   -- FOREIGN KEY(user_id) REFERENCES users(user_id));
 
 

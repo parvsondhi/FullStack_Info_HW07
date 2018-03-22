@@ -6,14 +6,14 @@ def insert_trip(trip_name, destination):
         cur = con.cursor()
         cur.execute("INSERT INTO trips (trip_name, destination) VALUES (?,?)", (trip_name,destination))
         con.commit()
-    return cur.lastrowid
+    # return cur.lastrowid
 
 def retrieve_trips():
     # SQL statement to query database goes here
     with sql.connect("app.db") as con:
         con.row_factory = sql.Row
         cur = con.cursor()
-        result = cur.execute("SELECT trip_name, destination FROM trips").fetchall()
+        result = cur.execute("SELECT * FROM trips").fetchall()
     return result
 
 def insert_users(username, password):
