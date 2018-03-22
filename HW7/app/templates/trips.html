@@ -1,9 +1,6 @@
-<!-- home aka signup -->
-
 {% extends "base.html" %}
 
 {% block header %}
-	<!-- super function here -->
 	{{super()}}
 	<form action="logout" id="logout">
 		<span id="username">Logged in as {{ name }}</span>
@@ -21,7 +18,6 @@
       <div class="divider"></div>
       <div class="section">
         <h3>These are all of our awesome trips:</h3>
-        <!-- Display all the current existing customers information here -->
         <table class="striped">
           <thead>
             <tr>

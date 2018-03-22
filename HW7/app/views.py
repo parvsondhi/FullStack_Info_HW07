@@ -22,9 +22,6 @@ def login():
         return redirect(url_for('index'))
     if request.method=='GET':
         return redirect(url_for('signup'))
-    #if request.method=='GET':
-    #    do something
-    #    return redirect(url_for('index'))
 
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
@@ -40,7 +37,6 @@ def signup():
         session['password'] = password
         return redirect(url_for('index'))
     return render_template('signup.html')
-    #return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
@@ -48,27 +44,14 @@ def logout():
     session.pop('password', None)
     return redirect(url_for('index'))
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-	"""Register Form"""
-	if request.method == 'POST':
-		new_user = User(username=request.form['username'], password=request.form['password'])
-		db.session.add(new_user)
-		db.session.commit()
-		return render_template('login.html')
-	return render_template('signup.html')
-
-# need this?
 @app.route('/create_user', methods=['GET', 'POST'])
 def create_user():
     userForm = UserForm()
-
     return render_template('trips.html')
 
 @app.route('/trips')
 def display_trips():
     curr_user = session['username']
-    #curr_user = "cy"
     trips = retrieve_trips(curr_user)
     return render_template('trips.html', trips=trips, name=curr_user)
 
@@ -85,7 +68,6 @@ def create_trip():
         friend = form.friend.data
         trip_name = form.trip_name.data
         trip_owner = session['username']
-        #trip_owner = "cy"
         insert_trip(trip_owner, dest, trip_name, friend)
         return redirect('/trips')
     return render_template('create-trip.html', form=form, name=curr_user)

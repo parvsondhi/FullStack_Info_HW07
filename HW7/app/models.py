@@ -2,7 +2,7 @@ import sqlite3 as sql
 from flask import session, escape
 import sys
 
-#TODO: remove print
+#todo: remove print
 def retrieve_trips(curr_user):
     query = "SELECT * FROM trips WHERE owner == '" + curr_user + "' OR friend == '" + curr_user+"'"
     print(query, file=sys.stderr)
@@ -19,14 +19,13 @@ def insert_trip(trip_owner, dest, trip_name, friend):
         cur.execute("INSERT INTO trips (owner, destination, trip_name, friend) VALUES (?,?,?,?)", (trip_owner, dest, trip_name, friend))
         con.commit()
 
-
 def delete_trip(value):
      with sql.connect("database.db") as con:
         cur = con.cursor()
         cur.execute("DELETE FROM trips WHERE trip_id == " + value)
         con.commit()
 
-#TODO: replace the test curr_user with real curr_user
+#todo: replace the test curr_user with real curr_user
 def retrieve_friends(curr_user):
     #curr_user = session['username']
     #curr_user = "'cy'"

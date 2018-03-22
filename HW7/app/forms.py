@@ -15,6 +15,3 @@ class TripForm(Form):
     dest = StringField('dest', validators=[DataRequired()])
     trip_name = StringField('trip_name', validators=[DataRequired()])
     friend = SelectField('friend', validators=[DataRequired()])
-
-    # def __init__(self, friend_tuple):
-        
