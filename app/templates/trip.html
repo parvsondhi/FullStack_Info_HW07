@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+<!-- COULD NOT GET MY CSS TO OVERWRITE MATERIALISE SO ADDED THIS -->
+<head>
+<style>
+select {display: block;}
+</style>
+</head>
 <div class="container">
   <div class="row">
     <div class= "section">
       <a href="{{ url_for('login') }}">Logout</a>
+      <p style="text-decoration: underline">Logged in as: {{ user }}</p>
       <!-- <a href="{{ url_for('login') }}">Logout</a> -->
     </div>
     <h4>Add a trip!</h4><br>
@@ -18,15 +25,11 @@
         <p>
           Trip Destination:<br>
           {{ tripForm.trip_destination(size=120) }}<br>
-          <!-- Additional form fields for the customer should go here -->
+          
+        <p>Add Friend<br><br>
+          {{ tripForm.trip_friend }}<br>
         </p>
-
-        <select style="display: block">
-          {% for friend in friends %}
-          <option value="{{ friend['first_name'] }}">{{ friend['first_name'] }}</option>
-          {% endfor %}
-        </select>
-
+        
       </div>
     <p><input type="submit" value="Create New Trip"></p>
   </div>

@@ -1,7 +1,8 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, IntegerField
+from wtforms import StringField, IntegerField, SelectField
 from flask_wtf.html5 import EmailField
 from wtforms.validators import DataRequired
+from .model import findUsers, chooseCollection
 
 class CustomerForm(Form):
     first_name = StringField('firstName', validators=[DataRequired()])
@@ -33,4 +34,11 @@ class NewUserForm(Form):
 class TripForm(Form):
     trip_title = StringField('tripTitle', validators=[DataRequired()])
     trip_destination = StringField('tripDestination', validators=[DataRequired()])
+    
+    collection = chooseCollection('users')
+    friends = findUsers(collection)
+    friendChoices = []
+    for friend in friends:
+        friendChoices.append((friend['Last'],friend['First']))
 
+    trip_friend  = SelectField('tripFriend', choices = friendChoices)

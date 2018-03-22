@@ -2,11 +2,10 @@
 {% block content %}
   
   <div class="container">
-    <a href="{{ url_for('create_newUser') }}">Logout</a><br>
-    <a href="{{ url_for('friends') }}">Add friends</a>
+    <a href="{{ url_for('login') }}">Logout</a><br>
+    <p style="text-decoration: underline">Logged in as: {{ user }}</p>
     <div class="row">
       <h1>Welcome to 0.0 Travel App</h1>
-      <p style="text-decoration: underline">Logged in as: {{ user }}</p>
       <div class= "section"> 
         <a href="{{ url_for('create_trip') }}">Add a trip</a>
       </div>
@@ -19,15 +18,12 @@
             <tr>
               <th data-field="Trip Title">Trip Title</th>
               <th data-field="Destination">Destination</th>
-              <th data-field="Destination">Destination</th>
             </tr>
           </thead>
           {% for trip in trips %}
             <tr>
               <td>{{ trip['trip_title'] }}</td>
               <td>{{ trip['trip_destination'] }}</td>
-              <!-- Add more fields to showcase on this page
-              Below is a method of adding the 'add an order' button which will route you to create_order in views.py -->
               <td><a type="submit" href="{{ url_for('tripsrem', value=trip['trip_title']) }}">Remove Trip</a></td>
 
 
