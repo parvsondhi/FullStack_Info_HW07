@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request, jsonify
 from app import app, db
 from flask_login import current_user, login_user, login_required, logout_user
 
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, TripForm
 from app.models import User, Trip
 from app.utils import inject_trip, current_user_has_access_to_trip, trip_owned_by_user, inject_trip_invitation
 
@@ -112,9 +112,17 @@ def delete_trip_invitation(trip_invitation):
         redirect_url=url_for('trips')
     )
 
-@app.route('/trips/<id>/edit')
+@app.route('/trips/<id>/edit', methods=['GET', 'POST'])
 @login_required
 @inject_trip
 @trip_owned_by_user
 def edit_trip(trip):
-    return str('Edit' +  str(trip.id))
+    #TODO: This should really be a PUT request.
+    trip_form = TripForm(obj=trip)
+    if trip_form.validate_on_submit():
+        trip.title = trip_form.title.data
+        trip.destination = trip_form.destination.data
+        db.session.commit()
+        return redirect(url_for('show_trip', id=trip.id))
+    return render_template('edit_trip.html', trip=trip, form=trip_form)
+
