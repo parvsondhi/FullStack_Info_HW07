@@ -1,5 +1,37 @@
 import sqlite3 as sql
 
+def insert_newUser(first_name, last_name, email, username, password):
+    with sql.connect('database.db') as con:
+        cur = con.cursor() # creating cursor
+        cur.execute("INSERT INTO users (first_name, last_name, email, username, password) VALUES (?,?,?,?,?)",
+            (first_name, last_name, email, username, password))
+        con.commit() # commit is like save
+
+def insert_trip(trip_title, trip_destination): # will need to add appropriate foreign keys
+    with sql.connect('database.db') as con:
+        cur = con.cursor() # creating cursor
+        cur.execute("INSERT INTO trips (trip_title, trip_destination) VALUES (?,?)",
+            (trip_title, trip_destination))
+        con.commit() # commit is like save
+
+def retrieve_trips():
+    # SQL statement to query database goes here
+    with sql.connect('database.db') as con:
+        con.row_factory = sql.Row # setting up connection to collect data in row object
+        cur = con.cursor()
+        result = cur.execute("SELECT * FROM trips").fetchall()
+        return result
+
+def retrieve_users():
+    # SQL statement to query database goes here
+    with sql.connect('database.db') as con:
+        con.row_factory = sql.Row # setting up connection to collect data in row object
+        cur = con.cursor()
+        result = cur.execute("SELECT * FROM users").fetchall()
+        return result
+
+
+# OLD
 
 def insert_customer(first_name, last_name, company, email, phone_number):
     # SQL statement to insert into database goes here

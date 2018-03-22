@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('login') }}">Logout</a>
+      <!-- <a href="{{ url_for('login') }}">Logout</a> -->
+    </div>
+    <h4>Add a trip!</h4><br>
+    <form action="" method="post" name="login">
+      {{ tripForm.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          Trip Title:<br>
+          {{ tripForm.trip_title(size=120) }}<br>
+        </p>
+        <p>
+          Trip Destination:<br>
+          {{ tripForm.trip_destination(size=120) }}<br>
+          <!-- Additional form fields for the customer should go here -->
+        </p>
+
+        <select style="display: block">
+          {% for friend in friends %}
+          <option value="{{ friend['first_name'] }}">{{ friend['first_name'] }}</option>
+          {% endfor %}
+        </select>
+
+      </div>
+    <p><input type="submit" value="Create New Trip"></p>
+  </div>
+</div>
+{% endblock %}
