@@ -1,0 +1,20 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - ACME</title>
+    {% else %}
+    <title>Welcome to the Travel App!</title>
+    {% endif %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  </head>
+  <body>
+    <nav>
+      {% if email_id %}
+        <span >Logged in as {{ email_id }}</span>
+        <a href="{{ url_for('logout') }}" class="btn" role="button">Logout</a>
+      {% endif %}
+    </nav>
+    {% block content %}{% endblock %}
+  </body>
+</html>

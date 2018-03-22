@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('create_trip') }}">Add a New Trip!</a>
+    </div>
+    
+    <br><h1>Here are your Trips Information!</h>
+    <div class="col-md-12 section">
+      <table class="table">
+          <thead class="thead-light">
+              <tr>
+                  <th>Trip Title</th>
+                  <th>Destination</th>
+                  <th></th>
+              </tr>
+          </thead>
+          {% for trip in trips %}
+          <tr>
+              <td>{{ trip['name'] }}</td>
+              <td>{{ trip['location'] }}</td>
+              <td><a href="{{ url_for('remove_trip', trip_id=trip['trip_id']) }}" role="button">Remove Trip</a></td>
+          </tr>
+          {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

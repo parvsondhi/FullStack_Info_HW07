@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('index') }}">Home</a>
+    </div>
+    <h2>Alright, Lets add a Trip!</h2>
+    <div>
+      <form action="" method="post" name="tripForm">
+
+        <div>
+          <label>Trip Title:</label>
+          <input type="text" placeholder="Trip Name" name="name"><br>
+        </div>
+
+        <div>
+          <label for="location">Destination:</label>
+          <input type="text" placeholder="Destination" name="location"><br>
+        </div>
+
+        <div>
+          <label for="friend">Friend:</label>
+          <select autofocus name="friend">
+            {% for u in users %}
+              <option value="{{u['email_id']}}">{{u['email_id']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <button type="submit" name="action" class="btn3">Create the Trip!</button>
+        
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
