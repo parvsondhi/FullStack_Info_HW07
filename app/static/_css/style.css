@@ -32,5 +32,9 @@ button.close {
     object-fit: cover;
 }
 
+.trip-detail .form {
+    display: inline;
+}
+
 
 
