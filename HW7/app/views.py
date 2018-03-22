@@ -10,7 +10,7 @@ from .models import *
 def index():
     if 'username' in session:
         username = escape(session['username'])
-        return render_template('trips.html', name=username)
+        return redirect('/trips')
     else:
         return render_template('login.html')
 
