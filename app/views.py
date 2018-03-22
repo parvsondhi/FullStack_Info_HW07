@@ -28,9 +28,12 @@ def login():
     # Here, you need to have logic like if there's a post request method, store the username and email from the form into
     # session dictionary
     if request.method == 'POST':
-        session['username'] = request.form['username']
-        session['password'] = request.form['password']
-        return redirect(url_for('index'))
+        # username = session['username']
+        # password = session['password']
+        username = request.form['username']
+        password = request.form['password']
+        models.insert_users( username, password)
+        return render_template('trips.html')
     else:
         return render_template('login.html')
 
@@ -45,15 +48,14 @@ def logout():
 def create_trip():
     username = session['username']
     tripform = TripForm()
-    if request.method == 'POST':
-        if tripform.validate_on_submit():
-            trip_name  = tripform.trip_name.data
-            destination  = tripform.destination.data
+    if request.method == 'POST' and tripform.validate_on_submit():
+        trip_name  = tripform.trip_name.data
+        destination  = tripform.destination.data
     # if'username' in session:
     #     trip_name = form.trip_name.data
     #     destination = form.destination.data
-            models.insert_trip(trip_name, destination)
-    #
+        models.insert_trip(trip_name, destination)
+        
     #     # surveyResponse = {}
     #     # surveyResponse['trip_name'] = request.form.get('trip_name')
     #     # surveyResponse['destination'] = request.form.get('destination')
