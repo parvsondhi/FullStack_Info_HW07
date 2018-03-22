@@ -5,14 +5,13 @@
 {% endblock %}
 
 {% block content %}
-  <div>
+  <div class="trips">
     <h1>Trips</h1>
 
     <div>
       <h3>My Trips</h3>
       <div class="row">
-
-        {% for trip in created_trips%}
+        {% for trip in created_trips %}
           <div class="col col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card">
                 <div class="card-body">
@@ -22,13 +21,32 @@
                       </a>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{trip.destination}}</h6>
-                  </div>
+                </div>
+                <img class="card-img" src="https://source.unsplash.com/600x600/daily/?{{trip.destination}}">
             </div>
           </div>
         {% endfor %}
+      </div>
+    </div>
 
-
-
+    <div>
+      <h3>Invited Trips</h3>
+      <div class="row">
+        {% for trip in invited_trips %}
+          <div class="col col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                      <a href="{{ url_for('show_trip', id=trip.id) }}">
+                          {{trip.title}}
+                      </a>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{trip.destination}}</h6>
+                </div>
+                <img class="card-img" src="https://source.unsplash.com/600x600/daily?{{trip.destination}}">
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>

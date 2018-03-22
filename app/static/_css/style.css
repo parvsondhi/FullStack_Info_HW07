@@ -14,8 +14,23 @@ button.close {
     cursor: pointer;
 }
 
-.card {
+.trips .card {
     margin: 8px;
 }
+
+.trips .card .card-body {
+    min-height: 50px;
+}
+
+.trips .card .card-body {
+    min-height: 50px;
+}
+
+.trips .card .card-img,
+.trip-detail .card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
 
 
