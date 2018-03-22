@@ -27,10 +27,10 @@ def delete_trip(value):
         con.commit()
 
 #TODO: replace the test curr_user with real curr_user
-def retrieve_friends():
-    #curr_user = escape(session['username'])
-    curr_user = "'cy'"
-    query = "SELECT username FROM users WHERE username != " + curr_user
+def retrieve_friends(curr_user):
+    #curr_user = session['username']
+    #curr_user = "'cy'"
+    query = "SELECT username FROM users WHERE username != '" + curr_user + "'"
     print(query, file=sys.stderr)
     with sql.connect("database.db") as con:        
         #con.row_factory = sql.Row
@@ -38,8 +38,6 @@ def retrieve_friends():
         cur = con.cursor()
         result = cur.execute(query).fetchall()
         con.commit()
-    # for row in result:
-    #     print(row['username'], file=sys.stderr)
     return result
 
 def insert_user(username, password, first_name, last_name):

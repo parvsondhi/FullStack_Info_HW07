@@ -12,13 +12,9 @@ class UserForm(Form):
     password = PasswordField('password', validators=[DataRequired()])
 
 class TripForm(Form):
-    friend_list = retrieve_friends()
-    friend_tuple = list(zip(friend_list, friend_list))
     dest = StringField('dest', validators=[DataRequired()])
     trip_name = StringField('trip_name', validators=[DataRequired()])
-    print(friend_tuple, file=sys.stderr)
-    friend = SelectField('friend', choices=friend_tuple)
-    """
-    name_of_part = StringField('name_of_part', validators=[DataRequired()])
-    manufacturer_of_part = StringField('manufacturer_of_part', validators=[DataRequired()])
-    """
+    friend = SelectField('friend', validators=[DataRequired()])
+
+    # def __init__(self, friend_tuple):
+        
