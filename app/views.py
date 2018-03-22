@@ -4,7 +4,7 @@ from flask_login import current_user, login_user, login_required, logout_user
 
 from app.forms import LoginForm, RegistrationForm
 from app.models import User, Trip
-from app.utils import inject_trip, current_user_has_access_to_trip, trip_owned_by_user
+from app.utils import inject_trip, current_user_has_access_to_trip, trip_owned_by_user, inject_trip_invitation
 
 # =========================
 # 0. Error Handler
@@ -100,6 +100,17 @@ def delete_trip(trip):
         redirect_url=url_for('trips')
     )
 
+@app.route('/trips/<id>/invitation', methods = ['DELETE'])
+@login_required
+@inject_trip_invitation
+def delete_trip_invitation(trip_invitation):
+    db.session.delete(trip_invitation)
+    db.session.commit()
+    flash('Trip invitation was deleted!', 'info')
+    return jsonify(
+        redirect=True,
+        redirect_url=url_for('trips')
+    )
 
 @app.route('/trips/<id>/edit')
 @login_required

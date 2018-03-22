@@ -25,7 +25,9 @@
                         </form>
                         <a class="btn btn-primary btn-round pull-right" href="{{ url_for('edit_trip', id=trip.id) }}">Edit</a>
                     {% else %}
-                        <a class="btn btn-danger btn-round pull-right" href="{{ url_for('edit_trip', id=trip.id) }}">Delete Invitation</a>
+                        <form class="form delete-form" action="{{ url_for('delete_trip_invitation', id=trip.id) }}" method="DELETE">
+                            <input class="btn btn-danger btn-round pull-right" type="submit" value="Delete Invitation">
+                        </form>
                     {% endif %}
                 </div>
             </div>
