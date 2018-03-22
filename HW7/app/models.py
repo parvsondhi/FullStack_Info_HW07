@@ -32,7 +32,7 @@ def retrieve_friends(curr_user):
     #curr_user = "'cy'"
     query = "SELECT username FROM users WHERE username != '" + curr_user + "'"
     print(query, file=sys.stderr)
-    with sql.connect("database.db") as con:        
+    with sql.connect("database.db") as con:
         #con.row_factory = sql.Row
         con.row_factory = lambda cursor, row: row[0]
         cur = con.cursor()
@@ -45,7 +45,6 @@ def insert_user(username, password, first_name, last_name):
         cur = con.cursor()
         cur.execute("INSERT INTO users (username, password, first_name, last_name) VALUES (?,?,?,?)", (username, password, first_name, last_name))
         con.commit()
-    return cur.lastrowid
 
 def google_maps():
     return None

@@ -20,9 +20,27 @@ def login():
         session['username'] = request.form['username']
         session['password'] = request.form['password']
         return redirect(url_for('index'))
+    if request.method=='GET':
+        return redirect(url_for('signup'))
     #if request.method=='GET':
     #    do something
     #    return redirect(url_for('index'))
+
+@app.route('/signup', methods = ['GET', 'POST'])
+def signup():
+    if request.method=='POST':
+        username = request.form['username']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        password = request.form['password']
+        insert_user(username, password, first_name, last_name)
+        session['username'] = username
+        session['first_name'] = first_name
+        session['last_name'] = last_name
+        session['password'] = password
+        return redirect(url_for('index'))
+    return render_template('signup.html')
+    #return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
@@ -43,8 +61,8 @@ def register():
 # need this?
 @app.route('/create_user', methods=['GET', 'POST'])
 def create_user():
-    userForm = userForm()
-    # tripForm = tripForm()
+    userForm = UserForm()
+
     return render_template('trips.html')
 
 @app.route('/trips')
