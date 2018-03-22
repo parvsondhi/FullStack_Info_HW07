@@ -40,6 +40,34 @@
             <div class="card-text">
                 <p></p>
                 <h6>Participants</h6>
+                <div>
+                <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ trip.owner.formattedName() }}</td>
+                                <td>Admin</td>
+                                <td>{{ trip.owner.email }}</td>
+                            </tr>
+                            {% for guest in trip.guests %}
+                            <tr>
+                                <th scope="row"> {{ loop.index + 1 }} </th>
+                                <td>{{ guest.formattedName() }}</td>
+                                <td>Guest</td>
+                                <td>{{ guest.email }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="card-text">
