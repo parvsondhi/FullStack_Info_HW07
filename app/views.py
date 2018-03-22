@@ -1,9 +1,15 @@
+from __future__ import print_function
 from app import app
 import models
+import sys
 from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 import os
 from forms import TripForm
+
+#Make database sqlite3 app.db < schema.sql
+
 app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
+
 
 @app.route('/')
 @app.route('/index' )
@@ -35,20 +41,25 @@ def logout():
 	return redirect(url_for('index'))
 
 #users can create trips
-@app.route('/createTrip')
+@app.route('/createTrip', methods=['POST', 'GET'])
 def create_trip():
-    form = TripForm()
     username = session['username']
+    tripform = TripForm()
+    if request.method == 'POST':
+        if tripform.validate_on_submit():
+            trip_name  = tripform.trip_name.data
+            destination  = tripform.destination.data
     # if'username' in session:
     #     trip_name = form.trip_name.data
     #     destination = form.destination.data
-    #     models.insert_trip(trip_name, destination)
+            models.insert_trip(trip_name, destination)
     #
     #     # surveyResponse = {}
     #     # surveyResponse['trip_name'] = request.form.get('trip_name')
     #     # surveyResponse['destination'] = request.form.get('destination')
     #     return redirect(url_for('trips'))
-    return render_template('create_trip.html', form=form, username=username)
+        return render_template('trips.html')
+    return render_template('create_trip.html', form=tripform, username=username)
 
 #cancel from create trips
 @app.route('/trips')
@@ -58,6 +69,7 @@ def cancel_create_trip():
 #display users trips
 @app.route('/trips')
 def display_trip():
+    # if request.method == 'POST':
     # Retreive data from database to display
     trips = models.retrieve_trips()
     return render_template('trips.html')
