@@ -35,21 +35,15 @@ def login():
         username = request.form['username']
         password = request.form['password']
         models.insert_users( username, password)
-        return render_template('trips.html', username=username)
+        trips = models.retrieve_trips()
+        return render_template('trips.html', username=username, trips=trips)
     else:
         return redirect(url_for('index'))
         # return render_template('login.html')
 
-@app.route('/logout')
-def logout():
-	session.pop('username', None)
-	session.pop('email', None)
-	return redirect(url_for('index'))
-
 #users can create trips
 @app.route('/create_trip', methods=['POST', 'GET'])
 def create_trip():
-    # tripform = TripForm()
     if request.method == 'POST':
         trip_name  = request.form['trip_name']
         destination  = request.form['destination']
@@ -70,6 +64,12 @@ def create_trip():
 #     #     return redirect('trips')
 #     return render_template('create_trip.html', form=form)
 
+@app.route('/logout')
+def logout():
+	session.pop('username', None)
+	session.pop('email', None)
+	return redirect(url_for('index'))
+
 #display users trips
 @app.route('/trips', methods=['POST', 'GET'])
 def display_trip():
@@ -79,8 +79,6 @@ def display_trip():
         return render_template('trips.html', trips=trips)
     else:
         return render_template('trips.html')
-
-
 
 @app.errorhandler(404)
 def page_not_found(error):

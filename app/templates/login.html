@@ -5,7 +5,7 @@
 
 {% block content %}
   <div class="main-container">
-    <img src="globe.png">
+    <img src="{{ url_for('static', filename='globe.png')}}" id=globe_icon>
     <h2 id="headliner">Travel anywhere with friends</h2>
     <h5 id="description">Create your group. Select your friends. Explore the world.</h5>
     <div class="login-container">

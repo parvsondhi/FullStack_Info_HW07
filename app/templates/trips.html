@@ -8,7 +8,7 @@
 	{{ super() }}
   <div id="logout">
   	<form action="logout">
-  		<span id="username">Logged in as: {{ username }}</span>
+  		<!-- <span id="username">Logged in as: {{ username }}</span> -->
   		<input class="action-button" id="logout-button" type="submit" value="Logout">
   	</form>
   </div>
@@ -25,19 +25,17 @@
       <div class="divider"></div>
       <div class="section">
         <h3>These are all of your awesome trips:</h3>
-        <table class="striped">
+        <table class="all-trips">
           <thead>
             <tr>
               <th data-field="trip_name">Trip Title</th>
               <th data-field="destination">Destination</th>
-              <th data-field="trip_id">Trip ID</th>
             </tr>
           </thead>
           {% for trip in trips %}
             <tr>
               <td>{{ trip['trip_name'] }}</td>
               <td>{{ trip['destination'] }}</td>
-              <td>{{ trip['trip_id'] }}</td>
             </tr>
           {% endfor %}
         </table>
