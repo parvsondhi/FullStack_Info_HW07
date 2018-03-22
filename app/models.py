@@ -23,7 +23,7 @@ def db_create_trip(name, destination, user1, user2):
     with sql.connect('database.db') as con:
         cur = con.cursor()
         sqltext = ("INSERT INTO trips (name, destination, user1, user2)"
-            " VALUES (?, ?)")
+            " VALUES (?, ?, ?, ?)")
         cur.execute(sqltext, (name, destination, user1, user2))
         con.commit()
         return True
@@ -31,9 +31,8 @@ def db_create_trip(name, destination, user1, user2):
 def db_delete_trip(id):
     with sql.connect('database.db') as con:
         cur = con.cursor()
-        cur.execute("DELETE FROM trips WHERE id=?", [id])
-        val = cur.fetchone()[0]
-        cur.commit()
+        val = cur.execute("DELETE FROM trips WHERE id=?", [id])
+        con.commit()
         return val
 
 def fetch_trips(username):
@@ -44,6 +43,7 @@ def fetch_trips(username):
             "FROM trips "
             "WHERE (user1=? OR user2=?)")
         for rowlist in cur.execute(sqltext, (username, username)):
+            row = {}
             row['id'] = rowlist[0]
             row['name'] = rowlist[1]
             row['destination'] = rowlist[2]
