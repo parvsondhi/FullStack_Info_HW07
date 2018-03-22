@@ -27,25 +27,24 @@ are a part of. (we’ll call this the “trips” page)
 # MM200
 * The friend on the trip must be a user in the system
   * We recommend adding the friend via your form using a dropdown
-  * [.] pre-populate dropdown menu on Create Trip form
-  * [.] M2M table for friends + trips. Update Database Migrations
-  * [ ] Query for invited trips.
+  * [X] pre-populate dropdown menu on Create Trip form
+  * [X] Query for invited trips.
 * Each user can see the trips they are a part of on their trips page
-  * [ ] Add second table to template for invited trips
-  * [ ] Update route to get and display invited trips
+  * [X] Add second table to template for invited trips
+  * [X] Update route to get and display invited trips
 * The user should be able to delete any trip
   * You can use any method you want, but we recommend using jQuery to remove elements from the DOM and make an ajax call to a method to delete information from the table
-  * [ ] Add Delete button to table
-  * [ ] add delete_trip/<value> route
-    * [ ] implement delete + reload || Ajax remove and trigger delete
+  * [X] Add Delete button to table
+  * [X] add delete_trip/<value> route
+    * [X] implement delete + reload || Ajax remove and trigger delete
 
 # Extra Credits
 * Signup
-  * [ ] /registration route
-  * [ ] Register form
-  * [ ] insert new user into database
+  * [X] /registration route
+  * [X] Register form
+  * [X] insert new user into database
 * Logout
-  * [.] delete current session
+  * [X] delete current session
 * Embedded Google Map
 
 Michelle and Peter

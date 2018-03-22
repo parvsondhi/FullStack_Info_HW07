@@ -49,7 +49,7 @@ def create_trip():
     ## Form Processing
     if form.validate_on_submit():
         ## Create Trip object
-        trip = Trip(tripname=form.tripname.data, destination=form.destination.data, user_id=current_user.id, friend_id=int(form.friend_id.data))
+        trip = Trip(tripname=form.tripname.data, destination=form.destination.data, user_id=current_user.id, friend_id=form.friend_id.data)
         print(form.friend_id.data)
         ## Write Trip object to database
         db.session.add(trip)
