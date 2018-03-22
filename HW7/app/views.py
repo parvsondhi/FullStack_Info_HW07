@@ -52,7 +52,7 @@ def display_trips():
     curr_user = session['username']
     #curr_user = "cy"
     trips = retrieve_trips(curr_user)
-    return render_template('trips.html', trips=trips)
+    return render_template('trips.html', trips=trips, name=curr_user)
 
 @app.route('/create-trip', methods=['GET', 'POST'])
 def create_trip():
@@ -70,7 +70,7 @@ def create_trip():
         #trip_owner = "cy"
         insert_trip(trip_owner, dest, trip_name, friend)
         return redirect('/trips')
-    return render_template('create-trip.html', form=form)
+    return render_template('create-trip.html', form=form, name=curr_user)
 
 @app.route('/remove-trip/<value>')
 def remove_trip(value):
