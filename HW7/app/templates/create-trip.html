@@ -3,32 +3,39 @@
 <div class="container">
   <div class="row">
     <div class= "section">
-      <a href="{{ url_for('display_customer') }}">Home</a>
+      <a href="{{ url_for('display_trips') }}">Home</a>
     </div>
-    <h2>Add an Order</h2>
-    <form action="" method="post" name="login">
-      {{ orderForm.hidden_tag() }}
+    <h3>Add a Trip</h3>
+    <form action="" method="post" name="create">
+      {{ form.hidden_tag() }}
       <div class="divider"></div>
-      <!-- the Order Form-->
+      <!-- the Trip Form-->
       <div class="section">
-        <!--
-        name
-        destination
-        friend (dropdown)
-
         <p>
-          Name of Part:<br>
-          {{ orderForm.name_of_part(size=120) }}<br>
+          Trip Title: <br>
+          {{ form.trip_name(size=120)}}<br>
         </p>
         <p>
-          Manufacturer of Part:<br>
-          {{ orderForm.manufacturer_of_part(size=120) }}<br>
+          Trip Destination: <br>
+          {{ form.dest(size=120) }} <br>
         </p>
-        -->
+        <p>
+          Friend: <br></p>
+          {{ form.friend }} <br>
+        
       </div>
       <div class="divider"></div>
-      <p><input type="submit" value="Add an Order"></p>
+      <p><input class="btn" type="submit" value="Create Trip"></p>
     </form>
   </div>
 </div>
 {% endblock %}
+{% block script %} 
+<script>
+  console.log("hi");
+  $(document).ready(function() {
+    $('select').formSelect();
+  });
+  
+</script>
+{% endblock %} 

@@ -49,18 +49,33 @@ def create_user():
 
 @app.route('/trips')
 def display_trips():
-    return render_template('trips.html')
+    curr_user = session['username']
+    #curr_user = "cy"
+    trips = retrieve_trips(curr_user)
+    return render_template('trips.html', trips=trips)
 
 @app.route('/create-trip', methods=['GET', 'POST'])
-def create_trip(value):
+def create_trip():
+    curr_user = session['username']
+    friend_list = retrieve_friends(curr_user)
+    friend_tuple = list(zip(friend_list, friend_list))
     form = TripForm()
+    form.friend.choices=friend_tuple
+
     if form.validate_on_submit():
         dest = form.dest.data
-        friend = form.dest.friend
+        friend = form.friend.data
         trip_name = form.trip_name.data
         trip_owner = session['username']
-        insert_trip(dest, friend, trip_name, trip_owner)
-    return None
+        #trip_owner = "cy"
+        insert_trip(trip_owner, dest, trip_name, friend)
+        return redirect('/trips')
+    return render_template('create-trip.html', form=form)
+
+@app.route('/remove-trip/<value>')
+def remove_trip(value):
+    delete_trip(value)
+    return redirect('/trips')
 
 # 404 errohandler
 @app.errorhandler(404)
