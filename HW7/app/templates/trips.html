@@ -27,16 +27,13 @@
             <tr>
               <th data-field="trip_name">Trip name</th>
               <th data-field="destination">Destination</th>
-              <th data-field="owner">Friend</th>
             </tr>
           </thead>
-          {% for user in users %}
+          {% for trip in trips %}
             <tr>
-              <td>{{ user['first_name'] }}</td>
-              <td>{{ user['last_name'] }}</td>
-              <td>{{ user['username'] }}</td>
-              <td>{{ user['password'] }}</td>
-              <td><a href="{{ url_for('create_trip', value=user['user_id']) }}">Add a Trip</a></td>
+              <td>{{ trip['trip_name'] }}</td>
+              <td>{{ trip['destination'] }}</td>
+              <td><a href="{{ url_for('remove_trip', value=trip['trip_id']) }}">Remove Trip</a></td>
             </tr>
           {% endfor %}
         </table>

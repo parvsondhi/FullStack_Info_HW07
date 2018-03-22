@@ -2,15 +2,15 @@ import sqlite3 as sql
 from flask import session, escape
 import sys
 
-# I think retrieve trips will be better
-def retrieve_trips():
-    #curr_user = escape(session['username'])
-    curr_user = "'cy'"
-    query = "SELECT * FROM trips WHERE owner == " + curr_user + "OR friend == " + curr_user
+#TODO: remove print
+def retrieve_trips(curr_user):
+    query = "SELECT * FROM trips WHERE owner == '" + curr_user + "' OR friend == '" + curr_user+"'"
+    print(query, file=sys.stderr)
     with sql.connect("database.db") as con:
         con.row_factory = sql.Row
         cur = con.cursor()
         result = cur.execute(query).fetchall()
+        con.commit()
     return result
 
 def insert_trip(trip_owner, dest, trip_name, friend):
@@ -19,13 +19,14 @@ def insert_trip(trip_owner, dest, trip_name, friend):
         cur.execute("INSERT INTO trips (owner, destination, trip_name, friend) VALUES (?,?,?,?)", (trip_owner, dest, trip_name, friend))
         con.commit()
 
-# remove trip column from the table trips
+
 def delete_trip(value):
      with sql.connect("database.db") as con:
         cur = con.cursor()
         cur.execute("DELETE FROM trips WHERE trip_id == " + value)
         con.commit()
 
+#TODO: replace the test curr_user with real curr_user
 def retrieve_friends():
     #curr_user = escape(session['username'])
     curr_user = "'cy'"
@@ -36,14 +37,9 @@ def retrieve_friends():
         con.row_factory = lambda cursor, row: row[0]
         cur = con.cursor()
         result = cur.execute(query).fetchall()
-        #for row in result:
-        #    print(row['username'])
-        #     print("here", file=sys.stderr)
-        #     print(row, file=sys.stderr) 
         con.commit()
     # for row in result:
     #     print(row['username'], file=sys.stderr)
-    
     return result
 
 def insert_user(username, password, first_name, last_name):
