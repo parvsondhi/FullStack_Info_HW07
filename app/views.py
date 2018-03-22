@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash
 from app import app, db
 from flask_login import current_user, login_user, login_required, logout_user
 
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, TripForm
 from app.models import User
 
 # =========================
@@ -62,7 +62,15 @@ def trips():
 
 
 
-@app.route('/trips/create')
+@app.route('/trips/create', methods=['GET', 'POST'])
 @login_required
 def create_trip():
-    return render_template('createTrip.html')
+    form = TripForm()
+    if form.validate_on_submit():
+        trip = trip(name=form.name.data, destination=form.destination.data)
+        user.set_password(form.password.data)
+        db.session.add(trip)
+        db.session.commit()
+        flash('Congratulations, you successfully added a trip!', 'info')
+        return redirect(url_for('trips'))
+    return render_template('createTrip.html', title='Create a Trip', form=form)
