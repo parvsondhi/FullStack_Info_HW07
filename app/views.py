@@ -46,9 +46,9 @@ def logout():
 #users can create trips
 @app.route('/createTrip', methods=['POST', 'GET'])
 def create_trip():
-    username = session['username']
     tripform = TripForm()
     if request.method == 'POST' and tripform.validate_on_submit():
+ 
         trip_name  = tripform.trip_name.data
         destination  = tripform.destination.data
     # if'username' in session:
@@ -61,7 +61,7 @@ def create_trip():
     #     # surveyResponse['destination'] = request.form.get('destination')
     #     return redirect(url_for('trips'))
         return render_template('trips.html')
-    return render_template('create_trip.html', form=tripform, username=username)
+    return render_template('create_trip.html', form=tripform)
 
 #cancel from create trips
 @app.route('/trips')

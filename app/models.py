@@ -11,7 +11,7 @@ def insert_trip(trip_name, destination):
 def insert_users(username, password):
     with sql.connect("app.db") as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO users ( username, password) VALUES( ?, ?)",( username, password))
+        cur.execute("INSERT INTO users (username, password) VALUES( ?, ?)",(username, password))
         con.commit()
 # def retrieve_customers():
 #     # SQL statement to query database goes here
