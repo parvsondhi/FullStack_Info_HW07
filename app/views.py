@@ -1,10 +1,10 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request, jsonify
 from app import app, db
 from flask_login import current_user, login_user, login_required, logout_user
 
 from app.forms import LoginForm, RegistrationForm
 from app.models import User, Trip
-from app.utils import inject_trip, current_user_has_access_to_trip, trip_owned_by_user
+from app.utils import inject_trip, current_user_has_access_to_trip, trip_owned_by_user, inject_trip_invitation
 
 # =========================
 # 0. Error Handler
@@ -86,6 +86,31 @@ def trips():
 @current_user_has_access_to_trip
 def show_trip(trip):
     return render_template('trip-detail.html', trip=trip)
+
+@app.route('/trips/<id>', methods = ['DELETE'])
+@login_required
+@inject_trip
+@trip_owned_by_user
+def delete_trip(trip):
+    db.session.delete(trip)
+    db.session.commit()
+    flash('Trip was deleted!', 'info')
+    return jsonify(
+        redirect=True,
+        redirect_url=url_for('trips')
+    )
+
+@app.route('/trips/<id>/invitation', methods = ['DELETE'])
+@login_required
+@inject_trip_invitation
+def delete_trip_invitation(trip_invitation):
+    db.session.delete(trip_invitation)
+    db.session.commit()
+    flash('Trip invitation was deleted!', 'info')
+    return jsonify(
+        redirect=True,
+        redirect_url=url_for('trips')
+    )
 
 @app.route('/trips/<id>/edit')
 @login_required
