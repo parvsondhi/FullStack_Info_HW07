@@ -14,13 +14,16 @@ app.secret_key = os.environ.get('SECRET_KEY') or 'hard to guess string'
 @app.route('/')
 @app.route('/index' )
 def index():
-    username = session['username']
+    username = ''
+    # username = session['username']
     if username in session: #check if the user is already in session, if so, direct the user to trips.html Hint: render_template with a variable
-        trips = retrieve_trips()
-        return render_template('trips.html', trips=trips)
+            trips = models.retrieve_trips()
+            return render_template('trips.html')
+
         # return render_template('trips.html', username=username)
-    # else:
-    #     return render_template('login.html')
+    else:
+        # return redirect(url_for('index'))
+        return render_template('login.html')
 
 @app.route('/login', methods=['POST', 'GET']) # You need to specify something here for the function to get requests
 def login():
@@ -34,7 +37,8 @@ def login():
         models.insert_users( username, password)
         return render_template('trips.html', username=username)
     else:
-        return render_template('login.html')
+        return redirect(url_for('index'))
+        # return render_template('login.html')
 
 @app.route('/logout')
 def logout():
@@ -45,13 +49,13 @@ def logout():
 #users can create trips
 @app.route('/create_trip', methods=['POST', 'GET'])
 def create_trip():
-    tripform = TripForm()
+    # tripform = TripForm()
     if request.method == 'POST':
         trip_name  = request.form['trip_name']
         destination  = request.form['destination']
         models.insert_trip(trip_name, destination)
         # return render_template('trips.html')
-        return render_template('trips.html')
+        return redirect(url_for('display_trip'))
     return render_template('create_trip.html')
 
 # @app.route('/trips', methods=['POST', 'GET'])
@@ -69,10 +73,13 @@ def create_trip():
 #display users trips
 @app.route('/trips', methods=['POST', 'GET'])
 def display_trip():
-    if request.method == 'POST':
+    if request.method == 'GET':
     # Retreive data from database to display
         trips = models.retrieve_trips()
-    return render_template('trips.html', trips=trips)
+        return render_template('trips.html', trips=trips)
+    else:
+        return render_template('trips.html')
+
 
 
 @app.errorhandler(404)
