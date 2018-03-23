@@ -18,6 +18,6 @@ class Trip(db.Model):
         backref=db.backref('invited_trips', lazy=True))
 
     def invitable_users(self):
-        participating_users = list(map(lambda user: user.id, self.guests))
+        participating_users = [user.id for user in self.guests]
         participating_users += [self.user_id]
         return User.query.filter(~User.id.in_(participating_users)).all()
