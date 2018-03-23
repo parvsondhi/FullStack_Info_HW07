@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1>Welcome to Trip Planner!</h1>
+      <div class= "section">
+        <a href="{{ url_for('add_trip') }}">Add a Trip</a> 
+        <form action="logout" id="logout">
+          <input class="action-button" id="logout-button" type="submit" value="Logout">
+        </form>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <h3>These are all of your trips:</h3>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="trip_title">Trip Title</th>
+              <th data-field="destination">Destination</th>
+              <th data-field="remove">Remove Trip</th>
+            </tr>
+          </thead>
+          {% for trip in trip %}
+            <tr>
+              <td>{{ trip['trip_title'] }}</td>
+              <td>{{ trip['destination'] }}</td>
+              <td><a href="{{ url_for('remove_trip', value=trip['trip_id']) }}">Remove Trip</a></td>
+            </tr>
+          {% endfor %}
+          
+        </table>
+        
+      </div>
+    </div>
+  </div>
+{% endblock %}
