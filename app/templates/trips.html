@@ -30,12 +30,14 @@
             <tr>
               <th data-field="trip_name">Trip Title</th>
               <th data-field="destination">Destination</th>
+							<th data-field="travel_pal">Travel Pal</th>
             </tr>
           </thead>
           {% for trip in trips %}
             <tr>
               <td>{{ trip['trip_name'] }}</td>
               <td>{{ trip['destination'] }}</td>
+							<td>{{ trip['travel_pal'] }}</td>
             </tr>
           {% endfor %}
         </table>

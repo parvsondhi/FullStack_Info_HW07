@@ -5,6 +5,7 @@ import sys
 from flask import Flask, redirect, make_response, render_template, url_for, session, request, escape, flash
 import os
 from forms import TripForm
+import sqlite3 as sql
 
 #Make database sqlite3 app.db < schema.sql
 
@@ -34,6 +35,8 @@ def login():
         # password = session['password']
         username = request.form['username']
         password = request.form['password']
+        session['username'] = request.form['username']
+        session['password'] = password
         models.insert_users( username, password)
         trips = models.retrieve_trips()
         return render_template('trips.html', username=username, trips=trips)
@@ -44,15 +47,12 @@ def login():
 #users can create trips
 @app.route('/create_trip', methods=['POST', 'GET'])
 def create_trip():
-<<<<<<< HEAD
-=======
-    # tripform = TripForm()
-
->>>>>>> 76493b61e1e3deab3f6e4539f6aa67ff41b8a5bc
     if request.method == 'POST':
         trip_name  = request.form['trip_name']
         destination  = request.form['destination']
-        models.insert_trip(trip_name, destination)
+        travel_pal = request.form['travel_pal']
+        trip_creator = Flask.session['username']
+        models.insert_trip(trip_name, destination, travel_pal)
         # return render_template('trips.html')
         return redirect(url_for('display_trip'))
     return render_template('create_trip.html')

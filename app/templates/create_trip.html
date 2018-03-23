@@ -20,7 +20,6 @@
 {% block content %}
   <div class="main-container">
     <form action="/create_trip" method="POST">
-<<<<<<< HEAD
       <h3>Where do you want to go?</h3>
       <label class="survey-item sm-label">Trip Name
         <input class="sm-input" type="text" name="trip_name"></label><br>
@@ -39,25 +38,5 @@
       <button class="action-button" id="trip-cancel" onClick="history.go(-1); return false;">Cancel</button>
       <button class="action-button" type='submit' name="submit-trip" id="trip-go">Submit</button>
     </form>
-=======
-    <h3>Where do you want to go?</h3>
-    <label class="survey-item sm-label">Trip Name
-      <input class="sm-input" type="text" name="trip_name"></label><br>
-    <label class="survey-item sm-label">Destination
-      <input class="sm-input" type="text" name="destination"></label><br>
-      <label name="travel_pal">Travel Pal </label>
-      <select name="travel_pal">
-          <!-- {% for u in users %}
-          <option value="{{ u['username'] }}">{{u['username']}}</option>
-          {% endfor %} -->
-          <option value="">Select</option>
-        </select>
-      <!-- <input class="sm-input" type="text" name="pal"></label><br> -->
-    <button class="action-button" id="trip-cancel" onClick="history.go(-1); return false;">Cancel</button>
-    <button class="action-button" type='submit' name="submit-trip" id="trip-go">Submit</button>
-  </form>
-      </div>
-    </div>
->>>>>>> 76493b61e1e3deab3f6e4539f6aa67ff41b8a5bc
   </div>
 {% endblock %}
