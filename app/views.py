@@ -72,21 +72,26 @@ def display_trips():
 
 @app.route('/addtrip', methods=['GET', 'POST'])
 def add_trip():
-    # Get data from the form
-    # Send data from form to Database
     current_user = session['username']
-    friend_list = retrieve_friends(current_user)
-    friend_tuple = list(zip(friend_list, friend_list))
-    tripForm = TripForm()
-    tripForm.friend.choices = friend_tuple
+    friend_list = retrieve_friends(current_user) # create list of users
+    friend_tuple = list(zip(friend_list, friend_list)) # put list into tuple form
+    tripForm = TripForm() # instantiate the trip form
+    tripForm.friend.choices = friend_tuple # add friend list to choices on form
     if tripForm.validate_on_submit():
-        uid = getID(current_user)
-        print(uid, file=sys.stderr)
-        trip_title = tripForm.trip_title.data
+        uid = getID(current_user) 
+        # print(uid, file=sys.stderr)
+        # Get data from the form
+        trip_title = tripForm.trip_title.data  
         destination = tripForm.destination.data
         friend = tripForm.friend.data
+        # Send data from form to Database
         trip_id = insert_trip(trip_title, destination, friend)
         friend_id = getID(friend)
         insert_trip_user(trip_id, uid, friend_id)
         return redirect('/home')
     return render_template('addtrip.html', form=tripForm)
+
+@app.route('/remove_trip/<value>')
+def remove_trip(value):
+    delete_trip(value)
+    return redirect(url_for('display_trips'))

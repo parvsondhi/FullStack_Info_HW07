@@ -19,7 +19,7 @@ def retrieve_trips(username):
         con.row_factory = sql.Row
         cur = con.cursor() # creating cursor
         # not sure if below sql statement is correctly passing parameters in
-        result = cur.execute("SELECT trip.trip_title, trip.destination FROM trip INNER JOIN trip_user ON trip.trip_id = trip_user.trip_id WHERE trip_user.uid = (?) OR trip_user.friend_id = (?)", (username, username)).fetchall() 
+        result = cur.execute("SELECT trip.trip_title, trip.destination, trip.trip_id FROM trip INNER JOIN trip_user ON trip.trip_id = trip_user.trip_id WHERE trip_user.uid = (?) OR trip_user.friend_id = (?)", (username, username)).fetchall() 
         print(result, file=sys.stderr)
     return result
 
@@ -61,3 +61,10 @@ def retrieve_friends(current_user):
         print(result, file=sys.stderr)
     return result
 ##You might have additional functions to access the database
+
+def delete_trip(trip_id):
+    with sql.connect('app.db') as con:
+        cur = con.cursor() 
+        cur.execute("DELETE FROM trip_user WHERE trip_id = (?)", (trip_id))
+        cur.execute("DELETE FROM trip WHERE trip_id = (?)", (trip_id))
+        con.commit()

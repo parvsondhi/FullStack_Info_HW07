@@ -17,16 +17,19 @@
             <tr>
               <th data-field="trip_title">Trip Title</th>
               <th data-field="destination">Destination</th>
+              <th data-field="remove">Remove Trip</th>
             </tr>
           </thead>
           {% for trip in trip %}
             <tr>
               <td>{{ trip['trip_title'] }}</td>
               <td>{{ trip['destination'] }}</td>
-
+              <td><a href="{{ url_for('remove_trip', value=trip['trip_id']) }}">Remove Trip</a></td>
             </tr>
           {% endfor %}
+          
         </table>
+        
       </div>
     </div>
   </div>
