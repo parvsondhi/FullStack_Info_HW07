@@ -1,0 +1,17 @@
+#logout {
+	float: right;
+	height: inherit;
+	line-height: 5rem;
+	margin-right: 1rem;
+}
+
+#logout-button {
+	background-color: #99ccff;
+	border-bottom-color: #bdc3c7;
+	height: 2.5rem;
+	width: 5rem;
+}
+
+#logout-button:hover {
+	background-color: #bdc3c7;
+}
