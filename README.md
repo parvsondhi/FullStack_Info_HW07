@@ -8,6 +8,14 @@ After initially cloning the repository you need to do the following steps.
 ### 1. Install Dependencies
 To create a development environment and install a dependencies run the following commands.
 
+##### Windows
+```
+conda create -n fswd
+activate fswd
+pip install -r requirements.txt
+```
+
+##### MacOS / Linux
 ```
 pip install virtualenv
 virtualenv --python=python3 .fswd
@@ -16,7 +24,12 @@ pip install -r requirements.txt
 ```
 
 #### Activate Environment
-You can alwyas activate the environment by running `source .fswd/bin/activate` and deactivate it by running `deactivate`.
+
+##### Windows
+You can always activate the environment by running `activate fswd` and deactivate it by running `deactivate`.
+
+##### MacOS / Linux
+You can always activate the environment by running `source .fswd/bin/activate` and deactivate it by running `deactivate`.
 
 #### Update Dependecies
 To update the dependencies of the project, run `pip freeze > requirements.txt`.
@@ -49,5 +62,3 @@ app._create_database()
 5. Once finished, use source tree to merge develop into your feature branch locally. Check whether everything works as expected.
 6. Open a pull request to merge ther feature branch back to develop and wait for the code review to approve it.
 6. Once approved merge the feature branch into develop.
-
-

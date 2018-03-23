@@ -80,6 +80,19 @@ def trips():
     invited_trips = current_user.invited_trips
     return render_template('trips.html', created_trips=created_trips, invited_trips=invited_trips)
 
+@app.route('/trips/create', methods=['GET', 'POST'])
+@login_required
+def create_trip():
+    form = TripForm()
+    if form.validate_on_submit():
+        trip = Trip(title=form.title.data, destination=form.destination.data, user_id=current_user.id)
+        db.session.add(trip)
+        db.session.commit()
+        flash('Congratulations, you successfully added a trip!', 'info')
+        return redirect(url_for('trips'))
+    return render_template('create-trip.html', title='Create a Trip', form=form)
+
+
 @app.route('/trips/<id>')
 @login_required
 @inject_trip
