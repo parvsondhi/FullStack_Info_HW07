@@ -47,6 +47,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Role</th>
                             <th scope="col">Email</th>
+                            <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,6 +56,7 @@
                                 <td>{{ trip.owner.formattedName() }}</td>
                                 <td>Admin</td>
                                 <td>{{ trip.owner.email }}</td>
+                                <td></td>
                             </tr>
                             {% for guest in trip.guests %}
                             <tr>
@@ -62,6 +64,13 @@
                                 <td>{{ guest.formattedName() }}</td>
                                 <td>Guest</td>
                                 <td>{{ guest.email }}</td>
+                                <td>
+                                    {% if trip.user_id == current_user.id %}
+                                    <form class="form delete-form" action="{{ url_for('withdraw_trip_invitation', id=trip.id, user_id=guest.id) }}" method="DELETE">
+                                        <input class="text-danger" type="submit" value="Remove">
+                                    </form>
+                                    {% endif %}
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

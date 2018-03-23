@@ -138,10 +138,28 @@ def invite_to_trip(trip, user_id):
 @login_required
 @inject_trip_invitation
 def delete_trip_invitation(trip_invitation):
+    ''' Removes the current user from the trip if they are invited.'''
     db.session.delete(trip_invitation)
     db.session.commit()
     flash('Trip invitation was deleted!', 'info')
     return jsonify(
         redirect=True,
         redirect_url=url_for('trips')
+    )
+
+@app.route('/trips/<id>/invitation/<user_id>', methods = ['DELETE'])
+@login_required
+@inject_trip
+@trip_owned_by_user
+def withdraw_trip_invitation(trip, user_id):
+    ''' Removes specified user from the trip's guest list '''
+    user = User.query.filter_by(id=int(user_id)).first()
+    trip_invitation = TripInvitation.query.filter_by(trip_id=trip.id, user_id=user.id).first()
+    if user and trip_invitation:
+        db.session.delete(trip_invitation)
+        db.session.commit()
+    flash(user.fullName() + ' was removed from trip!', 'info')
+    return jsonify(
+        redirect=True,
+        redirect_url=url_for('show_trip', id=trip.id )
     )

@@ -44,3 +44,12 @@ button.close {
     max-height: 200px;
     overflow-y: scroll;
 }
+
+.trip-detail .table input[type="submit"] {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    cursor: pointer;
+}
