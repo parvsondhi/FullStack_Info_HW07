@@ -23,3 +23,9 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def formattedName(self):
+        return self.firstname[0] + '. ' + self.lastname
+
+    def fullName(self):
+        return self.firstname + ' ' + self.lastname
+

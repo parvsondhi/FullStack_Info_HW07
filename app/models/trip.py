@@ -1,5 +1,6 @@
 from app import db
 from datetime import datetime
+from app.models import User
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,3 +16,8 @@ class Trip(db.Model):
     
     guests = db.relationship('User', secondary='trip_invitation', lazy='subquery',
         backref=db.backref('invited_trips', lazy=True))
+
+    def invitable_users(self):
+        participating_users = [user.id for user in self.guests]
+        participating_users += [self.user_id]
+        return User.query.filter(~User.id.in_(participating_users)).all()
