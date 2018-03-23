@@ -1,0 +1,42 @@
+<!-- 1. extend from base-->
+{% extends "base.html" %}
+
+{% block title %}
+ Create a Trip
+{% endblock %}
+
+{% block header %}
+	{{ super() }}
+  <div id="logout">
+  	<form action="logout">
+  		<!-- <span id="username">Logged in as: {{ username }}</span> -->
+  		<input class="action-button" id="logout-button" type="submit" value="Logout">
+  	</form>
+  </div>
+{% endblock %}
+
+
+<!-- 1. extend from content block from the base-->
+{% block content %}
+  <div class="main-container">
+    <form action="/create_trip" method="POST">
+      <h3>Where do you want to go?</h3>
+      <label class="survey-item sm-label">Trip Name
+        <input class="sm-input" type="text" name="trip_name"></label><br>
+      <label class="survey-item sm-label">Destination
+        <input class="sm-input" type="text" name="destination"></label><br>
+      <label class="survey-item sm-label">Travel Pal
+        <!-- <input class="sm-input" type="text" name="pal"></label><br> -->
+        <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+        </div>
+      <button class="action-button" id="trip-cancel" onClick="history.go(-1); return false;">Cancel</button>
+      <button class="action-button" type='submit' name="submit-trip" id="trip-go">Submit</button>
+    </form>
+  </div>
+{% endblock %}
