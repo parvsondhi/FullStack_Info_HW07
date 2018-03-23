@@ -1,9 +1,8 @@
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
 from wtforms.validators import ValidationError, DataRequired
-from app.models import User
 
 class TripForm(Form):
-    title = StringField('Trip Name', render_kw={'class': 'form-control', 'placeholder': 'Spring Break Gppd Luck with Your Liver', 'required': True}, validators=[DataRequired('Please enter your trip name.')])
-    destination = StringField('Destination', render_kw={'class': 'form-control', 'placeholder': 'Floripa', 'required': True}, validators=[DataRequired('Please enter your travel destination')])
+    title = StringField('Title', render_kw={'class': 'form-control', 'placeholder': 'Awesome Spring Break Trip', 'required': True}, validators=[DataRequired('How should be call you? Please enter a title for your trip.')])
+    destination = StringField('Destination', render_kw={'class': 'form-control', 'placeholder': 'Brazil', 'required': True}, validators=[DataRequired('Please enter a destintion for your trip.')])
     submit = SubmitField('Submit', render_kw={'class': 'btn btn-primary btn-round'} )

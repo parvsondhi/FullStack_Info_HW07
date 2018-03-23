@@ -9,7 +9,7 @@ db = SQLAlchemy(app)
 login = LoginManager(app)
 login.login_view = 'login'
 
-from app import views, models, forms
+from app import views, models, forms, utils
 
 def _create_database():
     ''' Creates the database schema specified by the SQLAlchemy models '''

@@ -1,9 +1,28 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request, jsonify
 from app import app, db
 from flask_login import current_user, login_user, login_required, logout_user
 
 from app.forms import LoginForm, RegistrationForm, TripForm
 from app.models import User, Trip
+from app.utils import inject_trip, current_user_has_access_to_trip, trip_owned_by_user, inject_trip_invitation
+
+
+# =========================
+# 0. Error Handler
+# =========================
+
+@app.errorhandler(404)
+def page_not_found(e):
+    error_code = 404
+    error_message = 'Sorry, we can\'t find what you are looking for :-('
+    return render_template('error.html', error_code=error_code, error_message=error_message), error_code
+
+@app.errorhandler(403)
+def page_not_found(e):
+    error_code = 403
+    error_message = 'Naughty! You are not allowed to access this resource!'
+    return render_template('error.html', error_code=error_code, error_message=error_message), error_code
+
 
 # =========================
 # 1. Anonymously Accessible
@@ -58,18 +77,66 @@ def register():
 @app.route('/trips')
 @login_required
 def trips():
-    return render_template('trips.html')
-
-
+    created_trips = current_user.trips
+    invited_trips = current_user.invited_trips
+    return render_template('trips.html', created_trips=created_trips, invited_trips=invited_trips)
 
 @app.route('/trips/create', methods=['GET', 'POST'])
 @login_required
 def create_trip():
     form = TripForm()
     if form.validate_on_submit():
-        trip = Trip(title=form.title.data, destination=form.destination.data)
+        trip = trip(name=form.name.data, destination=form.destination.data)
+        user.set_password(form.password.data)
         db.session.add(trip)
         db.session.commit()
         flash('Congratulations, you successfully added a trip!', 'info')
         return redirect(url_for('trips'))
-    return render_template('create-trip.html', title='Create a Trip', form=form)
+    return render_template('createTrip.html', title='Create a Trip', form=form)
+
+@app.route('/trips/<id>')
+@login_required
+@inject_trip
+@current_user_has_access_to_trip
+def show_trip(trip):
+    return render_template('trip-detail.html', trip=trip)
+
+@app.route('/trips/<id>', methods = ['DELETE'])
+@login_required
+@inject_trip
+@trip_owned_by_user
+def delete_trip(trip):
+    db.session.delete(trip)
+    db.session.commit()
+    flash('Trip was deleted!', 'info')
+    return jsonify(
+        redirect=True,
+        redirect_url=url_for('trips')
+    )
+
+@app.route('/trips/<id>/invitation', methods = ['DELETE'])
+@login_required
+@inject_trip_invitation
+def delete_trip_invitation(trip_invitation):
+    db.session.delete(trip_invitation)
+    db.session.commit()
+    flash('Trip invitation was deleted!', 'info')
+    return jsonify(
+        redirect=True,
+        redirect_url=url_for('trips')
+    )
+
+@app.route('/trips/<id>/edit', methods=['GET', 'POST'])
+@login_required
+@inject_trip
+@trip_owned_by_user
+def edit_trip(trip):
+    #TODO: This should really be a PUT request.
+    trip_form = TripForm(obj=trip)
+    if trip_form.validate_on_submit():
+        trip.title = trip_form.title.data
+        trip.destination = trip_form.destination.data
+        db.session.commit()
+        return redirect(url_for('show_trip', id=trip.id))
+    return render_template('edit_trip.html', trip=trip, form=trip_form)
+
