@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+
+    <h2>Create a Trip</h2>
+    <span id="username">Hello {{ username }}</span>
+    <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          Trip name:<br>
+          {{ form.trip(size=120) }}<br>
+        </p>
+        <p>
+          Destination:<br>
+          {{ form.destination(size=120) }}<br>
+        </p>
+        <p>
+          Friend name:<br>
+          <!-- {{ form.friend(size=120) }}<br> -->
+          <select name="friend" style="display: block">
+            <option disabled selected value> -- select a friend -- </option>
+            {% for user in users %}
+            <option value="{{ user.username }}">{{ user.username }}</option>
+            {% endfor %}
+          </select>
+        </p>
+
+      </div>
+      <p><input type="submit" value="Create Trip"></p>
+    </form>
+  </div>
+</div>
+
+<iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBkh0CN4CNAogZ-1HaRkFB9SiVaAAZejxQ&q=Berkeley" allowfullscreen>
+</iframe>
+
+{% endblock %}

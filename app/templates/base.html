@@ -1,0 +1,16 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - Travel</title>
+    {% else %}
+    <title>Welcome to Travel APP</title>
+    {% endif %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+  <script type='text/javascript' src='http://code.jquery.com/jquery-latest.min.js'></script>
+  <script type='text/javascript' src="{{ url_for('static', filename='main.js') }}"></script>
+</html>

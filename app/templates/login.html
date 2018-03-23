@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Login
+{% endblock %}
+
+{% block content %}
+<h1>Welcome to Travel App</h1>
+<div class="main-container">
+	<h3>Let's get you logged in</h3>
+	
+	<form action="/login" method="post" name="login"> 
+	Name:<br>
+  	<input type="text" name="username" required>
+  	<br>
+  	Password:<br>
+  	<input type="password" name="password" required>
+		<input class="action-button" type="submit" value="Log in">
+	</form>
+</div>
+
+      <div> New User?</div>
+      <div> Click here to 
+        <a href="/register">
+          <span>Register</span>
+        </a>
+        <span>!</span>
+      </div>
+{% endblock %}
