@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block navlinks %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+  <div>
+    <h1>{{ error_code }}</h1>
+
+    <h3>{{ error_message }}</h3>
+  </div>
+{% endblock %}
