@@ -3,7 +3,7 @@ from app import app, db
 from flask_login import current_user, login_user, login_required, logout_user
 
 from app.forms import LoginForm, RegistrationForm, TripForm
-from app.models import User
+from app.models import User, Trip
 
 # =========================
 # 1. Anonymously Accessible
@@ -67,10 +67,9 @@ def trips():
 def create_trip():
     form = TripForm()
     if form.validate_on_submit():
-        trip = trip(name=form.name.data, destination=form.destination.data)
-        user.set_password(form.password.data)
+        trip = Trip(title=form.title.data, destination=form.destination.data)
         db.session.add(trip)
         db.session.commit()
         flash('Congratulations, you successfully added a trip!', 'info')
         return redirect(url_for('trips'))
-    return render_template('createTrip.html', title='Create a Trip', form=form)
+    return render_template('create-trip.html', title='Create a Trip', form=form)
