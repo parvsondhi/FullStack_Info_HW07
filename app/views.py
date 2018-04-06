@@ -49,7 +49,6 @@ def create_trip():
     for friend in friends:
         row = {}
         row['Username'] = friend['Username']
-        # row['last_name'] = friend['Last']
         boomlist.append(row)  
         
     if tripForm.validate_on_submit():
