@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+  
+  <div class="container">
+    <a href="{{ url_for('login') }}">Logout</a><br>
+    <p style="text-decoration: underline">Logged in as: {{ user }}</p>
+    <div class="row">
+      <h1>Welcome to 0.0 Travel App</h1>
+      <div class= "section"> 
+        <a href="{{ url_for('create_trip') }}">Add a trip</a>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <h3>Here's the trip information:</h3>
+        
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="Trip Title">Trip Title</th>
+              <th data-field="Destination">Destination</th>
+            </tr>
+          </thead>
+          {% for trip in trips %}
+            <tr>
+              <td>{{ trip['trip_title'] }}</td>
+              <td>{{ trip['trip_destination'] }}</td>
+              <td><a type="submit" href="{{ url_for('tripsrem', value=trip['trip_title']) }}">Remove Trip</a></td>
+
+
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
