@@ -1,0 +1,70 @@
+  <form action="logout" id="logout">
+    <span id="username">Logged in as {{ username }}</span>
+    <input class="action-button" id="logout-button" type="submit" value="Logout">
+  </form>
+
+{% extends "base.html" %}
+
+{{ super() }}
+{% block body %}
+
+
+{% endblock %}
+{{ super() }}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1>Welcome to our awesome travel app, {{ username }}!</h1>
+      <div class= "section">
+        <a href="{{ url_for('create_trip') }}">Add a trip</a>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <h3>These are all of your awesome trips</h3>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="first_name">Trip Name</th>
+              <th data-field="first_name">Destination</th>
+              <th data-field="last_name">Homie or Homette</th>
+              <th data-field="last_name">Delete</th>    
+            </tr>
+          </thead>
+          {% for trip in trips %}
+            <tr>
+              <td>{{ trip['trip_name'] }}</td>
+              <td>{{ trip['destination'] }}</td>
+              <td>{{ trip['friend'] }}</td>
+              <td><a href="/friends/{{ trip['customer_id'] }}">Delete</a></td>
+
+              <!-- Add more fields to showcase on this page
+              Below is a method of adding the 'add an order' button which will route you to create_order in views.py -->
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="section">
+        <h3> {{ username }}, trips your friends want to go on with you:</h3>
+        <!-- Display all the current existing order information here -->
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="trip_name">Trip Name</th>
+              <th data-field="destination">Destination</th>
+              <th data-field="homiehomette">Homie or Homette</th>
+            </tr>
+          </thead>
+          {% for trip in companions %}
+            <tr>
+              <td>{{ trip['trip_name'] }}</td>
+              <td>{{ trip['destination'] }}</td>
+              <td>{{ trip['username'] }}</td>
+              <!-- Add more fields to showcase on this page -->
+
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

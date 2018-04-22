@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('display_trips') }}">Home</a>
+    </div>
+    <h2>Add A Trip</h2>
+    <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="section">
+         <p>
+          Trip Name:<br>
+          {{ form.trip_name(size=120) }}<br>
+          <!-- Additional form fields for the customer should go here -->
+        </p>
+        <p>
+          Destination:<br>
+          {{ form.destination(size=120) }}<br>
+          <!-- Additional form fields for the customer should go here -->
+        </p>
+        <p>
+          Homie or Homette:<br> 
+          {{ form.friend }}<br>
+          <!-- Additional form fields for the customer should go here -->
+        </p>
+        <p>
+          Your name<br>
+          {{ username }}<br>
+          <!-- Additional form fields for the customer should go here -->
+        </p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+
+
+      </div>{{ form.language }}
+      <p>{{ form.language }}<input type="submit" value="Create Trip"></p>
+    </form>{{ form.language }}
+  </div>
+</div>
+{% endblock %}
