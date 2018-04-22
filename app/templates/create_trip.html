@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class= "section">
+      <a href="{{ url_for('display_user') }}">Trips</a>
+    </div>
+    <h2>Add Trip to Our Database</h2>
+    <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="section">
+        <p>
+          Name of Trip:<br>
+          {{ form.name(size=120)}}<br>
+        </p>
+        <p>
+          Destination:<br>
+          {{ form.destination(size=120)}}<br>
+        </p>
+        <p>
+          User1:<br>
+          <h5>{{ username }}</h5>
+        </p>
+        <p>
+          User2:<br>
+          <select style="display: inline-block;" name='user2'>
+            {% for user in users %}
+            <option value="{{ user }}">{{ user }}</option>
+            {% endfor %}
+          </select><br>
+        </p>
+      </div>
+      <p><input type="submit" value="Create Trip"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}

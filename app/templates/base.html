@@ -1,0 +1,16 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - Travlr </title>
+    {% else %}
+    <title>Welcome to our travel app</title>
+    {% endif %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+
+
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>

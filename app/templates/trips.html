@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1>Welcome to Travlr</h1>
+      <div class= "section">
+        Hi {{ username }}
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </div>
+      <div class="divider"></div>
+      <a href="{{ url_for('create_trip') }}">Create Trip</a>
+      <div class="section">
+        <h3>These are all of your trips:</h3>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="name">Trip Name</th>
+              <th data-field="destination">Destination</th>
+              <th data-field="user1">User1</th>
+              <th data-field="user2">User2</th>
+            </tr>
+          </thead>
+          {% for trip in trips %}
+            <tr>
+              <td>{{ trip['name'] }}</td>
+              <td>{{ trip['destination'] }}</td>
+              <td>{{ trip['user1'] }}</td>
+              <td>{{ trip['user2'] }}</td>
+              <!-- Add more fields to showcase on this page
+              Below is a method of adding the 'add an order' button which will route you to create_order in views.py -->
+              <td><a href="{{ url_for('delete_trip', value=trip['id']) }}">Delete Trip</a></td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
