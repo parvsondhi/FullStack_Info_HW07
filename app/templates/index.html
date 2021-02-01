@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Index
+{% endblock %}
+
+{% block content %}
+  <p><strong> Logged in as {{ current_user.username }} </strong></p>
+
+	<h1>My Trips</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Trip Name</th>
+				<th>Trip Destination</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for trip in trips %}
+			<tr>
+				<td>{{ trip.tripname }}</td>
+				<td>{{ trip.destination }}</td>
+				<td><a href='/delete_trip/{{ trip.id }}'>Delete</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h1>Trips I'm invited to</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Trip Name</th>
+				<th>Trip Destination</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for trip in invited %}
+			<tr>
+				<td>{{ trip.tripname }}</td>
+				<td>{{ trip.destination }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<br>
+	<a href="{{ url_for('create_trip') }}" class='btn'>Create a Trip </a>
+{% endblock %}

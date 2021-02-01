@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Create a Trip
+{% endblock %}
+
+{% block content %}
+  <p><strong> Logged in as {{ current_user.username }} </strong></p>
+    <div class="container">
+      <h1>Create a Trip</h1>
+      <br>
+      <form action="" method="post">
+				{{ form.hidden_tag() }}
+				<p>
+					{{ form.tripname.label }}<br>
+					{{ form.tripname(size=32) }}
+
+          <!-- Errors -->
+          {% for error in form.tripname.errors %}
+					     <span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+				</p>
+
+				<p>
+					{{ form.destination.label }}<br>
+					{{ form.destination(size=32) }}
+
+          <!-- Errors -->
+          {% for error in form.destination.errors %}
+					     <span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+				</p>
+
+				<p>
+					{{ form.friend_id.label }}<br>
+				    <!-- <select style='display: inline'> -->
+					{{ form.friend_id(size=32) }}
+					<!-- </select> -->
+					<!-- Errors -->
+					{% for error in form.friend_id.errors %}
+							 <span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+				</p>
+				<p>{{ form.submit() }}</p>
+
+			</form>
+    </div>
+{% endblock %}
